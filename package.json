@@ -1,0 +1,29 @@
+{
+  "name": "jogo-dos-santos",
+  "version": "1.0.0",
+  "description": "Jogo da Memoria dos Santos - a Catholic memory game for kids and families",
+  "main": "index.js",
+  "scripts": {
+    "start": "expo start",
+    "android": "expo start --android",
+    "ios": "expo start --ios",
+    "web": "expo start --web",
+    "generate:placeholders": "node scripts/generate-placeholders.js"
+  },
+  "dependencies": {
+    "expo": "~55.0.17",
+    "expo-asset": "~55.0.16",
+    "expo-constants": "~55.0.15",
+    "expo-file-system": "~55.0.17",
+    "expo-font": "~55.0.6",
+    "expo-keep-awake": "~55.0.6",
+    "expo-status-bar": "~55.0.5",
+    "react": "19.2.0",
+    "react-native": "0.83.6"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.25.2",
+    "babel-preset-expo": "~55.0.18"
+  },
+  "private": true
+}

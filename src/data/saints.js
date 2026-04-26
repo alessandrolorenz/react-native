@@ -1,0 +1,116 @@
+// Single source of truth for saint content.
+// Adding a saint = appending one object here. The shape is intentionally flat
+// so new fields (audio, locked, level) can be added later without breaking
+// existing entries.
+//
+// Final illustrations live in assets/saints/ (mix of .png and .webp).
+// Metro bundles webp natively on Android & iOS in Expo SDK 55+.
+// rita-cassia still uses the generated placeholder until final art arrives.
+
+export const SAINTS = [
+  {
+    id: 'francisco-assis',
+    name: 'São Francisco de Assis',
+    short_description: 'O santo que falava com os animais.',
+    story: [
+      'Nasceu em Assis, na Itália, em 1182.',
+      'Deixou tudo para viver com simplicidade e amor.',
+      'Cuidava dos pobres, dos doentes e da natureza.',
+    ],
+    fact: 'É o padroeiro dos animais e do meio ambiente.',
+    emoji: '🕊️',
+    image: require('../../assets/saints/sao-francisco.webp'),
+  },
+  {
+    id: 'carlo-acutis',
+    name: 'São Carlo Acutis',
+    short_description: 'O jovem santo da internet.',
+    story: [
+      'Nasceu em 1991 e amava computadores.',
+      'Usou a internet para falar de Jesus.',
+      'Mostrou que santidade é para todas as idades.',
+    ],
+    fact: 'É chamado de "padroeiro da internet".',
+    emoji: '💻',
+    image: require('../../assets/saints/carlo-acutis.webp'),
+  },
+  {
+    id: 'jose',
+    name: 'São José',
+    short_description: 'O pai adotivo de Jesus.',
+    story: [
+      'Foi um humilde carpinteiro em Nazaré.',
+      'Cuidou de Maria e do menino Jesus com amor.',
+      'É exemplo de pai trabalhador e fiel.',
+    ],
+    fact: 'É o padroeiro dos pais e dos trabalhadores.',
+    emoji: '🪚',
+    image: require('../../assets/saints/sao-jose.webp'),
+  },
+  {
+    id: 'antonio',
+    name: 'Santo Antônio',
+    short_description: 'O santo dos milagres e das coisas perdidas.',
+    story: [
+      'Nasceu em Lisboa, mas viveu em Pádua.',
+      'Pregava com tanta fé que até os peixes ouviam.',
+      'Ajudava quem precisava encontrar algo perdido.',
+    ],
+    fact: 'É lembrado em junho com festas alegres no Brasil.',
+    emoji: '🐟',
+    image: require('../../assets/saints/santo-antonio.webp'),
+  },
+  {
+    id: 'teresinha',
+    name: 'Santa Teresinha do Menino Jesus',
+    short_description: 'A santa do caminho pequeno.',
+    story: [
+      'Era uma menina cheia de sorrisos e carinho.',
+      'Entrou no convento aos 15 anos.',
+      'Ensinou que pequenos gestos de amor agradam a Deus.',
+    ],
+    fact: 'É também conhecida como "Santa das Rosas".',
+    emoji: '🌹',
+    image: require('../../assets/saints/santa-teresinha.webp'),
+  },
+  {
+    id: 'padre-pio',
+    name: 'São Padre Pio',
+    short_description: 'O santo das chagas de Cristo.',
+    story: [
+      'Foi um frade italiano cheio de fé.',
+      'Passava horas confessando e ajudando.',
+      'Recebeu as marcas de Jesus em suas mãos.',
+    ],
+    fact: 'Fundou hospitais para cuidar dos enfermos.',
+    emoji: '🙏',
+    image: require('../../assets/saints/padre-pio.webp'),
+  },
+  {
+    id: 'aparecida',
+    name: 'Nossa Senhora Aparecida',
+    short_description: 'A mãezinha do Brasil.',
+    story: [
+      'Sua imagem foi encontrada por pescadores em 1717.',
+      'Aconteceu no rio Paraíba do Sul.',
+      'Desde então, é venerada por todo o Brasil.',
+    ],
+    fact: 'É a padroeira oficial do Brasil.',
+    emoji: '👑',
+    image: require('../../assets/saints/nossa-senhora.webp'),
+  },
+  {
+    id: 'rita-cassia',
+    name: 'Santa Rita de Cássia',
+    short_description: 'A santa das causas impossíveis.',
+    story: [
+      'Viveu na Itália no século XIV.',
+      'Foi esposa, mãe e depois religiosa.',
+      'Sua fé tocou os corações mais difíceis.',
+    ],
+    fact: 'É invocada quando algo parece impossível.',
+    emoji: '🌿',
+    // TODO: replace with final illustration (placeholder for now)
+    image: require('../../assets/saints/rita-cassia.png'),
+  },
+];
