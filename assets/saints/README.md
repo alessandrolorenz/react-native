@@ -14,6 +14,16 @@ teresinha.png
 padre-pio.png
 aparecida.png
 rita-cassia.png
+madre-teresa-calcuta.webp
+santa-clara.webp
+santa-paulina.webp
+santo-agostinho.webp
+sao-bento.webp
+sao-domingos.webp
+santo-inacio-loiola.webp
+sao-joao-paulo-ii.webp
+sao-tomas-aquino.webp
+sao-vicente-paula.webp
 ```
 
 The filename must match the `id` field in `src/data/saints.js` exactly.
