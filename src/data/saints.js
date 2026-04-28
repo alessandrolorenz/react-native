@@ -6,6 +6,17 @@
 // Final illustrations live in assets/saints/ (mix of .png and .webp).
 // Metro bundles webp natively on Android & iOS in Expo SDK 55+.
 // rita-cassia still uses the generated placeholder until final art arrives.
+//
+// Gallery metadata fields:
+//   feast_day  — string, e.g. "4 de outubro" (empty string if unknown)
+//   patronage  — string[], e.g. ["Animais", "Meio ambiente"] (empty array if none)
+//   region     — string, e.g. "Itália"
+//   category   — string, one of: "Religioso", "Mártir", "Doutor da Igreja",
+//                "Mariana", "Leigo" (empty string if unset)
+//   era        — string, one of: "Antiguidade", "Idade Média", "Idade Moderna",
+//                "Século XX", "Século XXI" (empty string if unset)
+// Empty values are skipped by GalleryScreen's filter logic and SaintProfileScreen's
+// meta pills, so stub entries below degrade gracefully until content is filled in.
 
 export const SAINTS = [
   {
@@ -20,6 +31,11 @@ export const SAINTS = [
     fact: 'É o padroeiro dos animais e do meio ambiente.',
     emoji: '🕊️',
     image: require('../../assets/saints/sao-francisco.webp'),
+    feast_day: '4 de outubro',
+    patronage: ['Animais', 'Meio ambiente', 'Ecologia'],
+    region: 'Itália',
+    category: 'Religioso',
+    era: 'Idade Média',
   },
   {
     id: 'carlo-acutis',
@@ -33,6 +49,11 @@ export const SAINTS = [
     fact: 'É chamado de "padroeiro da internet".',
     emoji: '💻',
     image: require('../../assets/saints/carlo-acutis.webp'),
+    feast_day: '12 de outubro',
+    patronage: ['Internet', 'Jovens', 'Programadores'],
+    region: 'Itália',
+    category: 'Leigo',
+    era: 'Século XXI',
   },
   {
     id: 'jose',
@@ -46,6 +67,11 @@ export const SAINTS = [
     fact: 'É o padroeiro dos pais e dos trabalhadores.',
     emoji: '🪚',
     image: require('../../assets/saints/sao-jose.webp'),
+    feast_day: '19 de março',
+    patronage: ['Pais', 'Trabalhadores', 'Carpinteiros', 'Igreja Católica'],
+    region: 'Nazaré',
+    category: 'Religioso',
+    era: 'Antiguidade',
   },
   {
     id: 'antonio',
@@ -59,6 +85,11 @@ export const SAINTS = [
     fact: 'É lembrado em junho com festas alegres no Brasil.',
     emoji: '🐟',
     image: require('../../assets/saints/santo-antonio.webp'),
+    feast_day: '13 de junho',
+    patronage: ['Coisas perdidas', 'Pobres', 'Casamentos'],
+    region: 'Portugal e Itália',
+    category: 'Doutor da Igreja',
+    era: 'Idade Média',
   },
   {
     id: 'teresinha',
@@ -72,6 +103,11 @@ export const SAINTS = [
     fact: 'É também conhecida como "Santa das Rosas".',
     emoji: '🌹',
     image: require('../../assets/saints/santa-teresinha.webp'),
+    feast_day: '1 de outubro',
+    patronage: ['Missões', 'Floristas', 'Aviadores'],
+    region: 'França',
+    category: 'Doutor da Igreja',
+    era: 'Idade Moderna',
   },
   {
     id: 'padre-pio',
@@ -85,6 +121,11 @@ export const SAINTS = [
     fact: 'Fundou hospitais para cuidar dos enfermos.',
     emoji: '🙏',
     image: require('../../assets/saints/padre-pio.webp'),
+    feast_day: '23 de setembro',
+    patronage: ['Confessores', 'Enfermos', 'Voluntários do alívio civil'],
+    region: 'Itália',
+    category: 'Religioso',
+    era: 'Século XX',
   },
   {
     id: 'aparecida',
@@ -98,6 +139,11 @@ export const SAINTS = [
     fact: 'É a padroeira oficial do Brasil.',
     emoji: '👑',
     image: require('../../assets/saints/nossa-senhora.webp'),
+    feast_day: '12 de outubro',
+    patronage: ['Brasil', 'Pescadores'],
+    region: 'Brasil',
+    category: 'Mariana',
+    era: 'Idade Moderna',
   },
   {
     id: 'rita-cassia',
@@ -112,8 +158,13 @@ export const SAINTS = [
     emoji: '🌿',
     // TODO: replace with final illustration (placeholder for now)
     image: require('../../assets/saints/rita-cassia.png'),
+    feast_day: '22 de maio',
+    patronage: ['Causas impossíveis', 'Mães', 'Esposas'],
+    region: 'Itália',
+    category: 'Religioso',
+    era: 'Idade Média',
   },
-  // --- New saints (content TODO — fill in short_description, story, fact, emoji) ---
+  // --- New saints (content TODO — fill in short_description, story, fact, emoji, gallery metadata) ---
   {
     id: 'madre-teresa-calcuta',
     name: 'Madre Teresa de Calcutá',
@@ -122,6 +173,11 @@ export const SAINTS = [
     fact: 'TODO',
     emoji: '🙏',
     image: require('../../assets/saints/madre-teresa-calcuta.webp'),
+    feast_day: '',
+    patronage: [],
+    region: '',
+    category: '',
+    era: '',
   },
   {
     id: 'santa-clara',
@@ -131,6 +187,11 @@ export const SAINTS = [
     fact: 'TODO',
     emoji: '🙏',
     image: require('../../assets/saints/santa-clara.webp'),
+    feast_day: '',
+    patronage: [],
+    region: '',
+    category: '',
+    era: '',
   },
   {
     id: 'santa-paulina',
@@ -140,6 +201,11 @@ export const SAINTS = [
     fact: 'TODO',
     emoji: '🙏',
     image: require('../../assets/saints/santa-paulina.webp'),
+    feast_day: '',
+    patronage: [],
+    region: '',
+    category: '',
+    era: '',
   },
   {
     id: 'santo-agostinho',
@@ -149,6 +215,11 @@ export const SAINTS = [
     fact: 'TODO',
     emoji: '🙏',
     image: require('../../assets/saints/santo-agostinho.webp'),
+    feast_day: '',
+    patronage: [],
+    region: '',
+    category: '',
+    era: '',
   },
   {
     id: 'sao-bento',
@@ -158,6 +229,11 @@ export const SAINTS = [
     fact: 'TODO',
     emoji: '🙏',
     image: require('../../assets/saints/sao-bento.webp'),
+    feast_day: '',
+    patronage: [],
+    region: '',
+    category: '',
+    era: '',
   },
   {
     id: 'sao-domingos',
@@ -167,6 +243,11 @@ export const SAINTS = [
     fact: 'TODO',
     emoji: '🙏',
     image: require('../../assets/saints/sao-domingos.webp'),
+    feast_day: '',
+    patronage: [],
+    region: '',
+    category: '',
+    era: '',
   },
   {
     id: 'santo-inacio-loiola',
@@ -176,6 +257,11 @@ export const SAINTS = [
     fact: 'TODO',
     emoji: '🙏',
     image: require('../../assets/saints/santo-inacio-loiola.webp'),
+    feast_day: '',
+    patronage: [],
+    region: '',
+    category: '',
+    era: '',
   },
   {
     id: 'sao-joao-paulo-ii',
@@ -185,6 +271,11 @@ export const SAINTS = [
     fact: 'TODO',
     emoji: '🙏',
     image: require('../../assets/saints/sao-joao-paulo-ii.webp'),
+    feast_day: '',
+    patronage: [],
+    region: '',
+    category: '',
+    era: '',
   },
   {
     id: 'sao-tomas-aquino',
@@ -194,6 +285,11 @@ export const SAINTS = [
     fact: 'TODO',
     emoji: '🙏',
     image: require('../../assets/saints/sao-tomas-aquino.webp'),
+    feast_day: '',
+    patronage: [],
+    region: '',
+    category: '',
+    era: '',
   },
   {
     id: 'sao-vicente-paula',
@@ -203,5 +299,10 @@ export const SAINTS = [
     fact: 'TODO',
     emoji: '🙏',
     image: require('../../assets/saints/sao-vicente-paula.webp'),
+    feast_day: '',
+    patronage: [],
+    region: '',
+    category: '',
+    era: '',
   },
 ];

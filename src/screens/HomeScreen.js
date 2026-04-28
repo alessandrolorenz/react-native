@@ -7,7 +7,7 @@ import {
 } from 'react-native';
 import { colors, radii, shadow, spacing } from '../theme/colors';
 
-export default function HomeScreen({ onPlay }) {
+export default function HomeScreen({ onPlay, onOpenGallery }) {
   return (
     <View style={styles.safe}>
       <View style={styles.container}>
@@ -18,9 +18,19 @@ export default function HomeScreen({ onPlay }) {
           <Text style={styles.subtitle}>Aprenda brincando!</Text>
         </View>
 
-        <Pressable style={styles.cta} onPress={onPlay} accessibilityRole="button">
-          <Text style={styles.ctaText}>Jogar</Text>
-        </Pressable>
+        <View style={styles.actions}>
+          <Pressable style={styles.cta} onPress={onPlay} accessibilityRole="button">
+            <Text style={styles.ctaText}>Jogar</Text>
+          </Pressable>
+
+          <Pressable
+            style={[styles.cta, styles.ctaSecondary]}
+            onPress={onOpenGallery}
+            accessibilityRole="button"
+          >
+            <Text style={styles.ctaText}>✦ Galeria dos Santos</Text>
+          </Pressable>
+        </View>
 
         <Text style={styles.footer}>Para crianças e famílias 💛</Text>
       </View>
@@ -66,6 +76,9 @@ const styles = StyleSheet.create({
     color: colors.textSoft,
     fontStyle: 'italic',
   },
+  actions: {
+    width: '100%',
+  },
   cta: {
     width: '100%',
     backgroundColor: colors.primary,
@@ -73,6 +86,10 @@ const styles = StyleSheet.create({
     borderRadius: radii.lg,
     alignItems: 'center',
     ...shadow,
+  },
+  ctaSecondary: {
+    backgroundColor: colors.secondary,
+    marginTop: spacing.md,
   },
   ctaText: {
     fontSize: 20,
