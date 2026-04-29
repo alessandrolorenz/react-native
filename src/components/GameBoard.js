@@ -3,17 +3,21 @@ import { Dimensions, StyleSheet, View } from 'react-native';
 import Card from './Card';
 import { spacing } from '../theme/colors';
 
-// Lays out the deck as a 4x4 grid. Card size is computed from window width
-// so the board fits any phone without horizontal scroll. Plain View grid
-// (no FlatList) since 16 items render cheaply.
-const COLUMNS = 4;
+const MIN_CARD_SIZE = 44;
 const HORIZONTAL_PADDING = spacing.md;
 const CARD_MARGIN = 4;
 
-export default function GameBoard({ deck, flipped, matched, busy, onCardPress }) {
-  const { width } = Dimensions.get('window');
+export default function GameBoard({ deck, phase, flipped, matched, busy, onCardPress }) {
+  const { width, height } = Dimensions.get('window');
+  const rows = phase.rows;
+  const columns = phase.cols;
   const available = width - HORIZONTAL_PADDING * 2;
-  const cardSize = Math.floor(available / COLUMNS) - CARD_MARGIN * 2;
+  const maxByWidth = Math.floor(available / columns) - CARD_MARGIN * 2;
+
+  // Keeps larger phases visible on smaller displays.
+  const verticalAllowance = Math.max(300, height - 320);
+  const maxByHeight = Math.floor(verticalAllowance / rows) - CARD_MARGIN * 2;
+  const cardSize = Math.max(MIN_CARD_SIZE, Math.min(maxByWidth, maxByHeight));
 
   return (
     <View style={styles.board}>
@@ -42,5 +46,6 @@ const styles = StyleSheet.create({
     flexWrap: 'wrap',
     justifyContent: 'center',
     paddingHorizontal: HORIZONTAL_PADDING - CARD_MARGIN,
+    alignSelf: 'center',
   },
 });

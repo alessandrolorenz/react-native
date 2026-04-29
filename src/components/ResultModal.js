@@ -10,18 +10,55 @@ import {
 } from 'react-native';
 import { colors, radii, shadow, spacing } from '../theme/colors';
 
-// Shown when the player matches all pairs.
-// Reveals one saint with image, name, story, and fun fact, plus a CTA to
-// start a new round.
-export default function ResultModal({ visible, saint, onPlayAgain }) {
-  if (!saint) return null;
+function formatTime(seconds) {
+  const mins = Math.floor(seconds / 60);
+  const secs = seconds % 60;
+  return `${String(mins).padStart(2, '0')}:${String(secs).padStart(2, '0')}`;
+}
+
+function Metric({ label, value }) {
+  return (
+    <View style={styles.metricCard}>
+      <Text style={styles.metricLabel}>{label}</Text>
+      <Text style={styles.metricValue}>{value}</Text>
+    </View>
+  );
+}
+
+export default function ResultModal({
+  visible,
+  saint,
+  summary,
+  hasNextPhase,
+  onNextPhase,
+  onPlayAgain,
+  onBackHome,
+}) {
+  if (!saint || !summary) return null;
 
   return (
     <Modal visible={visible} transparent animationType="fade">
       <View style={styles.backdrop}>
         <View style={styles.card}>
           <ScrollView contentContainerStyle={styles.scroll}>
-            <Text style={styles.kicker}>Parabéns!</Text>
+            <Text style={styles.kicker}>Fase concluída!</Text>
+            <Text style={styles.phaseTitle}>{summary.phaseLabel}</Text>
+
+            <Metric label="Pontos da Fase" value={summary.totalPoints} />
+            <View style={styles.metricRow}>
+              <Metric label="Tempo" value={formatTime(summary.elapsedSeconds)} />
+              <Metric label="Precisão" value={`${summary.accuracy}%`} />
+            </View>
+            <View style={styles.metricRow}>
+              <Metric label="Melhor Combo" value={summary.bestCombo} />
+              <Metric label="Jogadas" value={summary.attempts} />
+            </View>
+
+            <View style={styles.pointsBreakdown}>
+              <Text style={styles.breakdownLine}>Base da fase: {summary.phasePoints}</Text>
+              <Text style={styles.breakdownLine}>Bônus de conclusão: +{summary.completionBonus}</Text>
+              <Text style={styles.breakdownLine}>Multiplicador de tempo: x{summary.timeMultiplier.toFixed(2)}</Text>
+            </View>
 
             <View style={styles.imageWrap}>
               <Image source={saint.image} style={styles.image} resizeMode="cover" />
@@ -46,9 +83,19 @@ export default function ResultModal({ visible, saint, onPlayAgain }) {
               <Text style={styles.fact}>{saint.fact}</Text>
             </View>
 
-            <Pressable style={styles.cta} onPress={onPlayAgain}>
-              <Text style={styles.ctaText}>Jogar novamente</Text>
-            </Pressable>
+            <View style={styles.actions}>
+              {hasNextPhase && (
+                <Pressable style={styles.cta} onPress={onNextPhase}>
+                  <Text style={styles.ctaText}>Próxima fase</Text>
+                </Pressable>
+              )}
+              <Pressable style={[styles.cta, styles.ctaAlt]} onPress={onPlayAgain}>
+                <Text style={styles.ctaText}>Repetir fase</Text>
+              </Pressable>
+              <Pressable style={[styles.cta, styles.ctaHome]} onPress={onBackHome}>
+                <Text style={styles.ctaText}>Voltar ao início</Text>
+              </Pressable>
+            </View>
           </ScrollView>
         </View>
       </View>
@@ -84,6 +131,50 @@ const styles = StyleSheet.create({
     textTransform: 'uppercase',
     fontWeight: '700',
     marginBottom: spacing.sm,
+  },
+  phaseTitle: {
+    fontSize: 20,
+    fontWeight: '800',
+    color: colors.text,
+    marginBottom: spacing.sm,
+  },
+  metricCard: {
+    backgroundColor: colors.white,
+    borderRadius: radii.md,
+    paddingVertical: spacing.xs,
+    paddingHorizontal: spacing.sm,
+    alignItems: 'center',
+    minWidth: 120,
+    marginBottom: spacing.xs,
+  },
+  metricLabel: {
+    fontSize: 11,
+    color: colors.textSoft,
+    textTransform: 'uppercase',
+    letterSpacing: 1,
+  },
+  metricValue: {
+    fontSize: 18,
+    fontWeight: '800',
+    color: colors.primaryDark,
+  },
+  metricRow: {
+    width: '100%',
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    gap: spacing.sm,
+  },
+  pointsBreakdown: {
+    alignSelf: 'stretch',
+    backgroundColor: '#F7EEE2',
+    borderRadius: radii.md,
+    padding: spacing.sm,
+    marginBottom: spacing.md,
+  },
+  breakdownLine: {
+    color: colors.text,
+    fontSize: 13,
+    lineHeight: 19,
   },
   imageWrap: {
     width: 160,
@@ -162,6 +253,16 @@ const styles = StyleSheet.create({
     borderRadius: radii.lg,
     alignItems: 'center',
     ...shadow,
+  },
+  ctaAlt: {
+    backgroundColor: colors.secondary,
+  },
+  ctaHome: {
+    backgroundColor: colors.primaryDark,
+  },
+  actions: {
+    width: '100%',
+    gap: spacing.sm,
   },
   ctaText: {
     fontSize: 16,
