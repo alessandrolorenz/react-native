@@ -1,44 +1,32 @@
-// Soft pastel palette tuned for a child-friendly Catholic memory game.
-// Centralizing tokens here keeps the visual language consistent across screens
-// and makes future theming (dark mode, level packs) a single-file change.
+// LEGACY SHIM — kept so screens that haven't been migrated still compile.
+// New code should import from '../theme' (folder) which exposes the semantic
+// nested API (colors.bg.app, colors.action.primary, etc.).
+//
+// Migration path: when a screen is rewritten to use the new <Button>/<Text>/<Chip>
+// primitives from src/components/ui/, switch its import from '../theme/colors'
+// to '../theme'. Once every screen is migrated, this file can be deleted.
+
+import { palette } from './palette';
+import { elevation } from './elevation';
 
 export const colors = {
-  bg: '#FFF7E6',         // warm cream background
-  surface: '#FFFFFF',
-  primary: '#F4B6C2',    // rose - main CTAs
-  primaryDark: '#E08FA1',
-  secondary: '#B5D8E8',  // sky blue - accents
-  accent: '#FFD9A8',     // peach - highlights
-  cardBack: '#E8C9A0',   // warm gold for face-down cards
-  cardBackEdge: '#C9A87A',
-  matched: '#CDE3D2',    // soft sage - matched card tint
-  text: '#3F3A36',
-  textSoft: '#7A6F66',
-  textOnPrimary: '#FFFFFF',
-  overlay: 'rgba(63, 58, 54, 0.45)',
-  white: '#FFFFFF',
+  bg: palette.cream100,
+  surface: palette.white,
+  primary: palette.rose200,
+  primaryDark: palette.rose400,
+  secondary: palette.sky200,
+  accent: palette.peach200,
+  cardBack: palette.gold200,
+  cardBackEdge: palette.gold500,
+  matched: palette.sage200,
+  text: palette.neutral900,
+  textSoft: palette.neutral600,
+  textOnPrimary: palette.white,
+  overlay: palette.overlay45,
+  white: palette.white,
 };
 
-export const radii = {
-  sm: 8,
-  md: 16,
-  lg: 24,
-  pill: 999,
-};
+export { radii } from './radii';
+export { spacing } from './spacing';
 
-export const spacing = {
-  xs: 4,
-  sm: 8,
-  md: 16,
-  lg: 24,
-  xl: 32,
-};
-
-// React Native shadow preset (works on iOS via shadow*, on Android via elevation).
-export const shadow = {
-  shadowColor: '#000',
-  shadowOpacity: 0.08,
-  shadowRadius: 8,
-  shadowOffset: { width: 0, height: 4 },
-  elevation: 3,
-};
+export const shadow = elevation.sm;
