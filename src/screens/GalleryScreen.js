@@ -20,7 +20,7 @@ const TILE_MARGIN = 4;
 
 // Browsable codex of all saints. Search by name + filter by category / region /
 // era. Tapping a tile pushes the profile screen via the parent App.js.
-export default function GalleryScreen({ onBack, onSelectSaint }) {
+export default function GalleryScreen({ onBack, onSelectSaint, progress, phases }) {
   const [query, setQuery] = useState('');
   const [category, setCategory] = useState(null);
   const [region, setRegion] = useState(null);
@@ -59,6 +59,7 @@ export default function GalleryScreen({ onBack, onSelectSaint }) {
   };
 
   const showClearAll = !!(query || category || region || era);
+  const completedCount = Object.keys(progress.completedPhases).length;
 
   const filterRows = [
     { key: 'category', label: 'Categoria', options: facetOptions.category, selected: category },
@@ -87,6 +88,14 @@ export default function GalleryScreen({ onBack, onSelectSaint }) {
           autoCapitalize="none"
           returnKeyType="search"
         />
+      </View>
+
+      <View style={styles.achievementCard}>
+        <Text style={styles.achievementTitle}>Conquistas</Text>
+        <Text style={styles.achievementScore}>Pontuação total: {progress.totalScore}</Text>
+        <Text style={styles.achievementMeta}>
+          Fases concluídas: {completedCount}/{phases.length}
+        </Text>
       </View>
 
       <FilterChips
@@ -146,6 +155,33 @@ const styles = StyleSheet.create({
   searchWrap: {
     paddingHorizontal: spacing.md,
     paddingTop: spacing.xs,
+  },
+  achievementCard: {
+    marginHorizontal: spacing.md,
+    marginTop: spacing.sm,
+    marginBottom: spacing.sm,
+    backgroundColor: colors.white,
+    borderRadius: radii.md,
+    paddingVertical: spacing.sm,
+    paddingHorizontal: spacing.md,
+    ...shadow,
+  },
+  achievementTitle: {
+    fontSize: 12,
+    color: colors.textSoft,
+    textTransform: 'uppercase',
+    letterSpacing: 1,
+  },
+  achievementScore: {
+    fontSize: 18,
+    color: colors.primaryDark,
+    fontWeight: '800',
+    marginTop: 2,
+  },
+  achievementMeta: {
+    fontSize: 13,
+    color: colors.text,
+    marginTop: 2,
   },
   search: {
     backgroundColor: colors.surface,

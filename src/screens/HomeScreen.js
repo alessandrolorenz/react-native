@@ -1,16 +1,17 @@
 import React from 'react';
 import {
   Pressable,
+  ScrollView,
   StyleSheet,
   Text,
   View,
 } from 'react-native';
 import { colors, radii, shadow, spacing } from '../theme/colors';
 
-export default function HomeScreen({ onPlay, onOpenGallery }) {
+export default function HomeScreen({ onPlay, onOpenGallery, phases, progress }) {
   return (
     <View style={styles.safe}>
-      <View style={styles.container}>
+      <ScrollView contentContainerStyle={styles.container}>
         <View style={styles.hero}>
           <Text style={styles.emojiHalo}>✨</Text>
           <Text style={styles.title}>Jogo da Memória</Text>
@@ -20,7 +21,7 @@ export default function HomeScreen({ onPlay, onOpenGallery }) {
 
         <View style={styles.actions}>
           <Pressable style={styles.cta} onPress={onPlay} accessibilityRole="button">
-            <Text style={styles.ctaText}>Jogar</Text>
+            <Text style={styles.ctaText}>Jogar Fases</Text>
           </Pressable>
 
           <Pressable
@@ -33,7 +34,7 @@ export default function HomeScreen({ onPlay, onOpenGallery }) {
         </View>
 
         <Text style={styles.footer}>Para crianças e famílias 💛</Text>
-      </View>
+      </ScrollView>
     </View>
   );
 }
@@ -41,11 +42,10 @@ export default function HomeScreen({ onPlay, onOpenGallery }) {
 const styles = StyleSheet.create({
   safe: { flex: 1, backgroundColor: colors.bg },
   container: {
-    flex: 1,
     paddingHorizontal: spacing.xl,
     paddingVertical: spacing.lg,
     alignItems: 'center',
-    justifyContent: 'space-between',
+    justifyContent: 'center',
   },
   hero: {
     flex: 1,
@@ -75,7 +75,9 @@ const styles = StyleSheet.create({
     fontSize: 17,
     color: colors.textSoft,
     fontStyle: 'italic',
+    marginBottom: spacing.md,
   },
+
   actions: {
     width: '100%',
   },
