@@ -2,6 +2,7 @@ import React, { useMemo, useState } from 'react';
 import {
   Dimensions,
   Pressable,
+  SafeAreaView,
   ScrollView,
   StyleSheet,
   Text,
@@ -13,6 +14,7 @@ import SaintTile from '../components/SaintTile';
 import FilterChips from '../components/FilterChips';
 import { applyFilters, getDistinctValues } from '../utils/saintFilters';
 import { colors, radii, shadow, spacing } from '../theme/colors';
+import { SAFE_AREA } from '../utils/safeArea';
 
 const COLUMNS = 2;
 const HORIZONTAL_PADDING = spacing.md;
@@ -68,7 +70,7 @@ export default function GalleryScreen({ onBack, onSelectSaint, progress, phases 
   ];
 
   return (
-    <View style={styles.safe}>
+    <SafeAreaView style={styles.safe}>
       <View style={styles.header}>
         <Pressable onPress={onBack} style={styles.iconBtn} accessibilityLabel="Voltar">
           <Text style={styles.icon}>‹</Text>
@@ -119,7 +121,7 @@ export default function GalleryScreen({ onBack, onSelectSaint, progress, phases 
           ))
         )}
       </ScrollView>
-    </View>
+    </SafeAreaView>
   );
 }
 
@@ -130,8 +132,9 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'space-between',
     paddingHorizontal: spacing.md,
-    paddingTop: spacing.lg,
+    paddingTop: spacing.sm + SAFE_AREA.paddingTop,
     paddingBottom: spacing.sm,
+    zIndex: 10,
   },
   iconBtn: {
     width: 44,
@@ -199,7 +202,7 @@ const styles = StyleSheet.create({
     flexWrap: 'wrap',
     justifyContent: 'center',
     paddingHorizontal: HORIZONTAL_PADDING - TILE_MARGIN,
-    paddingBottom: spacing.lg,
+    paddingBottom: spacing.lg + SAFE_AREA.paddingBottom,
   },
   empty: {
     width: '100%',

@@ -1,16 +1,18 @@
 import React from 'react';
 import {
   Pressable,
+  SafeAreaView,
   ScrollView,
   StyleSheet,
   Text,
   View,
 } from 'react-native';
 import { colors, radii, shadow, spacing } from '../theme/colors';
+import { SAFE_AREA } from '../utils/safeArea';
 
 export default function HomeScreen({ onPlay, onOpenGallery, phases, progress }) {
   return (
-    <View style={styles.safe}>
+    <SafeAreaView style={styles.safe}>
       <ScrollView contentContainerStyle={styles.container}>
         <View style={styles.hero}>
           <Text style={styles.emojiHalo}>✨</Text>
@@ -20,9 +22,6 @@ export default function HomeScreen({ onPlay, onOpenGallery, phases, progress }) 
         </View>
 
         <View style={styles.actions}>
-          <Pressable style={styles.cta} onPress={onPlay} accessibilityRole="button">
-            <Text style={styles.ctaText}>Jogar Fases</Text>
-          </Pressable>
 
           <Pressable
             style={[styles.cta, styles.ctaSecondary]}
@@ -31,11 +30,16 @@ export default function HomeScreen({ onPlay, onOpenGallery, phases, progress }) 
           >
             <Text style={styles.ctaText}>✦ Galeria dos Santos</Text>
           </Pressable>
+
+          <Pressable style={styles.cta} onPress={onPlay} accessibilityRole="button">
+            <Text style={styles.ctaText}>Jogar Fases</Text>
+          </Pressable>
+
         </View>
 
         <Text style={styles.footer}>Para crianças e famílias 💛</Text>
       </ScrollView>
-    </View>
+    </SafeAreaView>
   );
 }
 
@@ -44,6 +48,8 @@ const styles = StyleSheet.create({
   container: {
     paddingHorizontal: spacing.xl,
     paddingVertical: spacing.lg,
+    paddingTop: spacing.lg + SAFE_AREA.paddingTop,
+    paddingBottom: spacing.lg + SAFE_AREA.paddingBottom,
     alignItems: 'center',
     justifyContent: 'center',
   },
@@ -51,6 +57,7 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: 'center',
     justifyContent: 'center',
+    marginTop: spacing.sm,
   },
   emojiHalo: {
     fontSize: 56,
@@ -80,6 +87,7 @@ const styles = StyleSheet.create({
 
   actions: {
     width: '100%',
+    gap: spacing.md,
   },
   cta: {
     width: '100%',
@@ -91,7 +99,6 @@ const styles = StyleSheet.create({
   },
   ctaSecondary: {
     backgroundColor: colors.secondary,
-    marginTop: spacing.md,
   },
   ctaText: {
     fontSize: 20,

@@ -1,5 +1,5 @@
 import React, { useCallback, useEffect, useMemo, useReducer, useRef, useState } from 'react';
-import { Pressable, StyleSheet, Text, View } from 'react-native';
+import { Pressable, SafeAreaView, StyleSheet, Text, View } from 'react-native';
 import GameBoard from '../components/GameBoard';
 import Header from '../components/Header';
 import ResultModal from '../components/ResultModal';
@@ -8,6 +8,7 @@ import { SAINTS } from '../data/saints';
 import { buildDeck } from '../utils/deck';
 import { colors } from '../theme/colors';
 import { applyMissPenalty, buildPhaseSummary, getMatchScore } from '../utils/scoring';
+import { SAFE_AREA } from '../utils/safeArea';
 
 const FLIP_BACK_MS = 700;
 
@@ -204,17 +205,19 @@ export default function GameScreen({ onBack, phases, progress, onPhaseComplete }
   }, [activePhase.id, hasNextPhase]);
 
   return (
-    <View style={styles.safe}>
-      <Header
-        onBack={onBack}
-        onRestart={handlePlayAgain}
-        moves={state.attempts}
-        activePhase={activePhase}
-        totalScore={progress.totalScore}
-        phasePoints={state.phasePoints}
-        combo={state.comboStreak}
-        elapsedSeconds={elapsedSeconds}
-      />
+    <SafeAreaView style={styles.safe}>
+      <View style={styles.headerWrapper}>
+        <Header
+          onBack={onBack}
+          onRestart={handlePlayAgain}
+          moves={state.attempts}
+          activePhase={activePhase}
+          totalScore={progress.totalScore}
+          phasePoints={state.phasePoints}
+          combo={state.comboStreak}
+          elapsedSeconds={elapsedSeconds}
+        />
+      </View>
 
       <View style={styles.phaseStrip}>
         {phases.map((phase) => {
@@ -259,12 +262,17 @@ export default function GameScreen({ onBack, phases, progress, onPhaseComplete }
         totalScore={campaignScoreForModal}
         onBackHome={onBack}
       />
-    </View>
+    </SafeAreaView>
   );
 }
 
 const styles = StyleSheet.create({
   safe: { flex: 1, backgroundColor: colors.bg },
+  headerWrapper: {
+    paddingTop: SAFE_AREA.paddingTop,
+    zIndex: 10,
+    backgroundColor: colors.bg,
+  },
   phaseStrip: {
     flexDirection: 'row',
     justifyContent: 'space-between',
@@ -303,5 +311,6 @@ const styles = StyleSheet.create({
   boardWrap: {
     flex: 1,
     justifyContent: 'center',
+    paddingBottom: SAFE_AREA.paddingBottom,
   },
 });

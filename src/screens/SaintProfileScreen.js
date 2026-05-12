@@ -3,6 +3,7 @@ import {
   Animated,
   Image,
   Pressable,
+  SafeAreaView,
   ScrollView,
   StyleSheet,
   Text,
@@ -10,6 +11,7 @@ import {
 } from 'react-native';
 import { SAINTS } from '../data/saints';
 import { colors, radii, shadow, spacing } from '../theme/colors';
+import { SAFE_AREA } from '../utils/safeArea';
 
 const HERO_SIZE = 220;
 const FLIP_DURATION = 280;
@@ -56,7 +58,7 @@ export default function SaintProfileScreen({ saintId, onBack }) {
   ].filter((p) => p.value);
 
   return (
-    <View style={styles.safe}>
+    <SafeAreaView style={styles.safe}>
       <View style={styles.header}>
         <Pressable onPress={onBack} style={styles.iconBtn} accessibilityLabel="Voltar">
           <Text style={styles.icon}>‹</Text>
@@ -152,7 +154,7 @@ export default function SaintProfileScreen({ saintId, onBack }) {
           </View>
         )}
       </ScrollView>
-    </View>
+    </SafeAreaView>
   );
 }
 
@@ -163,8 +165,9 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'space-between',
     paddingHorizontal: spacing.md,
-    paddingTop: spacing.lg,
+    paddingTop: spacing.sm + SAFE_AREA.paddingTop,
     paddingBottom: spacing.sm,
+    zIndex: 10,
   },
   iconBtn: {
     width: 44,
@@ -181,7 +184,7 @@ const styles = StyleSheet.create({
   },
   scroll: {
     paddingHorizontal: spacing.lg,
-    paddingBottom: spacing.xl,
+    paddingBottom: spacing.xl + SAFE_AREA.paddingBottom,
     alignItems: 'center',
   },
 
