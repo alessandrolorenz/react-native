@@ -6,36 +6,36 @@ export const SAINT_PRAYERS = {
     'São Carlo Acutis, guia dos jovens, inspire-nos a usar a tecnologia com propósito e para aproximar as pessoas de Cristo. Amém.',
   'jose':
     'São José, protetor das famílias, abençoe-nos com sabedoria, trabalho honesto e amor verdadeiro. Amém.',
-  'cecilia':
-    'Santa Cecília, padroeira da música, ajude-nos a louvar a Deus em cada momento de nossas vidas. Amém.',
+  'antonio':
+    'Santo Antônio, amigo dos que buscam, ajude-nos a encontrar o que perdemos e a viver com fé e caridade. Amém.',
+  'teresinha':
+    'Santa Teresinha, ensine-nos o caminho da pequena via, fazendo com amor as coisas simples do dia a dia. Amém.',
+  'padre-pio':
+    'São Padre Pio, interceda por nós para que suportemos as dificuldades com paciência e confiança em Deus. Amém.',
+  'aparecida':
+    'Nossa Senhora Aparecida, Mãe querida do Brasil, cobre-nos com seu manto e conduza-nos sempre a Jesus. Amém.',
   'rita-cassia':
     'Santa Rita de Cássia, santa da compaixão, interceda por aqueles que enfrentam dificuldades e sofrimentos. Amém.',
-  'paulo':
-    'São Paulo, apóstolo das gentes, fortaleça nossa fé e ajude-nos a pregar o Evangelho com coragem. Amém.',
-  'lucas':
-    'São Lucas, evangelista e curador, abençoe a medicina, a arte e a compaixão pelo próximo. Amém.',
-  'joao':
-    'São João Batista, o batizador, purifique nossos corações e leve-nos mais perto de Jesus. Amém.',
-  'tomas-aquino':
-    'Santo Tomás de Aquino, doutor da Igreja, ilumina nossas mentes para compreender os mistérios da fé. Amém.',
-  'clara-assis':
-    'Santa Clara de Assis, contemplativa, ajude-nos a encontrar paz na oração e na simplicidade. Amém.',
-  'marta':
-    'Santa Marta, padroeira das cozinheiras, benzoa nosso trabalho diário e nossos lares. Amém.',
-  'lucia':
-    'Santa Lúcia, mártir, dê-nos coragem para enfrentar as provações com fé inabalável. Amém.',
-  'antonio-padua':
-    'Santo Antônio de Pádua, santo milagroso, ajude-nos a encontrar o que perdemos e a vencer nossas fraquezas. Amém.',
-  'bento':
-    'São Bento, padroeiro da Europa, guie nossas comunidades e trabalhos com ordem e paz. Amém.',
-  'teresinha':
-    'Santa Teresinha, carmelita, ensine-nos que a santidade está nas pequenas coisas feitas com grande amor. Amém.',
-  'agostinho':
-    'Santo Agostinho, doutor da Igreja, ilumina nossos caminhos rumo à verdade e à redenção. Amém.',
-  'margarida':
-    'Santa Margarida de Antióquia, padroeira das mães, proteja as gestantes e as crianças recém-nascidas. Amém.',
-  'teotonio':
-    'São Teotônio, padroeiro de Portugal, cuida de nós e nossa fé sob a proteção de Cristo. Amém.',
+  'madre-teresa-calcuta':
+    'Santa Teresa de Calcutá, inspira-nos a servir os mais pobres com ternura, humildade e amor sem medidas. Amém.',
+  'santa-clara':
+    'Santa Clara de Assis, contemplativa fiel, ajuda-nos a encontrar paz na oração e na simplicidade. Amém.',
+  'santa-paulina':
+    'Santa Paulina, missionária de esperança, fortalece-nos para cuidar dos irmãos com alegria e generosidade. Amém.',
+  'santo-agostinho':
+    'Santo Agostinho, doutor da Igreja, ilumina nossas mentes e corações no caminho da verdade. Amém.',
+  'sao-bento':
+    'São Bento, protetor contra o mal, guarda nosso lar e nossa família na paz de Cristo. Amém.',
+  'sao-domingos':
+    'São Domingos, pregador da verdade, ensina-nos a anunciar o Evangelho com sabedoria e caridade. Amém.',
+  'santo-inacio-loiola':
+    'Santo Inácio de Loiola, guia espiritual, ajuda-nos a discernir e escolher sempre a vontade de Deus. Amém.',
+  'sao-joao-paulo-ii':
+    'São João Paulo II, pastor dos jovens, fortalece nossa coragem para viver a fé no mundo de hoje. Amém.',
+  'sao-tomas-aquino':
+    'São Tomás de Aquino, doutor da Igreja, ilumina nosso entendimento para unir fé e razão com humildade. Amém.',
+  'sao-vicente-paula':
+    'São Vicente de Paulo, pai dos pobres, desperta em nós a compaixão e o serviço aos mais necessitados. Amém.',
 };
 
 export function getPrayerForSaint(saintId) {

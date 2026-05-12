@@ -193,6 +193,10 @@ export default function GameScreen({ onBack, phases, progress, onPhaseComplete }
   const hasNextPhase = activePhase.id < phases.length;
   const lastPhaseId = phases[phases.length - 1]?.id;
   const isCampaignCompletedNow = !!phaseSummary && phaseSummary.phaseId === lastPhaseId;
+  const isLastPhasePersisted = !!progress.completedPhases[lastPhaseId];
+  const campaignScoreForModal = isLastPhasePersisted
+    ? progress.totalScore || 0
+    : (progress.totalScore || 0) + (phaseSummary?.totalPoints || 0);
 
   const handleNextPhase = useCallback(() => {
     if (!hasNextPhase) return;
@@ -252,7 +256,7 @@ export default function GameScreen({ onBack, phases, progress, onPhaseComplete }
       <CampaignCompleteModal
         visible={state.isWon && isCampaignCompletedNow}
         saint={state.lastMatchedSaint}
-        totalScore={(progress.totalScore || 0) + (phaseSummary?.totalPoints || 0)}
+        totalScore={campaignScoreForModal}
         onBackHome={onBack}
       />
     </View>
