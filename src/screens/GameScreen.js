@@ -110,7 +110,6 @@ export default function GameScreen({ onBack, phases, progress, onPhaseComplete }
 
   const [state, dispatch] = useReducer(reducer, activePhase, createPhaseState);
   const [elapsedSeconds, setElapsedSeconds] = useState(0);
-  const [showCampaignComplete, setShowCampaignComplete] = useState(false);
   const timeoutRef = useRef(null);
   const reportedSummaryRef = useRef(null);
 
@@ -189,13 +188,11 @@ export default function GameScreen({ onBack, phases, progress, onPhaseComplete }
     if (reportedSummaryRef.current === reportKey) return;
     reportedSummaryRef.current = reportKey;
     onPhaseComplete(phaseSummary);
-    // Check if it's the last phase
-    if (phaseSummary.phaseId === phases.length) {
-      setShowCampaignComplete(true);
-    }
-  }, [phaseSummary, onPhaseComplete, state.startedAtMs, phases.length]);
+  }, [phaseSummary, onPhaseComplete, state.startedAtMs]);
 
   const hasNextPhase = activePhase.id < phases.length;
+  const lastPhaseId = phases[phases.length - 1]?.id;
+  const isCampaignCompletedNow = !!phaseSummary && phaseSummary.phaseId === lastPhaseId;
 
   const handleNextPhase = useCallback(() => {
     if (!hasNextPhase) return;
@@ -243,7 +240,7 @@ export default function GameScreen({ onBack, phases, progress, onPhaseComplete }
         />
       </View>
       <ResultModal
-        visible={state.isWon && !showCampaignComplete}
+        visible={state.isWon && !isCampaignCompletedNow}
         saint={state.lastMatchedSaint}
         summary={phaseSummary}
         hasNextPhase={hasNextPhase}
@@ -253,9 +250,9 @@ export default function GameScreen({ onBack, phases, progress, onPhaseComplete }
       />
 
       <CampaignCompleteModal
-        visible={showCampaignComplete}
+        visible={state.isWon && isCampaignCompletedNow}
         saint={state.lastMatchedSaint}
-        totalScore={progress.totalScore}
+        totalScore={(progress.totalScore || 0) + (phaseSummary?.totalPoints || 0)}
         onBackHome={onBack}
       />
     </View>
