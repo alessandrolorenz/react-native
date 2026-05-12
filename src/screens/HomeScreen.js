@@ -21,7 +21,7 @@ export default function HomeScreen({ onPlay, onOpenGallery, phases, progress }) 
 
         <View style={styles.actions}>
           <Button variant="secondary" size="lg" fullWidth onPress={onOpenGallery}>
-            ✦ Galeria dos Santosz
+            ✦ Galeria dos Santos
           </Button>
           <Button variant="primary" size="lg" fullWidth onPress={onPlay}>
             Jogar Fases
