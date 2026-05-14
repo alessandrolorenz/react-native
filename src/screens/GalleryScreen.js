@@ -22,11 +22,12 @@ const TILE_MARGIN = 4;
 
 // Browsable codex of all saints. Search by name + filter by category / region /
 // era. Tapping a tile pushes the profile screen via the parent App.js.
-export default function GalleryScreen({ onBack, onSelectSaint, progress, phases }) {
+export default function GalleryScreen({ onBack, onSelectSaint }) {
   const [query, setQuery] = useState('');
   const [category, setCategory] = useState(null);
   const [region, setRegion] = useState(null);
   const [era, setEra] = useState(null);
+  const [filtersOpen, setFiltersOpen] = useState(false);
 
   const { width } = Dimensions.get('window');
   const tileSize =
@@ -61,7 +62,7 @@ export default function GalleryScreen({ onBack, onSelectSaint, progress, phases 
   };
 
   const showClearAll = !!(query || category || region || era);
-  const completedCount = Object.keys(progress.completedPhases).length;
+  const activeFilterCount = [category, region, era].filter(Boolean).length;
 
   const filterRows = [
     { key: 'category', label: 'Categoria', options: facetOptions.category, selected: category },
@@ -92,20 +93,43 @@ export default function GalleryScreen({ onBack, onSelectSaint, progress, phases 
         />
       </View>
 
-      <View style={styles.achievementCard}>
-        <Text style={styles.achievementTitle}>Conquistas</Text>
-        <Text style={styles.achievementScore}>Pontuação total: {progress.totalScore}</Text>
-        <Text style={styles.achievementMeta}>
-          Fases concluídas: {completedCount}/{phases.length}
-        </Text>
-      </View>
+      <Pressable
+        onPress={() => setFiltersOpen((v) => !v)}
+        style={styles.filterToggle}
+        accessibilityRole="button"
+        accessibilityState={{ expanded: filtersOpen }}
+      >
+        <View style={styles.filterToggleLeft}>
+          <Text style={styles.filterToggleLabel}>Filtros</Text>
+          {activeFilterCount > 0 && (
+            <Text style={styles.filterToggleBadge}>
+              ({activeFilterCount} {activeFilterCount === 1 ? 'ativo' : 'ativos'})
+            </Text>
+          )}
+        </View>
+        <View style={styles.filterToggleLeft}>
+          {activeFilterCount > 0 && !filtersOpen && (
+            <Pressable
+              onPress={clearAll}
+              hitSlop={8}
+              style={styles.filterToggleClear}
+              accessibilityRole="button"
+            >
+              <Text style={styles.filterToggleClearText}>✕ limpar</Text>
+            </Pressable>
+          )}
+          <Text style={styles.filterToggleChevron}>{filtersOpen ? '▾' : '▸'}</Text>
+        </View>
+      </Pressable>
 
-      <FilterChips
-        rows={filterRows}
-        onSelect={handleSelect}
-        onClearAll={clearAll}
-        showClearAll={showClearAll}
-      />
+      {filtersOpen && (
+        <FilterChips
+          rows={filterRows}
+          onSelect={handleSelect}
+          onClearAll={clearAll}
+          showClearAll={showClearAll}
+        />
+      )}
 
       <ScrollView contentContainerStyle={styles.grid}>
         {filtered.length === 0 ? (
@@ -159,32 +183,42 @@ const styles = StyleSheet.create({
     paddingHorizontal: spacing.md,
     paddingTop: spacing.xs,
   },
-  achievementCard: {
-    marginHorizontal: spacing.md,
-    marginTop: spacing.sm,
-    marginBottom: spacing.sm,
-    backgroundColor: colors.white,
-    borderRadius: radii.md,
-    paddingVertical: spacing.sm,
+  filterToggle: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-between',
     paddingHorizontal: spacing.md,
-    ...shadow,
+    paddingVertical: spacing.sm,
   },
-  achievementTitle: {
-    fontSize: 12,
-    color: colors.textSoft,
+  filterToggleLeft: {
+    flexDirection: 'row',
+    alignItems: 'center',
+  },
+  filterToggleLabel: {
+    fontSize: 13,
+    fontWeight: '700',
+    color: colors.text,
     textTransform: 'uppercase',
     letterSpacing: 1,
   },
-  achievementScore: {
-    fontSize: 18,
-    color: colors.primaryDark,
-    fontWeight: '800',
-    marginTop: 2,
+  filterToggleBadge: {
+    fontSize: 12,
+    color: colors.textSoft,
+    marginLeft: 6,
   },
-  achievementMeta: {
-    fontSize: 13,
-    color: colors.text,
-    marginTop: 2,
+  filterToggleChevron: {
+    fontSize: 14,
+    color: colors.textSoft,
+    marginLeft: spacing.sm,
+  },
+  filterToggleClear: {
+    paddingHorizontal: spacing.sm,
+    paddingVertical: 4,
+  },
+  filterToggleClearText: {
+    fontSize: 12,
+    color: colors.primaryDark,
+    fontWeight: '700',
   },
   search: {
     backgroundColor: colors.surface,

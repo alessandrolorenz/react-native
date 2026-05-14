@@ -14,6 +14,7 @@ export const fontSize = {
   '3xl': 28,
   '4xl': 34,
   '5xl': 56,
+  '6xl': 72,
 };
 
 export const fontWeight = {

@@ -55,6 +55,7 @@ const styles = StyleSheet.create({
   emojiHalo: {
     fontSize: fontSize['5xl'],
     marginBottom: spacing.md,
+    height: fontSize['6xl'], // Ensure it takes up space even if emoji doesn't render
   },
   titleAccent: {
     marginBottom: spacing.md,

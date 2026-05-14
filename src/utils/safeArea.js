@@ -3,7 +3,7 @@
 
 export const SAFE_AREA = {
   // Extra padding for top (notch, status bar area)
-  paddingTop: 20,
+  paddingTop: 80,
   // Extra padding for bottom (home indicator, control buttons)
-  paddingBottom: 16,
+  paddingBottom: 80,
 };

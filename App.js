@@ -97,8 +97,6 @@ function App() {
       {screen === 'gallery' && (
         <GalleryScreen
           onBack={() => setScreen('home')}
-          phases={PHASES}
-          progress={progress}
           onSelectSaint={(id) => {
             setSelectedSaintId(id);
             setScreen('profile');
