@@ -32,4 +32,4 @@ Direção visual:
 - área segura nas bordas para o recorte das cartas;
 - sem mapas políticos, bandeiras modernas ou reconstruções apresentadas como exatas.
 
-Enquanto as imagens não estiverem disponíveis, o tema utiliza glifos coloridos definidos em `src/themes/biblical-places/items.js`.
+As imagens estão conectadas aos itens por `require()` em `src/themes/biblical-places/items.js`. Os glifos coloridos permanecem como representação editorial de apoio no conteúdo.

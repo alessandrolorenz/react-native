@@ -156,8 +156,7 @@ export const SAINTS = [
     ],
     fact: 'É invocada quando algo parece impossível.',
     emoji: '🌿',
-    // TODO: replace with final illustration (placeholder for now)
-    image: require('../../assets/saints/rita-cassia.png'),
+    image: require('../../assets/saints/ChatGPT Image 14 de jul. de 2026, 13_35_49.png'),
     feast_day: '22 de maio',
     patronage: ['Causas impossíveis', 'Mães', 'Esposas'],
     region: 'Itália',

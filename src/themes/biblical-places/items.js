@@ -4,6 +4,8 @@
 export const BIBLICAL_PLACE_ITEMS = [
   {
     id: 'jerusalem',
+    image: require('../../../assets/places/01-jerusalem.png'),
+    showEmojiBadge: false,
     name: 'Jerusalém',
     shortDescription: 'A cidade da Páscoa de Jesus e do nascimento da Igreja.',
     emoji: '🏛️',
@@ -23,6 +25,8 @@ export const BIBLICAL_PLACE_ITEMS = [
   },
   {
     id: 'bethlehem',
+    image: require('../../../assets/places/02-bethlehem.png'),
+    showEmojiBadge: false,
     name: 'Belém',
     shortDescription: 'A pequena cidade onde Jesus nasceu.',
     emoji: '⭐',
@@ -42,6 +46,8 @@ export const BIBLICAL_PLACE_ITEMS = [
   },
   {
     id: 'nazareth',
+    image: require('../../../assets/places/03-nazareth.png'),
+    showEmojiBadge: false,
     name: 'Nazaré',
     shortDescription: 'A cidade onde Jesus cresceu com Maria e José.',
     emoji: '🏠',
@@ -61,6 +67,8 @@ export const BIBLICAL_PLACE_ITEMS = [
   },
   {
     id: 'capernaum',
+    image: require('../../../assets/places/04-capernaum.png'),
+    showEmojiBadge: false,
     name: 'Cafarnaum',
     shortDescription: 'Uma cidade importante na missão de Jesus na Galileia.',
     emoji: '🏘️',
@@ -80,6 +88,8 @@ export const BIBLICAL_PLACE_ITEMS = [
   },
   {
     id: 'cana',
+    image: require('../../../assets/places/05-cana.png'),
+    showEmojiBadge: false,
     name: 'Caná',
     shortDescription: 'O lugar das bodas e do primeiro sinal de Jesus.',
     emoji: '🏺',
@@ -99,6 +109,8 @@ export const BIBLICAL_PLACE_ITEMS = [
   },
   {
     id: 'bethany',
+    image: require('../../../assets/places/06-bethany.png'),
+    showEmojiBadge: false,
     name: 'Betânia',
     shortDescription: 'A aldeia dos amigos Marta, Maria e Lázaro.',
     emoji: '🌿',
@@ -118,6 +130,8 @@ export const BIBLICAL_PLACE_ITEMS = [
   },
   {
     id: 'jericho',
+    image: require('../../../assets/places/07-jericho.png'),
+    showEmojiBadge: false,
     name: 'Jericó',
     shortDescription: 'A cidade onde Zaqueu subiu numa árvore para ver Jesus.',
     emoji: '🌳',
@@ -137,6 +151,8 @@ export const BIBLICAL_PLACE_ITEMS = [
   },
   {
     id: 'emmaus',
+    image: require('../../../assets/places/08-emmaus.png'),
+    showEmojiBadge: false,
     name: 'Emaús',
     shortDescription: 'O destino dos discípulos que caminharam com Jesus ressuscitado.',
     emoji: '🥖',
@@ -156,6 +172,8 @@ export const BIBLICAL_PLACE_ITEMS = [
   },
   {
     id: 'samaria',
+    image: require('../../../assets/places/09-samaria.png'),
+    showEmojiBadge: false,
     name: 'Samaria',
     shortDescription: 'A região onde Jesus conversou com uma mulher junto ao poço.',
     emoji: '🪣',
@@ -175,6 +193,8 @@ export const BIBLICAL_PLACE_ITEMS = [
   },
   {
     id: 'sea-of-galilee',
+    image: require('../../../assets/places/10-sea-of-galilee.png'),
+    showEmojiBadge: false,
     name: 'Mar da Galileia',
     shortDescription: 'O grande lago onde Jesus ensinou e acalmou a tempestade.',
     emoji: '🌊',
@@ -194,6 +214,8 @@ export const BIBLICAL_PLACE_ITEMS = [
   },
   {
     id: 'jordan-river',
+    image: require('../../../assets/places/11-jordan-river.png'),
+    showEmojiBadge: false,
     name: 'Rio Jordão',
     shortDescription: 'O rio onde Jesus recebeu o Batismo de João.',
     emoji: '💧',
@@ -213,6 +235,8 @@ export const BIBLICAL_PLACE_ITEMS = [
   },
   {
     id: 'mount-sinai',
+    image: require('../../../assets/places/12-mount-sinai.png'),
+    showEmojiBadge: false,
     name: 'Monte Sinai',
     shortDescription: 'O monte da aliança de Deus com o povo de Israel.',
     emoji: '⛰️',
@@ -232,6 +256,8 @@ export const BIBLICAL_PLACE_ITEMS = [
   },
   {
     id: 'mount-of-olives',
+    image: require('../../../assets/places/13-mount-of-olives.png'),
+    showEmojiBadge: false,
     name: 'Monte das Oliveiras',
     shortDescription: 'O monte próximo a Jerusalém onde Jesus costumava rezar.',
     emoji: '🫒',
@@ -251,6 +277,8 @@ export const BIBLICAL_PLACE_ITEMS = [
   },
   {
     id: 'judean-desert',
+    image: require('../../../assets/places/14-judean-desert.png'),
+    showEmojiBadge: false,
     name: 'Deserto da Judeia',
     shortDescription: 'A região desértica onde João Batista anunciava a conversão.',
     emoji: '🏜️',
@@ -270,6 +298,8 @@ export const BIBLICAL_PLACE_ITEMS = [
   },
   {
     id: 'egypt',
+    image: require('../../../assets/places/15-egypt.png'),
+    showEmojiBadge: false,
     name: 'Egito',
     shortDescription: 'A terra do Êxodo e do refúgio da Sagrada Família.',
     emoji: '🌴',
@@ -289,6 +319,8 @@ export const BIBLICAL_PLACE_ITEMS = [
   },
   {
     id: 'damascus',
+    image: require('../../../assets/places/16-damascus.png'),
+    showEmojiBadge: false,
     name: 'Damasco',
     shortDescription: 'A cidade ligada ao chamado e à conversão de Saulo.',
     emoji: '✨',
@@ -308,6 +340,8 @@ export const BIBLICAL_PLACE_ITEMS = [
   },
   {
     id: 'antioch',
+    image: require('../../../assets/places/17-antioch.png'),
+    showEmojiBadge: false,
     name: 'Antioquia',
     shortDescription: 'Uma cidade importante para as primeiras comunidades cristãs.',
     emoji: '⛪',
@@ -327,6 +361,8 @@ export const BIBLICAL_PLACE_ITEMS = [
   },
   {
     id: 'patmos',
+    image: require('../../../assets/places/18-patmos.png'),
+    showEmojiBadge: false,
     name: 'Ilha de Patmos',
     shortDescription: 'A ilha onde João recebeu as visões do Apocalipse.',
     emoji: '📜',

@@ -1,6 +1,6 @@
 # Spec 02 — Pacote “Lugares Bíblicos”
 
-Status: implementada com arte provisória; conteúdo sujeito a revisão catequética  
+Status: implementada com arte final integrada; conteúdo sujeito a revisão catequética
 Produto: Jogo da Memória  
 Tipo: novo pacote para o aplicativo multitema  
 Temas anteriores: Santos e Símbolos da Fé
