@@ -7,7 +7,7 @@ import { colors, radii, spacing } from '../../theme';
 //   filter — pill, white surface, gold border; active = rose with white text
 //   phase  — md radius, state-coded background (locked/unlocked/active/completed)
 //   stat   — md radius, white bg, uppercase label + bold value (Header pills)
-//   meta   — pill, surface bg, gold border (SaintProfile feast/region/era)
+//   meta   — pill, surface bg, gold border (ItemProfile metadata)
 
 const VARIANT_BASE = {
   filter: {

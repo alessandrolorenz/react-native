@@ -1,6 +1,5 @@
 import React from 'react';
 import {
-  Image,
   Modal,
   Pressable,
   ScrollView,
@@ -8,56 +7,65 @@ import {
   Text,
   View,
 } from 'react-native';
+import ItemArtwork from './ItemArtwork';
 import { colors, radii, shadow, spacing } from '../theme/colors';
-import { getPrayerForSaint } from '../data/prayers';
 
 export default function CampaignCompleteModal({
   visible,
-  saint,
-  totalScore,
+  theme,
+  item,
   onBackHome,
 }) {
-  if (!saint) return null;
+  if (!item) return null;
 
-  const prayer = getPrayerForSaint(saint.id);
+  const completion = theme.completion;
+  const sectionTitle = completion.sectionTitle?.(item);
+  const sectionText = completion.sectionText?.(item);
+  const finalMessage = completion.finalMessage?.(item);
+  const hasStory = Array.isArray(item.story) && item.story.length > 0;
 
   return (
     <Modal visible={visible} transparent animationType="fade">
       <View style={styles.backdrop}>
         <View style={styles.card}>
           <ScrollView contentContainerStyle={styles.scroll}>
-            <Text style={styles.kicker}>🎉 Campanha Concluída! 🎉</Text>
+            <Text style={styles.kicker}>{completion.kicker}</Text>
 
             <Text style={styles.congratsTitle}>
-              Parabéns, viajante espiritual!
+              {completion.title}
             </Text>
 
             <Text style={styles.congratsText}>
-              Você completou todas as quatro fases do Jogo da Memória dos Santos e conheceu histórias inspiradoras de fé e compaixão.
+              {completion.message}
             </Text>
 
             <View style={styles.imageWrap}>
-              <Image source={saint.image} style={styles.image} resizeMode="cover" />
-              <View style={styles.emojiBadge}>
-                <Text style={styles.emoji}>{saint.emoji}</Text>
-              </View>
+              <ItemArtwork item={item} glyphStyle={styles.artworkGlyph} />
             </View>
 
-            <Text style={styles.saintName}>{saint.name}</Text>
+            <Text style={styles.itemName}>{item.name}</Text>
+            {item.shortDescription ? <Text style={styles.short}>{item.shortDescription}</Text> : null}
 
-            <View style={styles.scoreCard}>
-              <Text style={styles.scoreLabel}>Pontuação Total da Campanha</Text>
-              <Text style={styles.scoreValue}>{totalScore}</Text>
-            </View>
+            {hasStory ? <View style={styles.storyCard}>
+              <Text style={styles.storyTitle}>{theme.copy.resultSectionTitle}</Text>
+              {item.story.map((line, i) => (
+                <Text key={i} style={styles.storyLine}>
+                  {line}
+                </Text>
+              ))}
+            </View> : null}
 
-            <View style={styles.prayerCard}>
-              <Text style={styles.prayerTitle}>Oração a {saint.name}</Text>
-              <Text style={styles.prayerText}>{prayer}</Text>
-            </View>
+            {item.fact ? <View style={styles.factPill}>
+              <Text style={styles.factLabel}>{theme.copy.factTitle}</Text>
+              <Text style={styles.fact}>{item.fact}</Text>
+            </View> : null}
 
-            <Text style={styles.finalMessage}>
-              Que a bênção de {saint.name.split(' ')[1]} acompanhe você sempre em seu caminho! ✨
-            </Text>
+            {sectionText ? <View style={styles.completionCard}>
+              {sectionTitle ? <Text style={styles.completionTitle}>{sectionTitle}</Text> : null}
+              <Text style={styles.completionText}>{sectionText}</Text>
+            </View> : null}
+
+            {finalMessage ? <Text style={styles.finalMessage}>{finalMessage}</Text> : null}
 
             <Pressable style={styles.cta} onPress={onBackHome}>
               <Text style={styles.ctaText}>Voltar ao Início</Text>
@@ -122,65 +130,79 @@ const styles = StyleSheet.create({
     backgroundColor: colors.white,
     ...shadow,
   },
-  image: {
-    width: '100%',
-    height: '100%',
-  },
-  emojiBadge: {
-    position: 'absolute',
-    bottom: 4,
-    right: 4,
-    backgroundColor: colors.white,
-    paddingHorizontal: 8,
-    paddingVertical: 4,
-    borderRadius: radii.pill,
-    ...shadow,
-  },
-  emoji: { fontSize: 18 },
-  saintName: {
+  artworkGlyph: { fontSize: 66 },
+  itemName: {
     fontSize: 22,
     fontWeight: '800',
     color: colors.primaryDark,
     textAlign: 'center',
+    marginBottom: spacing.xs,
+  },
+  short: {
+    fontSize: 15,
+    color: colors.textSoft,
+    fontStyle: 'italic',
+    textAlign: 'center',
     marginBottom: spacing.md,
   },
-  scoreCard: {
-    alignSelf: 'stretch',
-    backgroundColor: colors.accent,
-    borderRadius: radii.lg,
-    padding: spacing.md,
-    marginBottom: spacing.lg,
-    alignItems: 'center',
-  },
-  scoreLabel: {
-    fontSize: 12,
-    color: colors.text,
-    textTransform: 'uppercase',
-    letterSpacing: 1,
-    fontWeight: '700',
-  },
-  scoreValue: {
-    fontSize: 32,
-    fontWeight: '800',
-    color: colors.primaryDark,
-    marginTop: spacing.xs,
-  },
-  prayerCard: {
+  storyCard: {
     alignSelf: 'stretch',
     backgroundColor: colors.white,
     borderRadius: radii.lg,
     padding: spacing.md,
-    marginBottom: spacing.lg,
+    marginBottom: spacing.md,
+  },
+  storyTitle: {
+    fontSize: 14,
+    fontWeight: '700',
+    color: colors.primaryDark,
+    textAlign: 'center',
+    marginBottom: spacing.sm,
+  },
+  storyLine: {
+    fontSize: 15,
+    color: colors.text,
+    lineHeight: 22,
+    textAlign: 'center',
+    marginBottom: 4,
+  },
+  factPill: {
+    alignSelf: 'stretch',
+    backgroundColor: colors.accent,
+    borderRadius: radii.md,
+    paddingVertical: spacing.sm,
+    paddingHorizontal: spacing.md,
+    marginBottom: spacing.md,
+  },
+  factLabel: {
+    fontSize: 11,
+    fontWeight: '700',
+    color: colors.text,
+    letterSpacing: 1,
+    textTransform: 'uppercase',
+    marginBottom: 2,
+  },
+  fact: {
+    fontSize: 14,
+    color: colors.text,
+    lineHeight: 20,
+  },
+  completionCard: {
+    alignSelf: 'stretch',
+    backgroundColor: colors.white,
+    borderRadius: radii.lg,
+    padding: spacing.md,
+    marginBottom: spacing.md,
     ...shadow,
   },
-  prayerTitle: {
+  completionTitle: {
     fontSize: 14,
     fontWeight: '800',
     color: colors.primaryDark,
     marginBottom: spacing.sm,
     textAlign: 'center',
   },
-  prayerText: {
+  completionText: {
     fontSize: 15,
     color: colors.text,
     lineHeight: 23,
@@ -191,7 +213,7 @@ const styles = StyleSheet.create({
     fontSize: 14,
     color: colors.textSoft,
     textAlign: 'center',
-    marginBottom: spacing.lg,
+    marginBottom: spacing.md,
     lineHeight: 20,
   },
   cta: {

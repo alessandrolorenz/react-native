@@ -15,7 +15,7 @@
 //                "Mariana", "Leigo" (empty string if unset)
 //   era        — string, one of: "Antiguidade", "Idade Média", "Idade Moderna",
 //                "Século XX", "Século XXI" (empty string if unset)
-// Empty values are skipped by GalleryScreen's filter logic and SaintProfileScreen's
+// Empty values are skipped by GalleryScreen's filter logic and ItemProfileScreen's
 // meta pills, so stub entries below degrade gracefully until content is filled in.
 
 export const SAINTS = [

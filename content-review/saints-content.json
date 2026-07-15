@@ -1,0 +1,405 @@
+{
+  "instructions": {
+    "purpose": "Arquivo para curadoria dos textos exibidos no aplicativo.",
+    "immutable_field": "id",
+    "return_format": "Mantenha a estrutura JSON e envie este arquivo atualizado."
+  },
+  "saints": [
+    {
+      "id": "francisco-assis",
+      "name": "São Francisco de Assis",
+      "short_description": "O santo que falava com os animais.",
+      "story": [
+        "Nasceu em Assis, na Itália, em 1182.",
+        "Deixou tudo para viver com simplicidade e amor.",
+        "Cuidava dos pobres, dos doentes e da natureza."
+      ],
+      "fact": "É o padroeiro dos animais e do meio ambiente.",
+      "emoji": "🕊️",
+      "feast_day": "4 de outubro",
+      "patronage": [
+        "Animais",
+        "Meio ambiente",
+        "Ecologia"
+      ],
+      "region": "Itália",
+      "category": "Religioso",
+      "era": "Idade Média",
+      "prayer": "São Francisco, padroeiro da natureza, ajude-nos a cuidar de todas as criaturas com amor e compaixão, assim como você fez em vida. Amém."
+    },
+    {
+      "id": "carlo-acutis",
+      "name": "São Carlo Acutis",
+      "short_description": "O jovem santo da internet.",
+      "story": [
+        "Nasceu em 1991 e amava computadores.",
+        "Usou a internet para falar de Jesus.",
+        "Mostrou que santidade é para todas as idades."
+      ],
+      "fact": "É chamado de \"padroeiro da internet\".",
+      "emoji": "💻",
+      "feast_day": "12 de outubro",
+      "patronage": [
+        "Internet",
+        "Jovens",
+        "Programadores"
+      ],
+      "region": "Itália",
+      "category": "Leigo",
+      "era": "Século XXI",
+      "prayer": "São Carlo Acutis, guia dos jovens, inspire-nos a usar a tecnologia com propósito e para aproximar as pessoas de Cristo. Amém."
+    },
+    {
+      "id": "jose",
+      "name": "São José",
+      "short_description": "O pai adotivo de Jesus.",
+      "story": [
+        "Foi um humilde carpinteiro em Nazaré.",
+        "Cuidou de Maria e do menino Jesus com amor.",
+        "É exemplo de pai trabalhador e fiel."
+      ],
+      "fact": "É o padroeiro dos pais e dos trabalhadores.",
+      "emoji": "🪚",
+      "feast_day": "19 de março",
+      "patronage": [
+        "Pais",
+        "Trabalhadores",
+        "Carpinteiros",
+        "Igreja Católica"
+      ],
+      "region": "Nazaré",
+      "category": "Religioso",
+      "era": "Antiguidade",
+      "prayer": "São José, protetor das famílias, abençoe-nos com sabedoria, trabalho honesto e amor verdadeiro. Amém."
+    },
+    {
+      "id": "antonio",
+      "name": "Santo Antônio",
+      "short_description": "O santo dos milagres e das coisas perdidas.",
+      "story": [
+        "Nasceu em Lisboa, mas viveu em Pádua.",
+        "Pregava com tanta fé que até os peixes ouviam.",
+        "Ajudava quem precisava encontrar algo perdido."
+      ],
+      "fact": "É lembrado em junho com festas alegres no Brasil.",
+      "emoji": "🐟",
+      "feast_day": "13 de junho",
+      "patronage": [
+        "Coisas perdidas",
+        "Pobres",
+        "Casamentos"
+      ],
+      "region": "Portugal e Itália",
+      "category": "Doutor da Igreja",
+      "era": "Idade Média",
+      "prayer": "Santo Antônio, amigo dos que buscam, ajude-nos a encontrar o que perdemos e a viver com fé e caridade. Amém."
+    },
+    {
+      "id": "teresinha",
+      "name": "Santa Teresinha do Menino Jesus",
+      "short_description": "A santa do caminho pequeno.",
+      "story": [
+        "Era uma menina cheia de sorrisos e carinho.",
+        "Entrou no convento aos 15 anos.",
+        "Ensinou que pequenos gestos de amor agradam a Deus."
+      ],
+      "fact": "É também conhecida como \"Santa das Rosas\".",
+      "emoji": "🌹",
+      "feast_day": "1 de outubro",
+      "patronage": [
+        "Missões",
+        "Floristas",
+        "Aviadores"
+      ],
+      "region": "França",
+      "category": "Doutor da Igreja",
+      "era": "Idade Moderna",
+      "prayer": "Santa Teresinha, ensine-nos o caminho da pequena via, fazendo com amor as coisas simples do dia a dia. Amém."
+    },
+    {
+      "id": "padre-pio",
+      "name": "São Padre Pio",
+      "short_description": "O santo das chagas de Cristo.",
+      "story": [
+        "Foi um frade italiano cheio de fé.",
+        "Passava horas confessando e ajudando.",
+        "Recebeu as marcas de Jesus em suas mãos."
+      ],
+      "fact": "Fundou hospitais para cuidar dos enfermos.",
+      "emoji": "🙏",
+      "feast_day": "23 de setembro",
+      "patronage": [
+        "Confessores",
+        "Enfermos",
+        "Voluntários do alívio civil"
+      ],
+      "region": "Itália",
+      "category": "Religioso",
+      "era": "Século XX",
+      "prayer": "São Padre Pio, interceda por nós para que suportemos as dificuldades com paciência e confiança em Deus. Amém."
+    },
+    {
+      "id": "aparecida",
+      "name": "Nossa Senhora Aparecida",
+      "short_description": "A mãezinha do Brasil.",
+      "story": [
+        "Sua imagem foi encontrada por pescadores em 1717.",
+        "Aconteceu no rio Paraíba do Sul.",
+        "Desde então, é venerada por todo o Brasil."
+      ],
+      "fact": "É a padroeira oficial do Brasil.",
+      "emoji": "👑",
+      "feast_day": "12 de outubro",
+      "patronage": [
+        "Brasil",
+        "Pescadores"
+      ],
+      "region": "Brasil",
+      "category": "Mariana",
+      "era": "Idade Moderna",
+      "prayer": "Nossa Senhora Aparecida, Mãe querida do Brasil, cobre-nos com seu manto e conduza-nos sempre a Jesus. Amém."
+    },
+    {
+      "id": "rita-cassia",
+      "name": "Santa Rita de Cássia",
+      "short_description": "A santa das causas impossíveis.",
+      "story": [
+        "Viveu na Itália no século XIV.",
+        "Foi esposa, mãe e depois religiosa.",
+        "Sua fé tocou os corações mais difíceis."
+      ],
+      "fact": "É invocada quando algo parece impossível.",
+      "emoji": "🌿",
+      "feast_day": "22 de maio",
+      "patronage": [
+        "Causas impossíveis",
+        "Mães",
+        "Esposas"
+      ],
+      "region": "Itália",
+      "category": "Religioso",
+      "era": "Idade Média",
+      "prayer": "Santa Rita de Cássia, santa da compaixão, interceda por aqueles que enfrentam dificuldades e sofrimentos. Amém."
+    },
+    {
+      "id": "madre-teresa-calcuta",
+      "name": "Madre Teresa de Calcutá",
+      "short_description": "Dedicou sua vida aos pobres e doentes.",
+      "story": [
+        "Nasceu na Albânia e viveu grande parte da vida na Índia.",
+        "Fundou as Missionárias da Caridade.",
+        "Cuidava das pessoas mais pobres com amor e humildade."
+      ],
+      "fact": "Recebeu o Prêmio Nobel da Paz em 1979.",
+      "emoji": "🙏",
+      "feast_day": "5 de setembro",
+      "patronage": [
+        "Missionários",
+        "Pobres",
+        "Doentes"
+      ],
+      "region": "Índia",
+      "category": "Religioso",
+      "era": "Século XX",
+      "prayer": "Santa Teresa de Calcutá, inspira-nos a servir os mais pobres com ternura, humildade e amor sem medidas. Amém."
+    },
+    {
+      "id": "santa-clara",
+      "name": "Santa Clara de Assis",
+      "short_description": "Seguiu uma vida de simplicidade, oração e amor a Deus.",
+      "story": [
+        "Nasceu na Itália e foi grande amiga de São Francisco de Assis.",
+        "Deixou uma vida rica para seguir Jesus com humildade.",
+        "Fundou a ordem das Clarissas dedicada à oração e à simplicidade."
+      ],
+      "fact": "É considerada a padroeira da televisão e das comunicações.",
+      "emoji": "✨",
+      "feast_day": "11 de agosto",
+      "patronage": [
+        "Televisão",
+        "Comunicações",
+        "Clarissas"
+      ],
+      "region": "Itália",
+      "category": "Religioso",
+      "era": "Idade Média",
+      "prayer": "Santa Clara de Assis, contemplativa fiel, ajuda-nos a encontrar paz na oração e na simplicidade. Amém."
+    },
+    {
+      "id": "santa-paulina",
+      "name": "Santa Paulina",
+      "short_description": "Foi uma religiosa dedicada aos doentes e aos mais necessitados.",
+      "story": [
+        "Nasceu na Itália e veio ainda criança para o Brasil.",
+        "Cuidava dos doentes e ajudava pessoas pobres com muito carinho.",
+        "Fundou a Congregação das Irmãzinhas da Imaculada Conceição."
+      ],
+      "fact": "Foi a primeira santa canonizada que viveu no Brasil.",
+      "emoji": "💙",
+      "feast_day": "9 de julho",
+      "patronage": [
+        "Doentes",
+        "Religiosas",
+        "Brasil"
+      ],
+      "region": "Brasil",
+      "category": "Religioso",
+      "era": "Século XIX",
+      "prayer": "Santa Paulina, missionária de esperança, fortalece-nos para cuidar dos irmãos com alegria e generosidade. Amém."
+    },
+    {
+      "id": "santo-agostinho",
+      "name": "Santo Agostinho",
+      "short_description": "Foi um grande pensador que encontrou Deus após muitos desafios.",
+      "story": [
+        "Nasceu no norte da África e gostava muito de estudar.",
+        "Durante a juventude, buscou felicidade em muitos caminhos diferentes.",
+        "Depois de sua conversão, tornou-se bispo e escreveu importantes ensinamentos cristãos."
+      ],
+      "fact": "Escreveu o famoso livro “Confissões”.",
+      "emoji": "📖",
+      "feast_day": "28 de agosto",
+      "patronage": [
+        "Teólogos",
+        "Estudantes",
+        "Filósofos"
+      ],
+      "region": "Norte da África",
+      "category": "Religioso",
+      "era": "Antiguidade Cristã",
+      "prayer": "Santo Agostinho, doutor da Igreja, ilumina nossas mentes e corações no caminho da verdade. Amém."
+    },
+    {
+      "id": "sao-bento",
+      "name": "São Bento",
+      "short_description": "Foi um monge conhecido por sua sabedoria, oração e proteção espiritual.",
+      "story": [
+        "Nasceu na Itália e dedicou sua vida à oração e ao trabalho.",
+        "Criou regras para ajudar os monges a viverem com disciplina e paz.",
+        "Sua medalha tornou-se símbolo de proteção e fé cristã."
+      ],
+      "fact": "A Medalha de São Bento é conhecida no mundo todo como símbolo de proteção.",
+      "emoji": "⛪",
+      "feast_day": "11 de julho",
+      "patronage": [
+        "Europa",
+        "Monges",
+        "Proteção espiritual"
+      ],
+      "region": "Itália",
+      "category": "Religioso",
+      "era": "Idade Média",
+      "prayer": "São Bento, protetor contra o mal, guarda nosso lar e nossa família na paz de Cristo. Amém."
+    },
+    {
+      "id": "sao-domingos",
+      "name": "São Domingos",
+      "short_description": "Foi um pregador que dedicou sua vida ao ensino e à evangelização.",
+      "story": [
+        "Nasceu na Espanha e desde jovem gostava de estudar e ajudar as pessoas.",
+        "Percorreu muitas cidades anunciando o Evangelho com alegria.",
+        "Fundou a Ordem dos Dominicanos, dedicada ao estudo e à pregação."
+      ],
+      "fact": "A tradição do Rosário é fortemente ligada à missão de São Domingos.",
+      "emoji": "📿",
+      "feast_day": "8 de agosto",
+      "patronage": [
+        "Pregadores",
+        "Astrônomos",
+        "Dominicanos"
+      ],
+      "region": "Espanha",
+      "category": "Religioso",
+      "era": "Idade Média",
+      "prayer": "São Domingos, pregador da verdade, ensina-nos a anunciar o Evangelho com sabedoria e caridade. Amém."
+    },
+    {
+      "id": "santo-inacio-loiola",
+      "name": "Santo Inácio de Loiola",
+      "short_description": "Foi um soldado que se tornou um grande guia espiritual da Igreja.",
+      "story": [
+        "Nasceu na Espanha e sonhava em ser um grande cavaleiro.",
+        "Após ficar ferido em uma batalha, começou uma profunda conversão.",
+        "Fundou a Companhia de Jesus, conhecida como os Jesuítas."
+      ],
+      "fact": "Criou os famosos Exercícios Espirituais, usados até hoje no mundo inteiro.",
+      "emoji": "🕊️",
+      "feast_day": "31 de julho",
+      "patronage": [
+        "Retiros espirituais",
+        "Jesuítas",
+        "Soldados"
+      ],
+      "region": "Espanha",
+      "category": "Religioso",
+      "era": "Renascimento",
+      "prayer": "Santo Inácio de Loiola, guia espiritual, ajuda-nos a discernir e escolher sempre a vontade de Deus. Amém."
+    },
+    {
+      "id": "sao-joao-paulo-ii",
+      "name": "São João Paulo II",
+      "short_description": "Foi um papa muito querido que marcou a história da Igreja no mundo moderno.",
+      "story": [
+        "Nasceu na Polônia e viveu tempos difíceis durante a Segunda Guerra Mundial.",
+        "Tornou-se papa e viajou o mundo levando mensagens de paz e esperança.",
+        "Foi um grande defensor da juventude e da dignidade humana."
+      ],
+      "fact": "Foi um dos papas que mais viajou na história da Igreja.",
+      "emoji": "🌍",
+      "feast_day": "22 de outubro",
+      "patronage": [
+        "Jovens",
+        "Famílias",
+        "Paz mundial"
+      ],
+      "region": "Polônia / Vaticano",
+      "category": "Religioso",
+      "era": "Século XX",
+      "prayer": "São João Paulo II, pastor dos jovens, fortalece nossa coragem para viver a fé no mundo de hoje. Amém."
+    },
+    {
+      "id": "sao-tomas-aquino",
+      "name": "São Tomás de Aquino",
+      "short_description": "Foi um grande estudioso que uniu fé e razão em seus ensinamentos.",
+      "story": [
+        "Nasceu na Itália e desde jovem gostava muito de estudar.",
+        "Ingressou na Ordem Dominicana contra a vontade da família.",
+        "Escreveu importantes obras de teologia e filosofia cristã."
+      ],
+      "fact": "Sua obra “Suma Teológica” é uma das mais importantes da história da Igreja.",
+      "emoji": "📚",
+      "feast_day": "28 de janeiro",
+      "patronage": [
+        "Estudantes",
+        "Teólogos",
+        "Universidades"
+      ],
+      "region": "Itália",
+      "category": "Religioso",
+      "era": "Idade Média",
+      "prayer": "São Tomás de Aquino, doutor da Igreja, ilumina nosso entendimento para unir fé e razão com humildade. Amém."
+    },
+    {
+      "id": "sao-vicente-paula",
+      "name": "São Vicente de Paula",
+      "short_description": "Foi um sacerdote conhecido por sua caridade e dedicação aos pobres.",
+      "story": [
+        "Nasceu na França e desde jovem mostrou grande compaixão pelos necessitados.",
+        "Fundou a Congregação da Missão e as Filhas da Caridade para ajudar os pobres.",
+        "Dedicou sua vida a servir os mais vulneráveis e a promover a justiça social."
+      ],
+      "fact": "É lembrado como o santo da caridade e da ajuda aos pobres.",
+      "emoji": "🙏",
+      "feast_day": "27 de setembro",
+      "patronage": [
+        "Caridade",
+        "Pobres",
+        "Missionários"
+      ],
+      "region": "",
+      "category": "",
+      "era": "",
+      "prayer": "São Vicente de Paulo, pai dos pobres, desperta em nós a compaixão e o serviço aos mais necessitados. Amém."
+    }
+  ]
+}

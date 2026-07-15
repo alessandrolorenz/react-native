@@ -4,9 +4,10 @@ import { StyleSheet, Text, View } from 'react-native';
 import HomeScreen from './src/screens/HomeScreen';
 import GameScreen from './src/screens/GameScreen';
 import GalleryScreen from './src/screens/GalleryScreen';
-import SaintProfileScreen from './src/screens/SaintProfileScreen';
+import ItemProfileScreen from './src/screens/ItemProfileScreen';
 import { colors } from './src/theme/colors';
 import { PHASES } from './src/data/phases';
+import { DEFAULT_THEME_ID, getThemeById, THEMES, validateTheme } from './src/themes';
 
 // Catches any JS render error and shows it on screen instead of a white screen.
 class ErrorBoundary extends React.Component {
@@ -31,15 +32,28 @@ class ErrorBoundary extends React.Component {
 // touching any screen internals.
 function App() {
   const [screen, setScreen] = useState('home');
-  const [selectedSaintId, setSelectedSaintId] = useState(null);
-  const [progress, setProgress] = useState({
-    unlockedPhase: 1,
-    completedPhases: {},
-    totalScore: 0,
-  });
+  const [activeThemeId, setActiveThemeId] = useState(DEFAULT_THEME_ID);
+  const [selectedItemId, setSelectedItemId] = useState(null);
+  const [progressByTheme, setProgressByTheme] = useState(() =>
+    Object.fromEntries(
+      THEMES.map((theme) => [
+        theme.id,
+        { unlockedPhase: 1, completedPhases: {}, totalScore: 0 },
+      ]),
+    ),
+  );
+
+  const activeTheme = getThemeById(activeThemeId);
+  const progress = progressByTheme[activeThemeId];
+
+  const themeErrors = THEMES.flatMap((theme) => validateTheme(theme, PHASES));
+  if (themeErrors.length > 0) {
+    throw new Error(themeErrors.join('\n'));
+  }
 
   const handlePhaseComplete = (summary) => {
-    setProgress((prev) => {
+    setProgressByTheme((allProgress) => {
+      const prev = allProgress[activeThemeId];
       const existing = prev.completedPhases[summary.phaseId];
       const bestScore = Math.max(existing?.bestScore || 0, summary.totalPoints);
       const bestCombo = Math.max(existing?.bestCombo || 0, summary.bestCombo);
@@ -68,9 +82,15 @@ function App() {
       );
 
       return {
-        unlockedPhase: Math.max(prev.unlockedPhase, Math.min(PHASES.length, summary.phaseId + 1)),
-        completedPhases,
-        totalScore,
+        ...allProgress,
+        [activeThemeId]: {
+          unlockedPhase: Math.max(
+            prev.unlockedPhase,
+            Math.min(PHASES.length, summary.phaseId + 1),
+          ),
+          completedPhases,
+          totalScore,
+        },
       };
     });
   };
@@ -82,12 +102,18 @@ function App() {
         <HomeScreen
           onPlay={() => setScreen('game')}
           onOpenGallery={() => setScreen('gallery')}
-          phases={PHASES}
-          progress={progress}
+          themes={THEMES}
+          activeTheme={activeTheme}
+          progressByTheme={progressByTheme}
+          onSelectTheme={(themeId) => {
+            setActiveThemeId(themeId);
+            setSelectedItemId(null);
+          }}
         />
       )}
       {screen === 'game' && (
         <GameScreen
+          theme={activeTheme}
           onBack={() => setScreen('home')}
           phases={PHASES}
           progress={progress}
@@ -96,16 +122,18 @@ function App() {
       )}
       {screen === 'gallery' && (
         <GalleryScreen
+          theme={activeTheme}
           onBack={() => setScreen('home')}
-          onSelectSaint={(id) => {
-            setSelectedSaintId(id);
+          onSelectItem={(id) => {
+            setSelectedItemId(id);
             setScreen('profile');
           }}
         />
       )}
       {screen === 'profile' && (
-        <SaintProfileScreen
-          saintId={selectedSaintId}
+        <ItemProfileScreen
+          theme={activeTheme}
+          itemId={selectedItemId}
           onBack={() => setScreen('gallery')}
         />
       )}

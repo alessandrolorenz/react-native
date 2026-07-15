@@ -1,19 +1,19 @@
 import React, { memo, useEffect, useRef } from 'react';
 import {
   Animated,
-  Image,
   Pressable,
   StyleSheet,
   Text,
   View,
 } from 'react-native';
+import ItemArtwork from './ItemArtwork';
 import { colors, radii, shadow } from '../theme/colors';
 
 // Single memory card with a 3D flip animation.
 // `isOpen` (matched OR currently flipped) drives a rotateY animation between
 // 0deg (back face up) and 180deg (front face up). backfaceVisibility: 'hidden'
 // keeps the hidden face from leaking through during the rotation.
-function Card({ card, isOpen, isMatched, disabled, onPress, size }) {
+function Card({ card, isOpen, isMatched, disabled, onPress, size, cardBackGlyph = '✦' }) {
   const rotation = useRef(new Animated.Value(isOpen ? 1 : 0)).current;
 
   useEffect(() => {
@@ -41,7 +41,7 @@ function Card({ card, isOpen, isMatched, disabled, onPress, size }) {
       disabled={disabled || isOpen}
       style={[styles.cardWrapper, dimension]}
       accessibilityRole="button"
-      accessibilityLabel={isOpen ? card.saint.name : 'Carta virada para baixo'}
+      accessibilityLabel={isOpen ? card.item.name : 'Carta virada para baixo'}
     >
       {/* Back face (face-down state) */}
       <Animated.View
@@ -53,11 +53,11 @@ function Card({ card, isOpen, isMatched, disabled, onPress, size }) {
         ]}
       >
         <View style={styles.backInner}>
-          <Text style={styles.backGlyph}>✦</Text>
+          <Text style={styles.backGlyph}>{cardBackGlyph}</Text>
         </View>
       </Animated.View>
 
-      {/* Front face (saint reveal) */}
+      {/* Front face (theme item reveal) */}
       <Animated.View
         style={[
           styles.face,
@@ -67,10 +67,7 @@ function Card({ card, isOpen, isMatched, disabled, onPress, size }) {
           { transform: [{ rotateY: frontInterpolate }] },
         ]}
       >
-        <Image source={card.saint.image} style={styles.image} resizeMode="cover" />
-        <View style={styles.emojiBadge}>
-          <Text style={styles.emoji}>{card.saint.emoji}</Text>
-        </View>
+        <ItemArtwork item={card.item} glyphStyle={styles.itemGlyph} />
       </Animated.View>
     </Pressable>
   );
@@ -120,21 +117,8 @@ const styles = StyleSheet.create({
     borderWidth: 2,
     borderColor: colors.matched,
   },
-  image: {
-    width: '100%',
-    height: '100%',
-  },
-  emojiBadge: {
-    position: 'absolute',
-    bottom: 6,
-    right: 6,
-    backgroundColor: colors.white,
-    paddingHorizontal: 6,
-    paddingVertical: 2,
-    borderRadius: radii.pill,
-  },
-  emoji: {
-    fontSize: 16,
+  itemGlyph: {
+    fontSize: 34,
   },
 });
 
@@ -144,5 +128,6 @@ export default memo(Card, (prev, next) =>
   prev.isMatched === next.isMatched &&
   prev.disabled === next.disabled &&
   prev.size === next.size &&
+  prev.cardBackGlyph === next.cardBackGlyph &&
   prev.card.cardId === next.card.cardId,
 );

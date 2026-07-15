@@ -9,10 +9,9 @@ import {
   TextInput,
   View,
 } from 'react-native';
-import { SAINTS } from '../data/saints';
-import SaintTile from '../components/SaintTile';
+import GalleryTile from '../components/GalleryTile';
 import FilterChips from '../components/FilterChips';
-import { applyFilters, getDistinctValues } from '../utils/saintFilters';
+import { applyFilters, getDistinctValues } from '../utils/itemFilters';
 import { colors, radii, shadow, spacing } from '../theme/colors';
 import { SAFE_AREA } from '../utils/safeArea';
 
@@ -20,55 +19,47 @@ const COLUMNS = 2;
 const HORIZONTAL_PADDING = spacing.md;
 const TILE_MARGIN = 4;
 
-// Browsable codex of all saints. Search by name + filter by category / region /
-// era. Tapping a tile pushes the profile screen via the parent App.js.
-export default function GalleryScreen({ onBack, onSelectSaint }) {
+export default function GalleryScreen({ theme, onBack, onSelectItem }) {
   const [query, setQuery] = useState('');
-  const [category, setCategory] = useState(null);
-  const [region, setRegion] = useState(null);
-  const [era, setEra] = useState(null);
+  const [selectedFilters, setSelectedFilters] = useState({});
   const [filtersOpen, setFiltersOpen] = useState(false);
 
   const { width } = Dimensions.get('window');
   const tileSize =
     Math.floor((width - HORIZONTAL_PADDING * 2) / COLUMNS) - TILE_MARGIN * 2;
 
-  // Saints are static at runtime — derive distinct facet values once.
   const facetOptions = useMemo(
-    () => ({
-      category: getDistinctValues(SAINTS, 'category'),
-      region: getDistinctValues(SAINTS, 'region'),
-      era: getDistinctValues(SAINTS, 'era'),
-    }),
-    [],
+    () => Object.fromEntries(
+      theme.filters.map((filter) => [
+        filter.key,
+        getDistinctValues(theme.items, filter.key),
+      ]),
+    ),
+    [theme],
   );
 
   const filtered = useMemo(
-    () => applyFilters(SAINTS, { query, category, region, era }),
-    [query, category, region, era],
+    () => applyFilters(theme.items, query, selectedFilters),
+    [theme.items, query, selectedFilters],
   );
 
   const handleSelect = (key, value) => {
-    if (key === 'category') setCategory(value);
-    else if (key === 'region') setRegion(value);
-    else if (key === 'era') setEra(value);
+    setSelectedFilters((current) => ({ ...current, [key]: value }));
   };
 
   const clearAll = () => {
     setQuery('');
-    setCategory(null);
-    setRegion(null);
-    setEra(null);
+    setSelectedFilters({});
   };
 
-  const showClearAll = !!(query || category || region || era);
-  const activeFilterCount = [category, region, era].filter(Boolean).length;
+  const activeFilterCount = Object.values(selectedFilters).filter(Boolean).length;
+  const showClearAll = !!query || activeFilterCount > 0;
 
-  const filterRows = [
-    { key: 'category', label: 'Categoria', options: facetOptions.category, selected: category },
-    { key: 'region', label: 'Região', options: facetOptions.region, selected: region },
-    { key: 'era', label: 'Época', options: facetOptions.era, selected: era },
-  ];
+  const filterRows = theme.filters.map((filter) => ({
+    ...filter,
+    options: facetOptions[filter.key] || [],
+    selected: selectedFilters[filter.key] || null,
+  }));
 
   return (
     <SafeAreaView style={styles.safe}>
@@ -76,7 +67,7 @@ export default function GalleryScreen({ onBack, onSelectSaint }) {
         <Pressable onPress={onBack} style={styles.iconBtn} accessibilityLabel="Voltar">
           <Text style={styles.icon}>‹</Text>
         </Pressable>
-        <Text style={styles.title}>✦ Galeria</Text>
+        <Text style={styles.title}>{theme.copy.galleryTitle}</Text>
         <View style={styles.iconBtn} />
       </View>
 
@@ -84,7 +75,7 @@ export default function GalleryScreen({ onBack, onSelectSaint }) {
         <TextInput
           value={query}
           onChangeText={setQuery}
-          placeholder="Buscar santo…"
+          placeholder={theme.copy.searchPlaceholder}
           placeholderTextColor={colors.textSoft}
           style={styles.search}
           autoCorrect={false}
@@ -93,7 +84,7 @@ export default function GalleryScreen({ onBack, onSelectSaint }) {
         />
       </View>
 
-      <Pressable
+      {theme.filters.length > 0 && <Pressable
         onPress={() => setFiltersOpen((v) => !v)}
         style={styles.filterToggle}
         accessibilityRole="button"
@@ -120,7 +111,7 @@ export default function GalleryScreen({ onBack, onSelectSaint }) {
           )}
           <Text style={styles.filterToggleChevron}>{filtersOpen ? '▾' : '▸'}</Text>
         </View>
-      </Pressable>
+      </Pressable>}
 
       {filtersOpen && (
         <FilterChips
@@ -133,14 +124,14 @@ export default function GalleryScreen({ onBack, onSelectSaint }) {
 
       <ScrollView contentContainerStyle={styles.grid}>
         {filtered.length === 0 ? (
-          <Text style={styles.empty}>Nenhum santo encontrado.</Text>
+          <Text style={styles.empty}>{theme.copy.emptySearch}</Text>
         ) : (
-          filtered.map((saint) => (
-            <SaintTile
-              key={saint.id}
-              saint={saint}
+          filtered.map((item) => (
+            <GalleryTile
+              key={item.id}
+              item={item}
               size={tileSize}
-              onPress={() => onSelectSaint(saint.id)}
+              onPress={() => onSelectItem(item.id)}
             />
           ))
         )}

@@ -7,7 +7,15 @@ const MIN_CARD_SIZE = 44;
 const HORIZONTAL_PADDING = spacing.md;
 const CARD_MARGIN = 4;
 
-export default function GameBoard({ deck, phase, flipped, matched, busy, onCardPress }) {
+export default function GameBoard({
+  deck,
+  phase,
+  flipped,
+  matched,
+  busy,
+  cardBackGlyph,
+  onCardPress,
+}) {
   const { width, height } = Dimensions.get('window');
   const rows = phase.rows;
   const columns = phase.cols;
@@ -32,6 +40,7 @@ export default function GameBoard({ deck, phase, flipped, matched, busy, onCardP
             isOpen={isFlipped || isMatched}
             isMatched={isMatched}
             disabled={busy || isMatched}
+            cardBackGlyph={cardBackGlyph}
             onPress={() => onCardPress(index)}
           />
         );

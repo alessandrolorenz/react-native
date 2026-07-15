@@ -4,7 +4,6 @@ import GameBoard from '../components/GameBoard';
 import Header from '../components/Header';
 import ResultModal from '../components/ResultModal';
 import CampaignCompleteModal from '../components/CampaignCompleteModal';
-import { SAINTS } from '../data/saints';
 import { buildDeck } from '../utils/deck';
 import { colors } from '../theme/colors';
 import { applyMissPenalty, buildPhaseSummary, getMatchScore } from '../utils/scoring';
@@ -12,8 +11,8 @@ import { SAFE_AREA } from '../utils/safeArea';
 
 const FLIP_BACK_MS = 700;
 
-const createPhaseState = (phase) => ({
-  deck: buildDeck(SAINTS, phase.pairs),
+const createPhaseState = (phase, items) => ({
+  deck: buildDeck(items, phase.pairs),
   flipped: [],
   matched: new Set(),
   busy: false,
@@ -23,7 +22,7 @@ const createPhaseState = (phase) => ({
   phasePoints: 0,
   startedAtMs: Date.now(),
   completedAtMs: null,
-  lastMatchedSaint: null,
+  lastMatchedItem: null,
   isWon: false,
 });
 
@@ -38,7 +37,7 @@ function getInitialPhaseId(phases, progress) {
 function reducer(state, action) {
   switch (action.type) {
     case 'START_PHASE':
-      return createPhaseState(action.phase);
+      return createPhaseState(action.phase, action.items);
     case 'FLIP': {
       const { index } = action;
       if (state.busy) return state;
@@ -74,7 +73,7 @@ function reducer(state, action) {
           bestCombo,
           phasePoints,
           completedAtMs: isWon ? action.nowMs : null,
-          lastMatchedSaint: a.saint,
+          lastMatchedItem: a.item,
           isWon,
         };
       }
@@ -102,23 +101,27 @@ function getPhaseStatus(phaseId, activePhaseId, progress) {
   return 'unlocked';
 }
 
-export default function GameScreen({ onBack, phases, progress, onPhaseComplete }) {
+export default function GameScreen({ theme, onBack, phases, progress, onPhaseComplete }) {
   const [activePhaseId, setActivePhaseId] = useState(() => getInitialPhaseId(phases, progress));
   const activePhase = useMemo(
     () => phases.find((phase) => phase.id === activePhaseId) || phases[0],
     [activePhaseId, phases],
   );
 
-  const [state, dispatch] = useReducer(reducer, activePhase, createPhaseState);
+  const [state, dispatch] = useReducer(
+    reducer,
+    null,
+    () => createPhaseState(activePhase, theme.items),
+  );
   const [elapsedSeconds, setElapsedSeconds] = useState(0);
   const timeoutRef = useRef(null);
   const reportedSummaryRef = useRef(null);
 
   useEffect(() => {
-    dispatch({ type: 'START_PHASE', phase: activePhase });
+    dispatch({ type: 'START_PHASE', phase: activePhase, items: theme.items });
     setElapsedSeconds(0);
     reportedSummaryRef.current = null;
-  }, [activePhase]);
+  }, [activePhase, theme.items]);
 
   useEffect(() => {
     if (state.busy) {
@@ -157,10 +160,10 @@ export default function GameScreen({ onBack, phases, progress, onPhaseComplete }
   }, [activePhase.pairs]);
 
   const handlePlayAgain = useCallback(() => {
-    dispatch({ type: 'START_PHASE', phase: activePhase });
+    dispatch({ type: 'START_PHASE', phase: activePhase, items: theme.items });
     setElapsedSeconds(0);
     reportedSummaryRef.current = null;
-  }, [activePhase]);
+  }, [activePhase, theme.items]);
 
   const handleSelectPhase = useCallback((phaseId) => {
     if (phaseId > progress.unlockedPhase) return;
@@ -194,10 +197,6 @@ export default function GameScreen({ onBack, phases, progress, onPhaseComplete }
   const hasNextPhase = activePhase.id < phases.length;
   const lastPhaseId = phases[phases.length - 1]?.id;
   const isCampaignCompletedNow = !!phaseSummary && phaseSummary.phaseId === lastPhaseId;
-  const isLastPhasePersisted = !!progress.completedPhases[lastPhaseId];
-  const campaignScoreForModal = isLastPhasePersisted
-    ? progress.totalScore || 0
-    : (progress.totalScore || 0) + (phaseSummary?.totalPoints || 0);
 
   const handleNextPhase = useCallback(() => {
     if (!hasNextPhase) return;
@@ -243,13 +242,14 @@ export default function GameScreen({ onBack, phases, progress, onPhaseComplete }
           flipped={state.flipped}
           matched={state.matched}
           busy={state.busy}
+          cardBackGlyph={theme.appearance?.cardBackGlyph}
           onCardPress={handleCardPress}
         />
       </View>
       <ResultModal
         visible={state.isWon && !isCampaignCompletedNow}
-        saint={state.lastMatchedSaint}
-        summary={phaseSummary}
+        theme={theme}
+        item={state.lastMatchedItem}
         hasNextPhase={hasNextPhase}
         onNextPhase={handleNextPhase}
         onPlayAgain={handlePlayAgain}
@@ -258,8 +258,8 @@ export default function GameScreen({ onBack, phases, progress, onPhaseComplete }
 
       <CampaignCompleteModal
         visible={state.isWon && isCampaignCompletedNow}
-        saint={state.lastMatchedSaint}
-        totalScore={campaignScoreForModal}
+        theme={theme}
+        item={state.lastMatchedItem}
         onBackHome={onBack}
       />
     </SafeAreaView>
