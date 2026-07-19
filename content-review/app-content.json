@@ -1,0 +1,2721 @@
+{
+  "schemaVersion": 1,
+  "instructions": {
+    "purpose": "Arquivo único para revisar todo o conteúdo editorial exibido nos cinco temas do aplicativo.",
+    "immutableFields": [
+      "themes[].id",
+      "themes[].items[].id",
+      "themes[].items[].image",
+      "themes[].filters[].key",
+      "themes[].profile.*.key"
+    ],
+    "editableFields": "Todos os demais textos, emojis, metadados, histórias, fatos, orações e opções editoriais podem ser atualizados.",
+    "returnFormat": "Mantenha a estrutura JSON válida e envie este mesmo arquivo atualizado.",
+    "templateSyntax": "Textos como {{item.name}}, {{item.fact}} e {{item.prayer}} são marcadores usados pelo aplicativo; não os remova sem avisar."
+  },
+  "campaign": {
+    "phases": [
+      {
+        "id": 1,
+        "rows": 4,
+        "cols": 4,
+        "cards": 16,
+        "pairs": 8,
+        "label": "Fase 1"
+      },
+      {
+        "id": 2,
+        "rows": 5,
+        "cols": 4,
+        "cards": 20,
+        "pairs": 10,
+        "label": "Fase 2"
+      },
+      {
+        "id": 3,
+        "rows": 6,
+        "cols": 4,
+        "cards": 24,
+        "pairs": 12,
+        "label": "Fase 3"
+      },
+      {
+        "id": 4,
+        "rows": 7,
+        "cols": 4,
+        "cards": 28,
+        "pairs": 14,
+        "label": "Fase 4"
+      }
+    ]
+  },
+  "themes": [
+    {
+      "id": "saints",
+      "title": "Santos",
+      "displayTitle": "dos Santos",
+      "subtitle": "Aprenda brincando!",
+      "description": "Conheça histórias inspiradoras de fé e amor.",
+      "coverGlyph": "✨",
+      "copy": {
+        "galleryButton": "✦ Galeria dos Santos",
+        "galleryTitle": "✦ Galeria dos Santos",
+        "searchPlaceholder": "Buscar santo…",
+        "emptySearch": "Nenhum santo encontrado.",
+        "profileStoryTitle": "✦ HISTÓRIA",
+        "profileTagTitle": "✦ PADROEIRO DE",
+        "factTitle": "Você sabia?",
+        "resultSectionTitle": "Conheça sua história"
+      },
+      "filters": [
+        {
+          "key": "category",
+          "label": "Categoria",
+          "options": [
+            "Doutor da Igreja",
+            "Leigo",
+            "Mariana",
+            "Religioso"
+          ]
+        },
+        {
+          "key": "region",
+          "label": "Região",
+          "options": [
+            "Brasil",
+            "Espanha",
+            "França",
+            "Índia",
+            "Itália",
+            "Nazaré",
+            "Norte da África",
+            "Polônia / Vaticano",
+            "Portugal e Itália"
+          ]
+        },
+        {
+          "key": "era",
+          "label": "Época",
+          "options": [
+            "Antiguidade",
+            "Antiguidade Cristã",
+            "Idade Média",
+            "Idade Moderna",
+            "Renascimento",
+            "Século XIX",
+            "Século XX",
+            "Século XXI"
+          ]
+        }
+      ],
+      "profile": {
+        "metaFields": [
+          {
+            "key": "feastDay",
+            "label": "Festa"
+          },
+          {
+            "key": "region",
+            "label": "Região"
+          },
+          {
+            "key": "era",
+            "label": "Época"
+          }
+        ],
+        "tagField": {
+          "key": "patronage",
+          "label": "✦ PADROEIRO DE"
+        }
+      },
+      "appearance": {
+        "cardBackGlyph": "✦"
+      },
+      "completion": {
+        "kicker": "🎉 Campanha Concluída! 🎉",
+        "title": "Você concluiu todas as fases!",
+        "message": "Visite a Galeria para conhecer mais histórias dos santos. Este foi o último santo que apareceu no seu caminho:",
+        "sectionTitle": "Oração a {{item.name}}",
+        "sectionText": "{{item.prayer}}",
+        "finalMessage": "Que o exemplo e a intercessão de {{item.name}} acompanhem você sempre em seu caminho! ✨"
+      },
+      "items": [
+        {
+          "id": "francisco-assis",
+          "image": "assets/saints/sao-francisco.webp",
+          "name": "São Francisco de Assis",
+          "shortDescription": "O santo que falava com os animais.",
+          "emoji": "🕊️",
+          "story": [
+            "Nasceu em Assis, na Itália, em 1182.",
+            "Deixou tudo para viver com simplicidade e amor.",
+            "Cuidava dos pobres, dos doentes e da natureza."
+          ],
+          "fact": "É o padroeiro dos animais e do meio ambiente.",
+          "prayer": "São Francisco, padroeiro da natureza, ajude-nos a cuidar de todas as criaturas com amor e compaixão, assim como você fez em vida. Amém.",
+          "metadata": {
+            "feastDay": "4 de outubro",
+            "patronage": [
+              "Animais",
+              "Meio ambiente",
+              "Ecologia"
+            ],
+            "region": "Itália",
+            "category": "Religioso",
+            "era": "Idade Média"
+          }
+        },
+        {
+          "id": "carlo-acutis",
+          "image": "assets/saints/carlo-acutis.webp",
+          "name": "São Carlo Acutis",
+          "shortDescription": "O jovem santo da internet.",
+          "emoji": "💻",
+          "story": [
+            "Nasceu em 1991 e amava computadores.",
+            "Usou a internet para falar de Jesus.",
+            "Mostrou que santidade é para todas as idades."
+          ],
+          "fact": "É chamado de \"padroeiro da internet\".",
+          "prayer": "São Carlo Acutis, guia dos jovens, inspire-nos a usar a tecnologia com propósito e para aproximar as pessoas de Cristo. Amém.",
+          "metadata": {
+            "feastDay": "12 de outubro",
+            "patronage": [
+              "Internet",
+              "Jovens",
+              "Programadores"
+            ],
+            "region": "Itália",
+            "category": "Leigo",
+            "era": "Século XXI"
+          }
+        },
+        {
+          "id": "jose",
+          "image": "assets/saints/sao-jose.webp",
+          "name": "São José",
+          "shortDescription": "O pai adotivo de Jesus.",
+          "emoji": "🪚",
+          "story": [
+            "Foi um humilde carpinteiro em Nazaré.",
+            "Cuidou de Maria e do menino Jesus com amor.",
+            "É exemplo de pai trabalhador e fiel."
+          ],
+          "fact": "É o padroeiro dos pais e dos trabalhadores.",
+          "prayer": "São José, protetor das famílias, abençoe-nos com sabedoria, trabalho honesto e amor verdadeiro. Amém.",
+          "metadata": {
+            "feastDay": "19 de março",
+            "patronage": [
+              "Pais",
+              "Trabalhadores",
+              "Carpinteiros",
+              "Igreja Católica"
+            ],
+            "region": "Nazaré",
+            "category": "Religioso",
+            "era": "Antiguidade"
+          }
+        },
+        {
+          "id": "antonio",
+          "image": "assets/saints/santo-antonio.webp",
+          "name": "Santo Antônio",
+          "shortDescription": "O santo dos milagres e das coisas perdidas.",
+          "emoji": "🐟",
+          "story": [
+            "Nasceu em Lisboa, mas viveu em Pádua.",
+            "Pregava com tanta fé que até os peixes ouviam.",
+            "Ajudava quem precisava encontrar algo perdido."
+          ],
+          "fact": "É lembrado em junho com festas alegres no Brasil.",
+          "prayer": "Santo Antônio, amigo dos que buscam, ajude-nos a encontrar o que perdemos e a viver com fé e caridade. Amém.",
+          "metadata": {
+            "feastDay": "13 de junho",
+            "patronage": [
+              "Coisas perdidas",
+              "Pobres",
+              "Casamentos"
+            ],
+            "region": "Portugal e Itália",
+            "category": "Doutor da Igreja",
+            "era": "Idade Média"
+          }
+        },
+        {
+          "id": "teresinha",
+          "image": "assets/saints/santa-teresinha.webp",
+          "name": "Santa Teresinha do Menino Jesus",
+          "shortDescription": "A santa do caminho pequeno.",
+          "emoji": "🌹",
+          "story": [
+            "Era uma menina cheia de sorrisos e carinho.",
+            "Entrou no convento aos 15 anos.",
+            "Ensinou que pequenos gestos de amor agradam a Deus."
+          ],
+          "fact": "É também conhecida como \"Santa das Rosas\".",
+          "prayer": "Santa Teresinha, ensine-nos o caminho da pequena via, fazendo com amor as coisas simples do dia a dia. Amém.",
+          "metadata": {
+            "feastDay": "1 de outubro",
+            "patronage": [
+              "Missões",
+              "Floristas",
+              "Aviadores"
+            ],
+            "region": "França",
+            "category": "Doutor da Igreja",
+            "era": "Idade Moderna"
+          }
+        },
+        {
+          "id": "padre-pio",
+          "image": "assets/saints/padre-pio.webp",
+          "name": "São Padre Pio",
+          "shortDescription": "O santo das chagas de Cristo.",
+          "emoji": "🙏",
+          "story": [
+            "Foi um frade italiano cheio de fé.",
+            "Passava horas confessando e ajudando.",
+            "Recebeu as marcas de Jesus em suas mãos."
+          ],
+          "fact": "Fundou hospitais para cuidar dos enfermos.",
+          "prayer": "São Padre Pio, interceda por nós para que suportemos as dificuldades com paciência e confiança em Deus. Amém.",
+          "metadata": {
+            "feastDay": "23 de setembro",
+            "patronage": [
+              "Confessores",
+              "Enfermos",
+              "Voluntários do alívio civil"
+            ],
+            "region": "Itália",
+            "category": "Religioso",
+            "era": "Século XX"
+          }
+        },
+        {
+          "id": "aparecida",
+          "image": "assets/saints/nossa-senhora.webp",
+          "name": "Nossa Senhora Aparecida",
+          "shortDescription": "A mãezinha do Brasil.",
+          "emoji": "👑",
+          "story": [
+            "Sua imagem foi encontrada por pescadores em 1717.",
+            "Aconteceu no rio Paraíba do Sul.",
+            "Desde então, é venerada por todo o Brasil."
+          ],
+          "fact": "É a padroeira oficial do Brasil.",
+          "prayer": "Nossa Senhora Aparecida, Mãe querida do Brasil, cobre-nos com seu manto e conduza-nos sempre a Jesus. Amém.",
+          "metadata": {
+            "feastDay": "12 de outubro",
+            "patronage": [
+              "Brasil",
+              "Pescadores"
+            ],
+            "region": "Brasil",
+            "category": "Mariana",
+            "era": "Idade Moderna"
+          }
+        },
+        {
+          "id": "rita-cassia",
+          "image": "assets/saints/ChatGPT Image 14 de jul. de 2026, 13_35_49.png",
+          "name": "Santa Rita de Cássia",
+          "shortDescription": "A santa das causas impossíveis.",
+          "emoji": "🌿",
+          "story": [
+            "Viveu na Itália no século XIV.",
+            "Foi esposa, mãe e depois religiosa.",
+            "Sua fé tocou os corações mais difíceis."
+          ],
+          "fact": "É invocada quando algo parece impossível.",
+          "prayer": "Santa Rita de Cássia, santa da compaixão, interceda por aqueles que enfrentam dificuldades e sofrimentos. Amém.",
+          "metadata": {
+            "feastDay": "22 de maio",
+            "patronage": [
+              "Causas impossíveis",
+              "Mães",
+              "Esposas"
+            ],
+            "region": "Itália",
+            "category": "Religioso",
+            "era": "Idade Média"
+          }
+        },
+        {
+          "id": "madre-teresa-calcuta",
+          "image": "assets/saints/madre-teresa-calcuta.webp",
+          "name": "Madre Teresa de Calcutá",
+          "shortDescription": "Dedicou sua vida aos pobres e doentes.",
+          "emoji": "🙏",
+          "story": [
+            "Nasceu na Albânia e viveu grande parte da vida na Índia.",
+            "Fundou as Missionárias da Caridade.",
+            "Cuidava das pessoas mais pobres com amor e humildade."
+          ],
+          "fact": "Recebeu o Prêmio Nobel da Paz em 1979.",
+          "prayer": "Santa Teresa de Calcutá, inspira-nos a servir os mais pobres com ternura, humildade e amor sem medidas. Amém.",
+          "metadata": {
+            "feastDay": "5 de setembro",
+            "patronage": [
+              "Missionários",
+              "Pobres",
+              "Doentes"
+            ],
+            "region": "Índia",
+            "category": "Religioso",
+            "era": "Século XX"
+          }
+        },
+        {
+          "id": "santa-clara",
+          "image": "assets/saints/santa-clara.webp",
+          "name": "Santa Clara de Assis",
+          "shortDescription": "Seguiu uma vida de simplicidade, oração e amor a Deus.",
+          "emoji": "✨",
+          "story": [
+            "Nasceu na Itália e foi grande amiga de São Francisco de Assis.",
+            "Deixou uma vida rica para seguir Jesus com humildade.",
+            "Fundou a ordem das Clarissas dedicada à oração e à simplicidade."
+          ],
+          "fact": "É considerada a padroeira da televisão e das comunicações.",
+          "prayer": "Santa Clara de Assis, contemplativa fiel, ajuda-nos a encontrar paz na oração e na simplicidade. Amém.",
+          "metadata": {
+            "feastDay": "11 de agosto",
+            "patronage": [
+              "Televisão",
+              "Comunicações",
+              "Clarissas"
+            ],
+            "region": "Itália",
+            "category": "Religioso",
+            "era": "Idade Média"
+          }
+        },
+        {
+          "id": "santa-paulina",
+          "image": "assets/saints/santa-paulina.webp",
+          "name": "Santa Paulina",
+          "shortDescription": "Foi uma religiosa dedicada aos doentes e aos mais necessitados.",
+          "emoji": "💙",
+          "story": [
+            "Nasceu na Itália e veio ainda criança para o Brasil.",
+            "Cuidava dos doentes e ajudava pessoas pobres com muito carinho.",
+            "Fundou a Congregação das Irmãzinhas da Imaculada Conceição."
+          ],
+          "fact": "Foi a primeira santa canonizada que viveu no Brasil.",
+          "prayer": "Santa Paulina, missionária de esperança, fortalece-nos para cuidar dos irmãos com alegria e generosidade. Amém.",
+          "metadata": {
+            "feastDay": "9 de julho",
+            "patronage": [
+              "Doentes",
+              "Religiosas",
+              "Brasil"
+            ],
+            "region": "Brasil",
+            "category": "Religioso",
+            "era": "Século XIX"
+          }
+        },
+        {
+          "id": "santo-agostinho",
+          "image": "assets/saints/santo-agostinho.webp",
+          "name": "Santo Agostinho",
+          "shortDescription": "Foi um grande pensador que encontrou Deus após muitos desafios.",
+          "emoji": "📖",
+          "story": [
+            "Nasceu no norte da África e gostava muito de estudar.",
+            "Durante a juventude, buscou felicidade em muitos caminhos diferentes.",
+            "Depois de sua conversão, tornou-se bispo e escreveu importantes ensinamentos cristãos."
+          ],
+          "fact": "Escreveu o famoso livro “Confissões”.",
+          "prayer": "Santo Agostinho, doutor da Igreja, ilumina nossas mentes e corações no caminho da verdade. Amém.",
+          "metadata": {
+            "feastDay": "28 de agosto",
+            "patronage": [
+              "Teólogos",
+              "Estudantes",
+              "Filósofos"
+            ],
+            "region": "Norte da África",
+            "category": "Religioso",
+            "era": "Antiguidade Cristã"
+          }
+        },
+        {
+          "id": "sao-bento",
+          "image": "assets/saints/sao-bento.webp",
+          "name": "São Bento",
+          "shortDescription": "Foi um monge conhecido por sua sabedoria, oração e proteção espiritual.",
+          "emoji": "⛪",
+          "story": [
+            "Nasceu na Itália e dedicou sua vida à oração e ao trabalho.",
+            "Criou regras para ajudar os monges a viverem com disciplina e paz.",
+            "Sua medalha tornou-se símbolo de proteção e fé cristã."
+          ],
+          "fact": "A Medalha de São Bento é conhecida no mundo todo como símbolo de proteção.",
+          "prayer": "São Bento, protetor contra o mal, guarda nosso lar e nossa família na paz de Cristo. Amém.",
+          "metadata": {
+            "feastDay": "11 de julho",
+            "patronage": [
+              "Europa",
+              "Monges",
+              "Proteção espiritual"
+            ],
+            "region": "Itália",
+            "category": "Religioso",
+            "era": "Idade Média"
+          }
+        },
+        {
+          "id": "sao-domingos",
+          "image": "assets/saints/sao-domingos.webp",
+          "name": "São Domingos",
+          "shortDescription": "Foi um pregador que dedicou sua vida ao ensino e à evangelização.",
+          "emoji": "📿",
+          "story": [
+            "Nasceu na Espanha e desde jovem gostava de estudar e ajudar as pessoas.",
+            "Percorreu muitas cidades anunciando o Evangelho com alegria.",
+            "Fundou a Ordem dos Dominicanos, dedicada ao estudo e à pregação."
+          ],
+          "fact": "A tradição do Rosário é fortemente ligada à missão de São Domingos.",
+          "prayer": "São Domingos, pregador da verdade, ensina-nos a anunciar o Evangelho com sabedoria e caridade. Amém.",
+          "metadata": {
+            "feastDay": "8 de agosto",
+            "patronage": [
+              "Pregadores",
+              "Astrônomos",
+              "Dominicanos"
+            ],
+            "region": "Espanha",
+            "category": "Religioso",
+            "era": "Idade Média"
+          }
+        },
+        {
+          "id": "santo-inacio-loiola",
+          "image": "assets/saints/santo-inacio-loiola.webp",
+          "name": "Santo Inácio de Loiola",
+          "shortDescription": "Foi um soldado que se tornou um grande guia espiritual da Igreja.",
+          "emoji": "🕊️",
+          "story": [
+            "Nasceu na Espanha e sonhava em ser um grande cavaleiro.",
+            "Após ficar ferido em uma batalha, começou uma profunda conversão.",
+            "Fundou a Companhia de Jesus, conhecida como os Jesuítas."
+          ],
+          "fact": "Criou os famosos Exercícios Espirituais, usados até hoje no mundo inteiro.",
+          "prayer": "Santo Inácio de Loiola, guia espiritual, ajuda-nos a discernir e escolher sempre a vontade de Deus. Amém.",
+          "metadata": {
+            "feastDay": "31 de julho",
+            "patronage": [
+              "Retiros espirituais",
+              "Jesuítas",
+              "Soldados"
+            ],
+            "region": "Espanha",
+            "category": "Religioso",
+            "era": "Renascimento"
+          }
+        },
+        {
+          "id": "sao-joao-paulo-ii",
+          "image": "assets/saints/sao-joao-paulo-ii.webp",
+          "name": "São João Paulo II",
+          "shortDescription": "Foi um papa muito querido que marcou a história da Igreja no mundo moderno.",
+          "emoji": "🌍",
+          "story": [
+            "Nasceu na Polônia e viveu tempos difíceis durante a Segunda Guerra Mundial.",
+            "Tornou-se papa e viajou o mundo levando mensagens de paz e esperança.",
+            "Foi um grande defensor da juventude e da dignidade humana."
+          ],
+          "fact": "Foi um dos papas que mais viajou na história da Igreja.",
+          "prayer": "São João Paulo II, pastor dos jovens, fortalece nossa coragem para viver a fé no mundo de hoje. Amém.",
+          "metadata": {
+            "feastDay": "22 de outubro",
+            "patronage": [
+              "Jovens",
+              "Famílias",
+              "Paz mundial"
+            ],
+            "region": "Polônia / Vaticano",
+            "category": "Religioso",
+            "era": "Século XX"
+          }
+        },
+        {
+          "id": "sao-tomas-aquino",
+          "image": "assets/saints/sao-tomas-aquino.webp",
+          "name": "São Tomás de Aquino",
+          "shortDescription": "Foi um grande estudioso que uniu fé e razão em seus ensinamentos.",
+          "emoji": "📚",
+          "story": [
+            "Nasceu na Itália e desde jovem gostava muito de estudar.",
+            "Ingressou na Ordem Dominicana contra a vontade da família.",
+            "Escreveu importantes obras de teologia e filosofia cristã."
+          ],
+          "fact": "Sua obra “Suma Teológica” é uma das mais importantes da história da Igreja.",
+          "prayer": "São Tomás de Aquino, doutor da Igreja, ilumina nosso entendimento para unir fé e razão com humildade. Amém.",
+          "metadata": {
+            "feastDay": "28 de janeiro",
+            "patronage": [
+              "Estudantes",
+              "Teólogos",
+              "Universidades"
+            ],
+            "region": "Itália",
+            "category": "Religioso",
+            "era": "Idade Média"
+          }
+        },
+        {
+          "id": "sao-vicente-paula",
+          "image": "assets/saints/sao-vicente-paula.webp",
+          "name": "São Vicente de Paula",
+          "shortDescription": "Foi um sacerdote conhecido por sua caridade e dedicação aos pobres.",
+          "emoji": "🙏",
+          "story": [
+            "Nasceu na França e desde jovem mostrou grande compaixão pelos necessitados.",
+            "Fundou a Congregação da Missão e as Filhas da Caridade para ajudar os pobres.",
+            "Dedicou sua vida a servir os mais vulneráveis e a promover a justiça social."
+          ],
+          "fact": "É lembrado como o santo da caridade e da ajuda aos pobres.",
+          "prayer": "São Vicente de Paulo, pai dos pobres, desperta em nós a compaixão e o serviço aos mais necessitados. Amém.",
+          "metadata": {
+            "feastDay": "27 de setembro",
+            "patronage": [
+              "Caridade",
+              "Pobres",
+              "Missionários"
+            ],
+            "region": "",
+            "category": "",
+            "era": ""
+          }
+        }
+      ]
+    },
+    {
+      "id": "symbols",
+      "title": "Símbolos da Fé",
+      "displayTitle": "dos Símbolos da Fé",
+      "subtitle": "Descubra os sinais que contam a nossa fé!",
+      "description": "Conheça sinais presentes na Bíblia, na oração e na liturgia.",
+      "coverGlyph": "✝️",
+      "copy": {
+        "galleryButton": "✦ Galeria dos Símbolos",
+        "galleryTitle": "✦ Galeria dos Símbolos",
+        "searchPlaceholder": "Buscar símbolo…",
+        "emptySearch": "Nenhum símbolo encontrado.",
+        "profileStoryTitle": "✦ O QUE SIGNIFICA?",
+        "factTitle": "Você sabia?",
+        "resultSectionTitle": "Conheça seu significado"
+      },
+      "filters": [
+        {
+          "key": "category",
+          "label": "Categoria",
+          "options": [
+            "Espírito Santo",
+            "Eucaristia",
+            "Igreja",
+            "Jesus Cristo",
+            "Maria e oração",
+            "Maria e santos",
+            "Oração",
+            "Palavra de Deus",
+            "Páscoa",
+            "Primeiros cristãos",
+            "Sacramentos",
+            "Virtudes"
+          ]
+        },
+        {
+          "key": "context",
+          "label": "Onde encontramos",
+          "options": [
+            "Arte e tradição",
+            "Batismo",
+            "Bíblia e liturgia",
+            "Bíblia e sacramentos",
+            "Bíblia e tradição",
+            "Devoção e oração",
+            "História da Igreja",
+            "Igreja e oração",
+            "Liturgia",
+            "Oração"
+          ]
+        }
+      ],
+      "profile": {
+        "metaFields": [
+          {
+            "key": "category",
+            "label": "Categoria"
+          },
+          {
+            "key": "context",
+            "label": "Onde encontramos"
+          }
+        ]
+      },
+      "appearance": {
+        "cardBackGlyph": "✦"
+      },
+      "completion": {
+        "kicker": "🎉 Campanha Concluída! 🎉",
+        "title": "Você descobriu os Símbolos da Fé!",
+        "message": "Cada sinal pode nos ajudar a recordar uma parte da fé. Este foi o último símbolo encontrado no seu caminho:",
+        "sectionTitle": "Para recordar",
+        "sectionText": "{{item.fact}}",
+        "finalMessage": "Continue observando: você encontrará muitos desses sinais na Bíblia, na igreja e nas celebrações! ✨"
+      },
+      "items": [
+        {
+          "id": "cross",
+          "name": "Cruz",
+          "image": "assets/symbols/01-cross.png",
+          "shortDescription": "Recorda o amor de Jesus e sua vitória sobre a morte.",
+          "emoji": "✝️",
+          "visual": {
+            "glyph": "✝",
+            "backgroundColor": "#F3D8C7"
+          },
+          "story": [
+            "Jesus entregou sua vida na cruz por amor a toda a humanidade.",
+            "Para os cristãos, a cruz também aponta para a Ressurreição e para a esperança."
+          ],
+          "fact": "O sinal da cruz recorda o Pai, o Filho e o Espírito Santo.",
+          "metadata": {
+            "category": "Jesus Cristo",
+            "context": "Igreja e oração"
+          },
+          "showEmojiBadge": false
+        },
+        {
+          "id": "bible",
+          "name": "Bíblia",
+          "image": "assets/symbols/02-bible.png",
+          "shortDescription": "O livro que reúne a Palavra de Deus.",
+          "emoji": "📖",
+          "visual": {
+            "glyph": "📖",
+            "backgroundColor": "#D9E8F2"
+          },
+          "story": [
+            "A Bíblia conta a história da aliança de Deus com seu povo.",
+            "Nos Evangelhos, conhecemos de modo especial a vida e os ensinamentos de Jesus."
+          ],
+          "fact": "Na Missa, as leituras bíblicas fazem parte da Liturgia da Palavra.",
+          "metadata": {
+            "category": "Palavra de Deus",
+            "context": "Bíblia e liturgia"
+          },
+          "showEmojiBadge": false
+        },
+        {
+          "id": "chalice",
+          "name": "Cálice",
+          "image": "assets/symbols/03-calice.png",
+          "shortDescription": "Um vaso sagrado usado na celebração da Eucaristia.",
+          "emoji": "🏆",
+          "visual": {
+            "glyph": "♕",
+            "backgroundColor": "#F4E4AD"
+          },
+          "story": [
+            "O cálice recebe o vinho que será consagrado durante a Missa.",
+            "Ele recorda a Última Ceia de Jesus com seus discípulos."
+          ],
+          "fact": "Por seu uso na Eucaristia, o cálice é tratado com grande cuidado e respeito.",
+          "metadata": {
+            "category": "Eucaristia",
+            "context": "Liturgia"
+          },
+          "showEmojiBadge": false
+        },
+        {
+          "id": "host",
+          "name": "Hóstia",
+          "image": "assets/symbols/06-ihs.png",
+          "shortDescription": "O pão preparado para a celebração da Eucaristia.",
+          "emoji": "☀️",
+          "visual": {
+            "glyph": "IHS",
+            "backgroundColor": "#FFF3C9"
+          },
+          "story": [
+            "Na Missa, o pão e o vinho são consagrados e tornam-se o Corpo e o Sangue de Cristo.",
+            "A Eucaristia alimenta a vida de fé e une a comunidade a Jesus."
+          ],
+          "fact": "As letras IHS são um antigo monograma do nome de Jesus.",
+          "metadata": {
+            "category": "Eucaristia",
+            "context": "Liturgia"
+          },
+          "showEmojiBadge": false
+        },
+        {
+          "id": "fish",
+          "name": "Peixe cristão",
+          "image": "assets/symbols/05-fish.png",
+          "shortDescription": "Um dos sinais usados pelos primeiros cristãos.",
+          "emoji": "🐟",
+          "visual": {
+            "glyph": "🐟",
+            "backgroundColor": "#CFE8EB"
+          },
+          "story": [
+            "A palavra grega para peixe ajudava os primeiros cristãos a recordar quem é Jesus.",
+            "O desenho simples tornou-se um sinal de identificação e de fé."
+          ],
+          "fact": "Em grego, as letras de “peixe” formam um antigo resumo da fé em Jesus Cristo.",
+          "metadata": {
+            "category": "Primeiros cristãos",
+            "context": "História da Igreja"
+          },
+          "showEmojiBadge": false
+        },
+        {
+          "id": "lamb",
+          "name": "Cordeiro",
+          "image": "assets/symbols/04-lamb.png",
+          "shortDescription": "Recorda Jesus, chamado Cordeiro de Deus.",
+          "emoji": "🐑",
+          "visual": {
+            "glyph": "🐑",
+            "backgroundColor": "#E8E2F2"
+          },
+          "story": [
+            "João Batista apresentou Jesus como o Cordeiro de Deus.",
+            "O cordeiro recorda a entrega, a mansidão e a vitória de Cristo."
+          ],
+          "fact": "Na Missa, a comunidade reza “Cordeiro de Deus” antes da Comunhão.",
+          "metadata": {
+            "category": "Jesus Cristo",
+            "context": "Bíblia e liturgia"
+          },
+          "showEmojiBadge": false
+        },
+        {
+          "id": "dove",
+          "name": "Pomba",
+          "image": "assets/symbols/07-dove.png",
+          "shortDescription": "Um sinal que recorda o Espírito Santo.",
+          "emoji": "🕊️",
+          "visual": {
+            "glyph": "🕊",
+            "backgroundColor": "#DCECF6"
+          },
+          "story": [
+            "Depois do dilúvio, uma pomba trouxe a Noé um ramo de oliveira.",
+            "No Batismo de Jesus, o Espírito Santo desceu sobre ele como uma pomba."
+          ],
+          "fact": "A pomba também é lembrada como sinal de paz e esperança.",
+          "metadata": {
+            "category": "Espírito Santo",
+            "context": "Bíblia e sacramentos"
+          },
+          "showEmojiBadge": false
+        },
+        {
+          "id": "rosary",
+          "name": "Rosário",
+          "image": "assets/symbols/08-terco.png",
+          "shortDescription": "Uma oração que contempla a vida de Jesus com Maria.",
+          "emoji": "📿",
+          "visual": {
+            "glyph": "📿",
+            "backgroundColor": "#E4D9EF"
+          },
+          "story": [
+            "As contas ajudam a acompanhar as orações e os mistérios contemplados.",
+            "Ao rezar o Rosário, recordamos momentos da vida, morte e Ressurreição de Jesus."
+          ],
+          "fact": "A palavra “rosário” lembra uma coroa de rosas oferecida em oração.",
+          "metadata": {
+            "category": "Maria e oração",
+            "context": "Oração"
+          },
+          "showEmojiBadge": false
+        },
+        {
+          "id": "sacred-heart",
+          "name": "Sagrado Coração",
+          "image": "assets/symbols/09-hearth.png",
+          "shortDescription": "Recorda o amor de Jesus por todas as pessoas.",
+          "emoji": "❤️",
+          "visual": {
+            "glyph": "❤",
+            "backgroundColor": "#F4CACA"
+          },
+          "story": [
+            "O coração é um sinal humano de amor, cuidado e entrega.",
+            "Na devoção ao Sagrado Coração, contemplamos o amor misericordioso de Jesus."
+          ],
+          "fact": "A chama costuma representar um amor vivo e ardente.",
+          "metadata": {
+            "category": "Jesus Cristo",
+            "context": "Devoção e oração"
+          },
+          "showEmojiBadge": false
+        },
+        {
+          "id": "alpha-omega",
+          "name": "Alfa e Ômega",
+          "image": "assets/symbols/10-az.png",
+          "shortDescription": "A primeira e a última letras do alfabeto grego.",
+          "emoji": "🔠",
+          "visual": {
+            "glyph": "Α Ω",
+            "backgroundColor": "#D9E5C6"
+          },
+          "story": [
+            "No livro do Apocalipse, Alfa e Ômega expressam o princípio e o fim.",
+            "Juntas, as letras recordam que toda a história encontra sentido em Deus."
+          ],
+          "fact": "Essas letras aparecem com frequência no Círio Pascal.",
+          "metadata": {
+            "category": "Jesus Cristo",
+            "context": "Bíblia e liturgia"
+          },
+          "showEmojiBadge": false
+        },
+        {
+          "id": "chi-rho",
+          "name": "Chi-Rho",
+          "image": "assets/symbols/11-px.png",
+          "shortDescription": "Um antigo monograma formado com letras do nome de Cristo.",
+          "emoji": "☧",
+          "visual": {
+            "glyph": "☧",
+            "backgroundColor": "#E5D5B9"
+          },
+          "story": [
+            "Chi e Rho são as primeiras letras da palavra “Cristo” em grego.",
+            "Os cristãos uniram essas letras para formar um sinal de Jesus."
+          ],
+          "fact": "O monograma também é conhecido pelo nome de cristograma.",
+          "metadata": {
+            "category": "Primeiros cristãos",
+            "context": "História da Igreja"
+          },
+          "showEmojiBadge": false
+        },
+        {
+          "id": "anchor",
+          "name": "Âncora",
+          "image": "assets/symbols/12-ancora.png",
+          "shortDescription": "Um sinal cristão de esperança firme em Deus.",
+          "emoji": "⚓",
+          "visual": {
+            "glyph": "⚓",
+            "backgroundColor": "#C9DEE8"
+          },
+          "story": [
+            "A âncora mantém um barco firme mesmo quando o mar está agitado.",
+            "Por isso, os cristãos a usam para recordar a esperança que sustenta a vida."
+          ],
+          "fact": "A Carta aos Hebreus compara a esperança a uma âncora segura para a alma.",
+          "metadata": {
+            "category": "Virtudes",
+            "context": "Bíblia e tradição"
+          },
+          "showEmojiBadge": false
+        },
+        {
+          "id": "keys",
+          "name": "Chaves de São Pedro",
+          "image": "assets/symbols/15-chaves.png",
+          "shortDescription": "Recordam a missão confiada por Jesus a Pedro.",
+          "emoji": "🗝️",
+          "visual": {
+            "glyph": "🗝",
+            "backgroundColor": "#F0D9A7"
+          },
+          "story": [
+            "Jesus falou a Pedro sobre as chaves do Reino dos Céus.",
+            "As chaves se tornaram um sinal do serviço e da missão de Pedro na Igreja."
+          ],
+          "fact": "Duas chaves cruzadas aparecem no brasão da Santa Sé.",
+          "metadata": {
+            "category": "Igreja",
+            "context": "Bíblia e tradição"
+          },
+          "showEmojiBadge": false
+        },
+        {
+          "id": "lily",
+          "name": "Lírio",
+          "image": "assets/symbols/14-flor.png",
+          "shortDescription": "Uma flor associada à pureza e à confiança em Deus.",
+          "emoji": "🌸",
+          "visual": {
+            "glyph": "⚜",
+            "backgroundColor": "#E7E8D1"
+          },
+          "story": [
+            "Na arte cristã, o lírio pode recordar pureza, beleza e entrega a Deus.",
+            "Ele aparece em imagens de Maria e também de São José."
+          ],
+          "fact": "Nas imagens de São José, o lírio ajuda a reconhecê-lo.",
+          "metadata": {
+            "category": "Maria e santos",
+            "context": "Arte e tradição"
+          },
+          "showEmojiBadge": false
+        },
+        {
+          "id": "paschal-candle",
+          "name": "Círio Pascal",
+          "image": "assets/symbols/13-vela.png",
+          "shortDescription": "A grande vela que recorda Cristo ressuscitado.",
+          "emoji": "🕯️",
+          "visual": {
+            "glyph": "🕯",
+            "backgroundColor": "#F7E8B8"
+          },
+          "story": [
+            "O Círio é aceso solenemente na Vigília Pascal.",
+            "Sua luz recorda que Cristo ressuscitado vence as trevas."
+          ],
+          "fact": "Ele costuma trazer uma cruz, o ano e as letras Alfa e Ômega.",
+          "metadata": {
+            "category": "Páscoa",
+            "context": "Liturgia"
+          },
+          "showEmojiBadge": false
+        },
+        {
+          "id": "baptismal-water",
+          "name": "Água do Batismo",
+          "image": "assets/symbols/16-agua.png",
+          "shortDescription": "Sinal sacramental de vida nova em Cristo.",
+          "emoji": "💧",
+          "visual": {
+            "glyph": "💧",
+            "backgroundColor": "#CBEAF2"
+          },
+          "story": [
+            "A água é essencial para a vida e também pode lavar e renovar.",
+            "No Batismo, ela é o sinal sacramental do novo nascimento pela água e pelo Espírito."
+          ],
+          "fact": "O Batismo é a porta de entrada para a vida sacramental da Igreja.",
+          "metadata": {
+            "category": "Sacramentos",
+            "context": "Batismo"
+          },
+          "showEmojiBadge": false
+        },
+        {
+          "id": "incense",
+          "name": "Incenso",
+          "image": "assets/symbols/17-incenso.png",
+          "shortDescription": "Sua fumaça perfumada recorda a oração que sobe a Deus.",
+          "emoji": "💨",
+          "visual": {
+            "glyph": "♨",
+            "backgroundColor": "#DDD5CC"
+          },
+          "story": [
+            "O incenso é usado em algumas celebrações para honrar pessoas e coisas sagradas.",
+            "A fumaça que sobe ajuda a recordar a oração oferecida a Deus."
+          ],
+          "fact": "O recipiente usado para queimar incenso é chamado turíbulo.",
+          "metadata": {
+            "category": "Oração",
+            "context": "Liturgia"
+          },
+          "showEmojiBadge": false
+        },
+        {
+          "id": "boat",
+          "name": "Barca da Igreja",
+          "image": "assets/symbols/18-barco.png",
+          "shortDescription": "Recorda a Igreja navegando com Cristo.",
+          "emoji": "⛵",
+          "visual": {
+            "glyph": "⛵",
+            "backgroundColor": "#C7E0E6"
+          },
+          "story": [
+            "Os Evangelhos contam vários encontros de Jesus com os discípulos em barcos.",
+            "A barca tornou-se uma imagem da Igreja reunida e guiada por Cristo."
+          ],
+          "fact": "A parte central de muitas igrejas é chamada nave, palavra ligada à ideia de navio.",
+          "metadata": {
+            "category": "Igreja",
+            "context": "Bíblia e tradição"
+          },
+          "showEmojiBadge": false
+        }
+      ]
+    },
+    {
+      "id": "biblical-places",
+      "title": "Lugares Bíblicos",
+      "displayTitle": "dos Lugares Bíblicos",
+      "subtitle": "Viaje pelas terras e histórias da Bíblia!",
+      "description": "Descubra cidades, montes, rios e caminhos da história da salvação.",
+      "coverGlyph": "🗺️",
+      "copy": {
+        "galleryButton": "✦ Galeria dos Lugares",
+        "galleryTitle": "✦ Galeria dos Lugares",
+        "searchPlaceholder": "Buscar lugar…",
+        "emptySearch": "Nenhum lugar encontrado.",
+        "profileStoryTitle": "✦ O QUE ACONTECEU AQUI?",
+        "factTitle": "Você sabia?",
+        "resultSectionTitle": "Conheça este lugar"
+      },
+      "filters": [
+        {
+          "key": "period",
+          "label": "Testamento",
+          "options": [
+            "Antigo e Novo Testamento",
+            "Antigo Testamento",
+            "Novo Testamento"
+          ]
+        },
+        {
+          "key": "placeType",
+          "label": "Tipo de lugar",
+          "options": [
+            "Cidade",
+            "Deserto",
+            "Ilha",
+            "Mar",
+            "Monte",
+            "País",
+            "Região",
+            "Rio"
+          ]
+        },
+        {
+          "key": "journey",
+          "label": "Jornada",
+          "options": [
+            "Antigo e Novo Testamento",
+            "Povo de Israel",
+            "Primeira Igreja",
+            "Vida de Jesus"
+          ]
+        }
+      ],
+      "profile": {
+        "metaFields": [
+          {
+            "key": "placeType",
+            "label": "Tipo"
+          },
+          {
+            "key": "region",
+            "label": "Região bíblica"
+          },
+          {
+            "key": "period",
+            "label": "Testamento"
+          }
+        ],
+        "tagField": {
+          "key": "references",
+          "label": "✦ LEIA NA BÍBLIA"
+        }
+      },
+      "appearance": {
+        "cardBackGlyph": "✦"
+      },
+      "completion": {
+        "kicker": "🎉 Viagem concluída! 🎉",
+        "title": "Você percorreu os Lugares Bíblicos!",
+        "message": "Cada lugar guarda a memória de uma parte da história da salvação. Este foi o último lugar encontrado:",
+        "sectionTitle": "Para recordar",
+        "sectionText": "{{item.fact}}",
+        "finalMessage": "Continue sua viagem pelas páginas da Bíblia e descubra novas histórias de fé! ✨"
+      },
+      "items": [
+        {
+          "id": "jerusalem",
+          "image": "assets/places/01-jerusalem.png",
+          "showEmojiBadge": false,
+          "name": "Jerusalém",
+          "shortDescription": "A cidade da Páscoa de Jesus e do nascimento da Igreja.",
+          "emoji": "🏛️",
+          "visual": {
+            "glyph": "🏛",
+            "backgroundColor": "#F1D9BD"
+          },
+          "story": [
+            "Jesus foi muitas vezes a Jerusalém e ali viveu os acontecimentos de sua Páscoa.",
+            "Depois da Ressurreição, os discípulos receberam o Espírito Santo e começaram a anunciar o Evangelho."
+          ],
+          "fact": "Jerusalém aparece muitas vezes tanto no Antigo quanto no Novo Testamento.",
+          "metadata": {
+            "period": "Antigo e Novo Testamento",
+            "placeType": "Cidade",
+            "region": "Judeia",
+            "journey": "Antigo e Novo Testamento",
+            "references": [
+              "Lucas 24",
+              "Atos 2"
+            ]
+          }
+        },
+        {
+          "id": "bethlehem",
+          "image": "assets/places/02-bethlehem.png",
+          "showEmojiBadge": false,
+          "name": "Belém",
+          "shortDescription": "A pequena cidade onde Jesus nasceu.",
+          "emoji": "⭐",
+          "visual": {
+            "glyph": "⭐",
+            "backgroundColor": "#F8E8B5"
+          },
+          "story": [
+            "Maria e José foram a Belém antes do nascimento de Jesus.",
+            "Ali, Jesus nasceu e foi colocado numa manjedoura."
+          ],
+          "fact": "Belém também está ligada à história de Rute e à família do rei Davi.",
+          "metadata": {
+            "period": "Antigo e Novo Testamento",
+            "placeType": "Cidade",
+            "region": "Judeia",
+            "journey": "Antigo e Novo Testamento",
+            "references": [
+              "Rute 1–4",
+              "Miqueias 5,1",
+              "Lucas 2,1–20"
+            ]
+          }
+        },
+        {
+          "id": "nazareth",
+          "image": "assets/places/03-nazareth.png",
+          "showEmojiBadge": false,
+          "name": "Nazaré",
+          "shortDescription": "A cidade onde Jesus cresceu com Maria e José.",
+          "emoji": "🏠",
+          "visual": {
+            "glyph": "🏠",
+            "backgroundColor": "#DDE9CF"
+          },
+          "story": [
+            "Em Nazaré, o anjo Gabriel anunciou a Maria que ela seria a mãe de Jesus.",
+            "Jesus viveu ali com Maria e José durante muitos anos."
+          ],
+          "fact": "Por ter vivido em Nazaré, Jesus também ficou conhecido como Jesus de Nazaré.",
+          "metadata": {
+            "period": "Novo Testamento",
+            "placeType": "Cidade",
+            "region": "Galileia",
+            "journey": "Vida de Jesus",
+            "references": [
+              "Lucas 1,26–38",
+              "Lucas 2,39–52"
+            ]
+          }
+        },
+        {
+          "id": "capernaum",
+          "image": "assets/places/04-capernaum.png",
+          "showEmojiBadge": false,
+          "name": "Cafarnaum",
+          "shortDescription": "Uma cidade importante na missão de Jesus na Galileia.",
+          "emoji": "🏘️",
+          "visual": {
+            "glyph": "🏘",
+            "backgroundColor": "#CFE5E4"
+          },
+          "story": [
+            "Jesus ensinou na sinagoga de Cafarnaum e realizou curas na cidade.",
+            "Dali, percorreu outros lugares da Galileia anunciando o Reino de Deus."
+          ],
+          "fact": "Cafarnaum ficava próxima ao Mar da Galileia e à região dos pescadores.",
+          "metadata": {
+            "period": "Novo Testamento",
+            "placeType": "Cidade",
+            "region": "Galileia",
+            "journey": "Vida de Jesus",
+            "references": [
+              "Marcos 1,21–34",
+              "Mateus 4,13"
+            ]
+          }
+        },
+        {
+          "id": "cana",
+          "image": "assets/places/05-cana.png",
+          "showEmojiBadge": false,
+          "name": "Caná",
+          "shortDescription": "O lugar das bodas e do primeiro sinal de Jesus.",
+          "emoji": "🏺",
+          "visual": {
+            "glyph": "🏺",
+            "backgroundColor": "#E6D6C9"
+          },
+          "story": [
+            "Jesus, Maria e os discípulos participaram de uma festa de casamento em Caná.",
+            "Quando o vinho acabou, Jesus transformou água em vinho e manifestou sua glória."
+          ],
+          "fact": "O Evangelho de João chama esse acontecimento de primeiro sinal realizado por Jesus.",
+          "metadata": {
+            "period": "Novo Testamento",
+            "placeType": "Cidade",
+            "region": "Galileia",
+            "journey": "Vida de Jesus",
+            "references": [
+              "João 2,1–11"
+            ]
+          }
+        },
+        {
+          "id": "bethany",
+          "image": "assets/places/06-bethany.png",
+          "showEmojiBadge": false,
+          "name": "Betânia",
+          "shortDescription": "A aldeia dos amigos Marta, Maria e Lázaro.",
+          "emoji": "🌿",
+          "visual": {
+            "glyph": "🌿",
+            "backgroundColor": "#D7E5C7"
+          },
+          "story": [
+            "Em Betânia viviam Marta, Maria e Lázaro, amigos de Jesus.",
+            "Jesus visitou a família e chamou Lázaro para fora do túmulo."
+          ],
+          "fact": "Betânia ficava perto de Jerusalém, junto ao caminho do Monte das Oliveiras.",
+          "metadata": {
+            "period": "Novo Testamento",
+            "placeType": "Cidade",
+            "region": "Judeia",
+            "journey": "Vida de Jesus",
+            "references": [
+              "Lucas 10,38–42",
+              "João 11,1–44"
+            ]
+          }
+        },
+        {
+          "id": "jericho",
+          "image": "assets/places/07-jericho.png",
+          "showEmojiBadge": false,
+          "name": "Jericó",
+          "shortDescription": "A cidade onde Zaqueu subiu numa árvore para ver Jesus.",
+          "emoji": "🌳",
+          "visual": {
+            "glyph": "🌳",
+            "backgroundColor": "#D9E4BD"
+          },
+          "story": [
+            "Ao passar por Jericó, Jesus encontrou Zaqueu, que havia subido num sicômoro.",
+            "Jesus foi à casa dele, e esse encontro transformou sua maneira de viver."
+          ],
+          "fact": "Jericó também é conhecida no Antigo Testamento pela história de suas muralhas.",
+          "metadata": {
+            "period": "Antigo e Novo Testamento",
+            "placeType": "Cidade",
+            "region": "Judeia",
+            "journey": "Vida de Jesus",
+            "references": [
+              "Josué 6",
+              "Lucas 19,1–10"
+            ]
+          }
+        },
+        {
+          "id": "emmaus",
+          "image": "assets/places/08-emmaus.png",
+          "showEmojiBadge": false,
+          "name": "Emaús",
+          "shortDescription": "O destino dos discípulos que caminharam com Jesus ressuscitado.",
+          "emoji": "🥖",
+          "visual": {
+            "glyph": "🥖",
+            "backgroundColor": "#E9D4B3"
+          },
+          "story": [
+            "Dois discípulos caminhavam para Emaús quando Jesus ressuscitado se aproximou.",
+            "Eles o reconheceram mais tarde, quando Jesus partiu o pão."
+          ],
+          "fact": "O Evangelho conta a caminhada, mas existem diferentes propostas para localizar Emaús atualmente.",
+          "metadata": {
+            "period": "Novo Testamento",
+            "placeType": "Cidade",
+            "region": "Judeia",
+            "journey": "Vida de Jesus",
+            "references": [
+              "Lucas 24,13–35"
+            ]
+          }
+        },
+        {
+          "id": "samaria",
+          "image": "assets/places/09-samaria.png",
+          "showEmojiBadge": false,
+          "name": "Samaria",
+          "shortDescription": "A região onde Jesus conversou com uma mulher junto ao poço.",
+          "emoji": "🪣",
+          "visual": {
+            "glyph": "🪣",
+            "backgroundColor": "#D6E3D3"
+          },
+          "story": [
+            "Ao atravessar a Samaria, Jesus parou junto a um poço e pediu água.",
+            "Sua conversa com uma mulher samaritana falou de verdade, acolhimento e vida nova."
+          ],
+          "fact": "A Samaria ficava entre as regiões da Judeia e da Galileia.",
+          "metadata": {
+            "period": "Antigo e Novo Testamento",
+            "placeType": "Região",
+            "region": "Samaria",
+            "journey": "Vida de Jesus",
+            "references": [
+              "João 4,4–42"
+            ]
+          }
+        },
+        {
+          "id": "sea-of-galilee",
+          "image": "assets/places/10-sea-of-galilee.png",
+          "showEmojiBadge": false,
+          "name": "Mar da Galileia",
+          "shortDescription": "O grande lago onde Jesus ensinou e acalmou a tempestade.",
+          "emoji": "🌊",
+          "visual": {
+            "glyph": "🌊",
+            "backgroundColor": "#C9E5EE"
+          },
+          "story": [
+            "Jesus e os discípulos atravessavam o Mar da Galileia quando começou uma forte tempestade.",
+            "Jesus acalmou o vento e as ondas, convidando os discípulos a confiar."
+          ],
+          "fact": "Apesar do nome, o Mar da Galileia é um lago de água doce.",
+          "metadata": {
+            "period": "Novo Testamento",
+            "placeType": "Mar",
+            "region": "Galileia",
+            "journey": "Vida de Jesus",
+            "references": [
+              "Marcos 4,35–41"
+            ]
+          }
+        },
+        {
+          "id": "jordan-river",
+          "image": "assets/places/11-jordan-river.png",
+          "showEmojiBadge": false,
+          "name": "Rio Jordão",
+          "shortDescription": "O rio onde Jesus recebeu o Batismo de João.",
+          "emoji": "💧",
+          "visual": {
+            "glyph": "💧",
+            "backgroundColor": "#C9E8EA"
+          },
+          "story": [
+            "João Batista anunciava a conversão e batizava pessoas no Rio Jordão.",
+            "Jesus também foi ao Jordão, e o Espírito Santo desceu sobre ele após o Batismo."
+          ],
+          "fact": "No Antigo Testamento, o povo de Israel atravessou o Jordão ao entrar na Terra Prometida.",
+          "metadata": {
+            "period": "Antigo e Novo Testamento",
+            "placeType": "Rio",
+            "region": "Vale do Jordão",
+            "journey": "Antigo e Novo Testamento",
+            "references": [
+              "Josué 3",
+              "Mateus 3,13–17"
+            ]
+          }
+        },
+        {
+          "id": "mount-sinai",
+          "image": "assets/places/12-mount-sinai.png",
+          "showEmojiBadge": false,
+          "name": "Monte Sinai",
+          "shortDescription": "O monte da aliança de Deus com o povo de Israel.",
+          "emoji": "⛰️",
+          "visual": {
+            "glyph": "⛰",
+            "backgroundColor": "#E8D3BB"
+          },
+          "story": [
+            "Depois de sair do Egito, o povo de Israel chegou ao Monte Sinai.",
+            "Ali, Deus fez uma aliança com o povo e entregou os mandamentos a Moisés."
+          ],
+          "fact": "O relato bíblico apresenta o Sinai como um lugar de encontro, escuta e compromisso.",
+          "metadata": {
+            "period": "Antigo Testamento",
+            "placeType": "Monte",
+            "region": "Sinai",
+            "journey": "Povo de Israel",
+            "references": [
+              "Êxodo 19–20"
+            ]
+          }
+        },
+        {
+          "id": "mount-of-olives",
+          "image": "assets/places/13-mount-of-olives.png",
+          "showEmojiBadge": false,
+          "name": "Monte das Oliveiras",
+          "shortDescription": "O monte próximo a Jerusalém onde Jesus costumava rezar.",
+          "emoji": "🫒",
+          "visual": {
+            "glyph": "🫒",
+            "backgroundColor": "#D9E3BE"
+          },
+          "story": [
+            "Jesus foi muitas vezes ao Monte das Oliveiras, perto de Jerusalém.",
+            "Na noite antes de sua prisão, rezou ali com os discípulos."
+          ],
+          "fact": "O livro dos Atos menciona o monte quando os discípulos voltam a Jerusalém após a Ascensão.",
+          "metadata": {
+            "period": "Novo Testamento",
+            "placeType": "Monte",
+            "region": "Judeia",
+            "journey": "Vida de Jesus",
+            "references": [
+              "Lucas 22,39–46",
+              "Atos 1,9–12"
+            ]
+          }
+        },
+        {
+          "id": "judean-desert",
+          "image": "assets/places/14-judean-desert.png",
+          "showEmojiBadge": false,
+          "name": "Deserto da Judeia",
+          "shortDescription": "A região desértica onde João Batista anunciava a conversão.",
+          "emoji": "🏜️",
+          "visual": {
+            "glyph": "🏜",
+            "backgroundColor": "#EACCA2"
+          },
+          "story": [
+            "João Batista apareceu no deserto da Judeia preparando o caminho do Senhor.",
+            "Muitas pessoas iam até ele para ouvir sua mensagem e receber o batismo."
+          ],
+          "fact": "Na Bíblia, o deserto pode ser lugar de silêncio, provação e encontro com Deus.",
+          "metadata": {
+            "period": "Novo Testamento",
+            "placeType": "Deserto",
+            "region": "Judeia",
+            "journey": "Vida de Jesus",
+            "references": [
+              "Mateus 3,1–6"
+            ]
+          }
+        },
+        {
+          "id": "egypt",
+          "image": "assets/places/15-egypt.png",
+          "showEmojiBadge": false,
+          "name": "Egito",
+          "shortDescription": "A terra do Êxodo e do refúgio da Sagrada Família.",
+          "emoji": "🌴",
+          "visual": {
+            "glyph": "🌴",
+            "backgroundColor": "#F0D5A4"
+          },
+          "story": [
+            "Deus libertou o povo de Israel da escravidão no Egito e o conduziu pelo deserto.",
+            "Muitos anos depois, José levou Maria e o menino Jesus ao Egito para protegê-lo."
+          ],
+          "fact": "O Egito liga acontecimentos importantes do Antigo e do Novo Testamento.",
+          "metadata": {
+            "period": "Antigo e Novo Testamento",
+            "placeType": "País",
+            "region": "Egito",
+            "journey": "Antigo e Novo Testamento",
+            "references": [
+              "Êxodo 12–14",
+              "Mateus 2,13–15"
+            ]
+          }
+        },
+        {
+          "id": "damascus",
+          "image": "assets/places/16-damascus.png",
+          "showEmojiBadge": false,
+          "name": "Damasco",
+          "shortDescription": "A cidade ligada ao chamado e à conversão de Saulo.",
+          "emoji": "✨",
+          "visual": {
+            "glyph": "✨",
+            "backgroundColor": "#F3E0AE"
+          },
+          "story": [
+            "Saulo viajava para Damasco quando uma luz o envolveu e ele ouviu a voz de Jesus.",
+            "Na cidade, Ananias o acolheu, e Saulo começou uma vida nova como discípulo."
+          ],
+          "fact": "Saulo ficou conhecido como Paulo e tornou-se um grande anunciador do Evangelho.",
+          "metadata": {
+            "period": "Novo Testamento",
+            "placeType": "Cidade",
+            "region": "Síria",
+            "journey": "Primeira Igreja",
+            "references": [
+              "Atos 9,1–19"
+            ]
+          }
+        },
+        {
+          "id": "antioch",
+          "image": "assets/places/17-antioch.png",
+          "showEmojiBadge": false,
+          "name": "Antioquia",
+          "shortDescription": "Uma cidade importante para as primeiras comunidades cristãs.",
+          "emoji": "⛪",
+          "visual": {
+            "glyph": "⛪",
+            "backgroundColor": "#E2D7C7"
+          },
+          "story": [
+            "Os discípulos anunciaram Jesus em Antioquia a pessoas de diferentes origens.",
+            "Barnabé e Saulo ajudaram a ensinar e fortalecer aquela comunidade."
+          ],
+          "fact": "Foi em Antioquia que os discípulos foram chamados cristãos pela primeira vez.",
+          "metadata": {
+            "period": "Novo Testamento",
+            "placeType": "Cidade",
+            "region": "Síria",
+            "journey": "Primeira Igreja",
+            "references": [
+              "Atos 11,19–26"
+            ]
+          }
+        },
+        {
+          "id": "patmos",
+          "image": "assets/places/18-patmos.png",
+          "showEmojiBadge": false,
+          "name": "Ilha de Patmos",
+          "shortDescription": "A ilha onde João recebeu as visões do Apocalipse.",
+          "emoji": "📜",
+          "visual": {
+            "glyph": "📜",
+            "backgroundColor": "#D7E5EA"
+          },
+          "story": [
+            "João estava na ilha de Patmos por causa da Palavra de Deus e do testemunho de Jesus.",
+            "Ali, recebeu a visão que deu origem ao livro do Apocalipse."
+          ],
+          "fact": "Patmos é uma pequena ilha cercada pelo Mar Egeu.",
+          "metadata": {
+            "period": "Novo Testamento",
+            "placeType": "Ilha",
+            "region": "Mar Egeu",
+            "journey": "Primeira Igreja",
+            "references": [
+              "Apocalipse 1,9–11"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "id": "parables",
+      "title": "Parábolas de Jesus",
+      "displayTitle": "das Parábolas de Jesus",
+      "subtitle": "Descubra as histórias que Jesus contou!",
+      "description": "Encontre ensinamentos sobre o Reino, a misericórdia e o amor.",
+      "coverGlyph": "🌱",
+      "copy": {
+        "galleryButton": "✦ Galeria das Parábolas",
+        "galleryTitle": "✦ Galeria das Parábolas",
+        "searchPlaceholder": "Buscar parábola…",
+        "emptySearch": "Nenhuma parábola encontrada.",
+        "profileStoryTitle": "✦ O QUE JESUS ENSINA?",
+        "factTitle": "Para recordar",
+        "resultSectionTitle": "Conheça esta parábola"
+      },
+      "filters": [
+        {
+          "key": "gospel",
+          "label": "Evangelho",
+          "options": [
+            "Lucas",
+            "Mateus"
+          ]
+        },
+        {
+          "key": "teaching",
+          "label": "Ensinamento",
+          "options": [
+            "Misericórdia",
+            "Oração e humildade",
+            "Palavra em prática",
+            "Reino de Deus",
+            "Responsabilidade",
+            "Vigilância"
+          ]
+        },
+        {
+          "key": "mainElement",
+          "label": "Elemento",
+          "options": [
+            "Alimento",
+            "Animal",
+            "Natureza",
+            "Objeto",
+            "Pessoa"
+          ]
+        }
+      ],
+      "profile": {
+        "metaFields": [
+          {
+            "key": "gospel",
+            "label": "Evangelho"
+          },
+          {
+            "key": "teaching",
+            "label": "Ensinamento"
+          },
+          {
+            "key": "mainElement",
+            "label": "Elemento"
+          }
+        ],
+        "tagField": {
+          "key": "references",
+          "label": "✦ LEIA NA BÍBLIA"
+        }
+      },
+      "appearance": {
+        "cardBackGlyph": "🌱"
+      },
+      "completion": {
+        "kicker": "🎉 Ensinamentos descobertos! 🎉",
+        "title": "Você conheceu as Parábolas de Jesus!",
+        "message": "As histórias de Jesus nos convidam a amar, confiar e colocar sua Palavra em prática. Esta foi a última parábola encontrada:",
+        "sectionTitle": "Para recordar",
+        "sectionText": "{{item.fact}}",
+        "finalMessage": "Continue ouvindo Jesus e fazendo o bem com alegria! ✨"
+      },
+      "items": [
+        {
+          "id": "good-samaritan",
+          "image": "assets/parables/01-good-samaritan.png",
+          "showEmojiBadge": false,
+          "name": "O Bom Samaritano",
+          "shortDescription": "Um viajante escolhe cuidar de quem precisava.",
+          "emoji": "🤝",
+          "visual": {
+            "glyph": "🤝",
+            "backgroundColor": "#F2D2B6"
+          },
+          "story": [
+            "Jesus contou sobre um homem ferido que foi encontrado no caminho.",
+            "Um samaritano se aproximou, cuidou dele e garantiu que estivesse seguro.",
+            "Jesus nos ensina a ser próximos de toda pessoa que precisa de ajuda."
+          ],
+          "fact": "O amor ao próximo aparece em atitudes concretas de cuidado e misericórdia.",
+          "metadata": {
+            "gospel": "Lucas",
+            "teaching": "Misericórdia",
+            "mainElement": "Pessoa",
+            "references": [
+              "Lucas 10,25–37"
+            ]
+          }
+        },
+        {
+          "id": "merciful-father",
+          "image": "assets/parables/02-merciful-father.png",
+          "showEmojiBadge": false,
+          "name": "O Pai Misericordioso",
+          "shortDescription": "Um pai acolhe com alegria o filho que voltou.",
+          "emoji": "🫂",
+          "visual": {
+            "glyph": "🫂",
+            "backgroundColor": "#EDC9B9"
+          },
+          "story": [
+            "Um filho saiu de casa e gastou tudo o que havia recebido.",
+            "Quando decidiu voltar, seu pai correu para abraçá-lo e preparou uma festa.",
+            "Jesus revela a alegria de Deus quando alguém aceita seu amor e recomeça."
+          ],
+          "fact": "Esta história também é conhecida como a parábola do Filho Pródigo.",
+          "metadata": {
+            "gospel": "Lucas",
+            "teaching": "Misericórdia",
+            "mainElement": "Pessoa",
+            "references": [
+              "Lucas 15,11–32"
+            ]
+          }
+        },
+        {
+          "id": "sower",
+          "image": "assets/parables/03-sower.png",
+          "showEmojiBadge": false,
+          "name": "O Semeador",
+          "shortDescription": "Sementes caem em solos diferentes e produzem frutos.",
+          "emoji": "🌾",
+          "visual": {
+            "glyph": "🌾",
+            "backgroundColor": "#E6D5A5"
+          },
+          "story": [
+            "Um semeador espalhou sementes pelo caminho, entre pedras, entre espinhos e em terra boa.",
+            "As sementes da terra boa cresceram e deram muitos frutos.",
+            "Jesus nos convida a acolher a Palavra e deixá-la transformar nossa vida."
+          ],
+          "fact": "A mesma semente encontra resultados diferentes conforme o solo que a recebe.",
+          "metadata": {
+            "gospel": "Mateus",
+            "teaching": "Palavra em prática",
+            "mainElement": "Natureza",
+            "references": [
+              "Mateus 13,1–23"
+            ]
+          }
+        },
+        {
+          "id": "lost-sheep",
+          "image": "assets/parables/04-lost-sheep.png",
+          "showEmojiBadge": false,
+          "name": "A Ovelha Perdida",
+          "shortDescription": "O pastor procura com cuidado uma ovelha perdida.",
+          "emoji": "🐑",
+          "visual": {
+            "glyph": "🐑",
+            "backgroundColor": "#DDE6CF"
+          },
+          "story": [
+            "Um pastor percebeu que uma de suas cem ovelhas havia se perdido.",
+            "Ele foi procurá-la e voltou cheio de alegria quando a encontrou.",
+            "Jesus mostra que cada pessoa é importante para Deus."
+          ],
+          "fact": "A alegria do pastor ajuda a compreender a misericórdia de Deus.",
+          "metadata": {
+            "gospel": "Lucas",
+            "teaching": "Misericórdia",
+            "mainElement": "Animal",
+            "references": [
+              "Lucas 15,1–7"
+            ]
+          }
+        },
+        {
+          "id": "lost-coin",
+          "image": "assets/parables/05-lost-coin.png",
+          "showEmojiBadge": false,
+          "name": "A Moeda Perdida",
+          "shortDescription": "Uma mulher procura até encontrar sua moeda.",
+          "emoji": "🪙",
+          "visual": {
+            "glyph": "🪙",
+            "backgroundColor": "#F5E1A7"
+          },
+          "story": [
+            "Uma mulher perdeu uma de suas dez moedas dentro de casa.",
+            "Ela acendeu uma lamparina, varreu tudo e procurou até encontrar.",
+            "Ao achar a moeda, chamou as amigas para partilhar sua alegria."
+          ],
+          "fact": "Jesus compara essa alegria à alegria de Deus por quem escolhe voltar para ele.",
+          "metadata": {
+            "gospel": "Lucas",
+            "teaching": "Misericórdia",
+            "mainElement": "Objeto",
+            "references": [
+              "Lucas 15,8–10"
+            ]
+          }
+        },
+        {
+          "id": "mustard-seed",
+          "image": "assets/parables/06-mustard-seed.png",
+          "showEmojiBadge": false,
+          "name": "O Grão de Mostarda",
+          "shortDescription": "Uma semente muito pequena cresce e oferece abrigo.",
+          "emoji": "🌱",
+          "visual": {
+            "glyph": "🌱",
+            "backgroundColor": "#D9E7BA"
+          },
+          "story": [
+            "Jesus comparou o Reino dos Céus a um pequeno grão de mostarda.",
+            "Depois de plantado, ele cresce e se torna um grande arbusto.",
+            "O Reino pode começar discretamente e produzir algo muito maior."
+          ],
+          "fact": "Pequenas atitudes de fé e amor também podem crescer e dar muitos frutos.",
+          "metadata": {
+            "gospel": "Mateus",
+            "teaching": "Reino de Deus",
+            "mainElement": "Natureza",
+            "references": [
+              "Mateus 13,31–32"
+            ]
+          }
+        },
+        {
+          "id": "leaven",
+          "image": "assets/parables/07-leaven.png",
+          "showEmojiBadge": false,
+          "name": "O Fermento na Massa",
+          "shortDescription": "Um pouco de fermento transforma toda a massa.",
+          "emoji": "🍞",
+          "visual": {
+            "glyph": "🍞",
+            "backgroundColor": "#EBD1A8"
+          },
+          "story": [
+            "Jesus comparou o Reino dos Céus ao fermento misturado à farinha.",
+            "Mesmo quase escondido, ele faz toda a massa crescer.",
+            "A presença do Reino transforma a vida por dentro."
+          ],
+          "fact": "Uma pequena quantidade de fermento pode alcançar toda a massa.",
+          "metadata": {
+            "gospel": "Mateus",
+            "teaching": "Reino de Deus",
+            "mainElement": "Alimento",
+            "references": [
+              "Mateus 13,33"
+            ]
+          }
+        },
+        {
+          "id": "hidden-treasure",
+          "image": "assets/parables/08-hidden-treasure.png",
+          "showEmojiBadge": false,
+          "name": "O Tesouro Escondido",
+          "shortDescription": "Um tesouro encontrado enche de alegria quem o descobre.",
+          "emoji": "💎",
+          "visual": {
+            "glyph": "💎",
+            "backgroundColor": "#D6E6E5"
+          },
+          "story": [
+            "Jesus falou de um homem que encontrou um tesouro escondido no campo.",
+            "Cheio de alegria, ele decidiu fazer o necessário para ficar com aquele campo.",
+            "A parábola mostra o valor incomparável do Reino de Deus."
+          ],
+          "fact": "A decisão do homem nasce da alegria de ter descoberto algo precioso.",
+          "metadata": {
+            "gospel": "Mateus",
+            "teaching": "Reino de Deus",
+            "mainElement": "Objeto",
+            "references": [
+              "Mateus 13,44"
+            ]
+          }
+        },
+        {
+          "id": "precious-pearl",
+          "image": "assets/parables/09-precious-pearl.png",
+          "showEmojiBadge": false,
+          "name": "A Pérola Preciosa",
+          "shortDescription": "Um comerciante reconhece uma pérola de grande valor.",
+          "emoji": "🦪",
+          "visual": {
+            "glyph": "◉",
+            "backgroundColor": "#E4DDF0"
+          },
+          "story": [
+            "Um comerciante procurava pérolas de grande valor.",
+            "Quando encontrou uma pérola extraordinária, escolheu ficar com ela.",
+            "Jesus nos convida a reconhecer o Reino como um bem precioso."
+          ],
+          "fact": "Encontrar o que realmente importa também ajuda a escolher como viver.",
+          "metadata": {
+            "gospel": "Mateus",
+            "teaching": "Reino de Deus",
+            "mainElement": "Objeto",
+            "references": [
+              "Mateus 13,45–46"
+            ]
+          }
+        },
+        {
+          "id": "house-on-rock",
+          "image": "assets/parables/10-house-on-rock.png",
+          "showEmojiBadge": false,
+          "name": "A Casa sobre a Rocha",
+          "shortDescription": "Uma casa firme resiste à chuva e ao vento.",
+          "emoji": "🏠",
+          "visual": {
+            "glyph": "🏠",
+            "backgroundColor": "#D5DEE8"
+          },
+          "story": [
+            "Jesus contou sobre duas casas: uma construída sobre a rocha e outra sobre a areia.",
+            "Quando vieram a chuva e o vento, somente a casa com base firme permaneceu.",
+            "Ouvir Jesus e praticar sua Palavra dá fundamento à nossa vida."
+          ],
+          "fact": "A parábola aparece no final do Sermão da Montanha.",
+          "metadata": {
+            "gospel": "Mateus",
+            "teaching": "Palavra em prática",
+            "mainElement": "Objeto",
+            "references": [
+              "Mateus 7,24–27"
+            ]
+          }
+        },
+        {
+          "id": "talents",
+          "image": "assets/parables/11-talents.png",
+          "showEmojiBadge": false,
+          "name": "Os Talentos",
+          "shortDescription": "Servos recebem bens para cuidar com responsabilidade.",
+          "emoji": "🪙",
+          "visual": {
+            "glyph": "🪙🪙",
+            "backgroundColor": "#E8D2A1"
+          },
+          "story": [
+            "Antes de viajar, um homem confiou diferentes quantias a seus servos.",
+            "Ao voltar, perguntou como cada um havia cuidado do que recebeu.",
+            "Jesus nos chama a usar com responsabilidade os bens e dons confiados a nós."
+          ],
+          "fact": "Na parábola, “talento” era uma grande medida de dinheiro.",
+          "metadata": {
+            "gospel": "Mateus",
+            "teaching": "Responsabilidade",
+            "mainElement": "Objeto",
+            "references": [
+              "Mateus 25,14–30"
+            ]
+          }
+        },
+        {
+          "id": "ten-virgins",
+          "image": "assets/parables/12-ten-virgins.png",
+          "showEmojiBadge": false,
+          "name": "As Dez Jovens",
+          "shortDescription": "Jovens aguardam uma festa com suas lamparinas.",
+          "emoji": "🪔",
+          "visual": {
+            "glyph": "🪔",
+            "backgroundColor": "#F3D9A6"
+          },
+          "story": [
+            "Dez jovens saíram com suas lamparinas para esperar o início de uma festa de casamento.",
+            "Algumas levaram azeite suficiente e estavam preparadas para a espera.",
+            "Jesus ensina a viver com atenção e o coração pronto para Deus."
+          ],
+          "fact": "A lamparina acesa tornou-se uma imagem de vigilância e preparação.",
+          "metadata": {
+            "gospel": "Mateus",
+            "teaching": "Vigilância",
+            "mainElement": "Objeto",
+            "references": [
+              "Mateus 25,1–13"
+            ]
+          }
+        },
+        {
+          "id": "pharisee-tax-collector",
+          "image": "assets/parables/13-pharisee-tax-collector.png",
+          "showEmojiBadge": false,
+          "name": "O Fariseu e o Cobrador de Impostos",
+          "shortDescription": "Duas pessoas rezam com atitudes muito diferentes.",
+          "emoji": "🙏",
+          "visual": {
+            "glyph": "🙏",
+            "backgroundColor": "#DDD8EA"
+          },
+          "story": [
+            "Jesus contou sobre duas pessoas que foram ao templo para rezar.",
+            "Uma se considerava melhor que as outras; a outra reconheceu com humildade que precisava de Deus.",
+            "A verdadeira oração não despreza ninguém e abre o coração à misericórdia."
+          ],
+          "fact": "Jesus dirigiu esta parábola a quem confiava apenas na própria justiça.",
+          "metadata": {
+            "gospel": "Lucas",
+            "teaching": "Oração e humildade",
+            "mainElement": "Pessoa",
+            "references": [
+              "Lucas 18,9–14"
+            ]
+          }
+        },
+        {
+          "id": "rich-fool",
+          "image": "assets/parables/14-rich-fool.png",
+          "showEmojiBadge": false,
+          "name": "O Rico Insensato",
+          "shortDescription": "Celeiros cheios não garantem o sentido da vida.",
+          "emoji": "🏚️",
+          "visual": {
+            "glyph": "🌾🏚",
+            "backgroundColor": "#DFCEAA"
+          },
+          "story": [
+            "Um homem teve uma colheita tão grande que decidiu construir celeiros maiores.",
+            "Ele pensou somente em acumular bens e esqueceu que a vida é um presente de Deus.",
+            "Jesus nos lembra que a riqueza verdadeira não está em guardar tudo para si."
+          ],
+          "fact": "A parábola nasceu de uma pergunta dirigida a Jesus sobre uma herança.",
+          "metadata": {
+            "gospel": "Lucas",
+            "teaching": "Responsabilidade",
+            "mainElement": "Alimento",
+            "references": [
+              "Lucas 12,13–21"
+            ]
+          }
+        },
+        {
+          "id": "watchful-servants",
+          "image": "assets/parables/15-watchful-servants.png",
+          "showEmojiBadge": false,
+          "name": "Os Servos Vigilantes",
+          "shortDescription": "Servos mantêm as luzes acesas enquanto esperam.",
+          "emoji": "🕯️",
+          "visual": {
+            "glyph": "🕯",
+            "backgroundColor": "#F4E2B0"
+          },
+          "story": [
+            "Jesus falou de servos que aguardavam o retorno de seu senhor.",
+            "Eles mantinham as lâmpadas acesas e estavam prontos para abrir a porta.",
+            "A vigilância cristã é viver cada dia com fidelidade e disposição para o bem."
+          ],
+          "fact": "Estar preparado significa cuidar bem das responsabilidades de cada dia.",
+          "metadata": {
+            "gospel": "Lucas",
+            "teaching": "Vigilância",
+            "mainElement": "Pessoa",
+            "references": [
+              "Lucas 12,35–48"
+            ]
+          }
+        },
+        {
+          "id": "great-banquet",
+          "image": "assets/parables/16-great-banquet.png",
+          "showEmojiBadge": false,
+          "name": "O Grande Banquete",
+          "shortDescription": "Uma grande mesa está preparada e o convite se amplia.",
+          "emoji": "🍽️",
+          "visual": {
+            "glyph": "🍽",
+            "backgroundColor": "#EDD0C2"
+          },
+          "story": [
+            "Um homem preparou uma grande festa e enviou convites aos convidados.",
+            "Quando muitos recusaram, ele mandou chamar outras pessoas pelas ruas e caminhos.",
+            "Jesus apresenta o convite generoso de Deus e nos chama a acolhê-lo."
+          ],
+          "fact": "A imagem do banquete fala de comunhão, alegria e acolhida.",
+          "metadata": {
+            "gospel": "Lucas",
+            "teaching": "Reino de Deus",
+            "mainElement": "Alimento",
+            "references": [
+              "Lucas 14,15–24"
+            ]
+          }
+        },
+        {
+          "id": "wheat-weeds",
+          "image": "assets/parables/17-wheat-weeds.png",
+          "showEmojiBadge": false,
+          "name": "O Trigo e o Joio",
+          "shortDescription": "Trigo e ervas crescem juntos até a colheita.",
+          "emoji": "🌾",
+          "visual": {
+            "glyph": "🌾🌿",
+            "backgroundColor": "#DCE1B5"
+          },
+          "story": [
+            "Um homem semeou boa semente, mas depois apareceram ervas no meio do trigo.",
+            "O dono do campo pediu paciência para não arrancar o trigo junto com elas.",
+            "Jesus ensina a confiar na justiça de Deus e a não julgar apressadamente."
+          ],
+          "fact": "A paciência do dono do campo protege aquilo que ainda está crescendo.",
+          "metadata": {
+            "gospel": "Mateus",
+            "teaching": "Vigilância",
+            "mainElement": "Natureza",
+            "references": [
+              "Mateus 13,24–30",
+              "Mateus 13,36–43"
+            ]
+          }
+        },
+        {
+          "id": "fishing-net",
+          "image": "assets/parables/18-fishing-net.png",
+          "showEmojiBadge": false,
+          "name": "A Rede Lançada ao Mar",
+          "shortDescription": "Uma rede reúne muitos tipos de peixe.",
+          "emoji": "🐟",
+          "visual": {
+            "glyph": "🐟",
+            "backgroundColor": "#C9E5EA"
+          },
+          "story": [
+            "Jesus comparou o Reino dos Céus a uma rede lançada ao mar.",
+            "Quando ficou cheia, os pescadores a puxaram para a praia e organizaram os peixes.",
+            "A parábola convida a acolher o Reino e fazer escolhas que conduzem ao bem."
+          ],
+          "fact": "A pesca era uma imagem familiar para muitas pessoas que ouviam Jesus na Galileia.",
+          "metadata": {
+            "gospel": "Mateus",
+            "teaching": "Reino de Deus",
+            "mainElement": "Animal",
+            "references": [
+              "Mateus 13,47–50"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "id": "miracles",
+      "title": "Milagres de Jesus",
+      "displayTitle": "dos Milagres de Jesus",
+      "subtitle": "Descubra os sinais de amor e esperança!",
+      "description": "Conheça encontros que revelam a compaixão e o poder de Jesus.",
+      "coverGlyph": "✨",
+      "copy": {
+        "galleryButton": "✦ Galeria dos Milagres",
+        "galleryTitle": "✦ Galeria dos Milagres",
+        "searchPlaceholder": "Buscar milagre…",
+        "emptySearch": "Nenhum milagre encontrado.",
+        "profileStoryTitle": "✦ O QUE ACONTECEU?",
+        "factTitle": "O que este sinal revela?",
+        "resultSectionTitle": "Conheça este milagre"
+      },
+      "filters": [
+        {
+          "key": "miracleType",
+          "label": "Tipo",
+          "options": [
+            "Cura",
+            "Natureza",
+            "Providência",
+            "Vida restaurada"
+          ]
+        },
+        {
+          "key": "gospel",
+          "label": "Evangelho",
+          "options": [
+            "João",
+            "Lucas",
+            "Marcos",
+            "Mateus"
+          ]
+        },
+        {
+          "key": "teaching",
+          "label": "Mensagem",
+          "options": [
+            "Compaixão",
+            "Confiança",
+            "Fé",
+            "Gratidão",
+            "Partilha",
+            "Responsabilidade",
+            "Vida nova"
+          ]
+        }
+      ],
+      "profile": {
+        "metaFields": [
+          {
+            "key": "miracleType",
+            "label": "Tipo"
+          },
+          {
+            "key": "gospel",
+            "label": "Evangelho"
+          },
+          {
+            "key": "teaching",
+            "label": "Mensagem"
+          }
+        ],
+        "tagField": {
+          "key": "references",
+          "label": "✦ LEIA NA BÍBLIA"
+        }
+      },
+      "appearance": {
+        "cardBackGlyph": "✨"
+      },
+      "completion": {
+        "kicker": "🎉 Sinais descobertos! 🎉",
+        "title": "Você conheceu os Milagres de Jesus!",
+        "message": "Os sinais de Jesus revelam sua compaixão, convidam à confiança e anunciam vida nova. Este foi o último milagre encontrado:",
+        "sectionTitle": "O que este sinal revela?",
+        "sectionText": "{{item.fact}}",
+        "finalMessage": "Continue caminhando com Jesus e levando esperança a quem encontrar! ✨"
+      },
+      "items": [
+        {
+          "id": "water-into-wine",
+          "image": "assets/miracles/01-water-into-wine.png",
+          "showEmojiBadge": false,
+          "name": "Água Transformada em Vinho",
+          "shortDescription": "Jesus leva alegria e abundância à festa de Caná.",
+          "emoji": "🏺",
+          "visual": {
+            "glyph": "🏺",
+            "backgroundColor": "#E7C9BB"
+          },
+          "story": [
+            "Jesus, Maria e os discípulos participavam de uma festa de casamento em Caná.",
+            "Quando o vinho acabou, Jesus pediu que enchessem de água seis grandes jarros.",
+            "A água foi transformada em vinho, e os discípulos começaram a crer nele."
+          ],
+          "fact": "O Evangelho de João apresenta Caná como o primeiro sinal realizado por Jesus.",
+          "metadata": {
+            "miracleType": "Providência",
+            "gospel": "João",
+            "teaching": "Confiança",
+            "references": [
+              "João 2,1–11"
+            ]
+          }
+        },
+        {
+          "id": "miraculous-catch",
+          "image": "assets/miracles/02-miraculous-catch.png",
+          "showEmojiBadge": false,
+          "name": "A Pesca Milagrosa",
+          "shortDescription": "Uma rede vazia volta cheia de peixes.",
+          "emoji": "🐟",
+          "visual": {
+            "glyph": "🐟🐟",
+            "backgroundColor": "#C9E5EA"
+          },
+          "story": [
+            "Depois de uma noite sem pescar nada, Simão e seus companheiros encontraram Jesus na margem.",
+            "Confiando na palavra de Jesus, lançaram novamente as redes e recolheram muitos peixes.",
+            "Jesus então os convidou a segui-lo e participar de sua missão."
+          ],
+          "fact": "A pesca abundante acompanha o chamado dos primeiros discípulos no Evangelho de Lucas.",
+          "metadata": {
+            "miracleType": "Providência",
+            "gospel": "Lucas",
+            "teaching": "Confiança",
+            "references": [
+              "Lucas 5,1–11"
+            ]
+          }
+        },
+        {
+          "id": "calming-storm",
+          "image": "assets/miracles/03-calming-storm.png",
+          "showEmojiBadge": false,
+          "name": "Jesus Acalma a Tempestade",
+          "shortDescription": "Jesus traz paz em meio ao vento e às ondas.",
+          "emoji": "⛵",
+          "visual": {
+            "glyph": "⛵",
+            "backgroundColor": "#BDDCE8"
+          },
+          "story": [
+            "Jesus atravessava o lago com os discípulos quando uma forte tempestade começou.",
+            "Eles ficaram com medo e pediram ajuda. Jesus acalmou o vento e o mar.",
+            "O relato convida os discípulos a confiar nele mesmo nos momentos difíceis."
+          ],
+          "fact": "O sinal revela a autoridade de Jesus e sua presença junto dos discípulos amedrontados.",
+          "metadata": {
+            "miracleType": "Natureza",
+            "gospel": "Marcos",
+            "teaching": "Confiança",
+            "references": [
+              "Marcos 4,35–41"
+            ]
+          }
+        },
+        {
+          "id": "multiplication-loaves",
+          "image": "assets/miracles/04-multiplication-loaves.png",
+          "showEmojiBadge": false,
+          "name": "A Multiplicação dos Pães",
+          "shortDescription": "Pães e peixes alimentam uma grande multidão.",
+          "emoji": "🥖",
+          "visual": {
+            "glyph": "🥖🐟",
+            "backgroundColor": "#EAD5AC"
+          },
+          "story": [
+            "Uma grande multidão seguia Jesus e precisava de alimento.",
+            "Um menino ofereceu cinco pães e dois peixes, e Jesus deu graças e os distribuiu.",
+            "Todos comeram, e ainda foram recolhidos doze cestos com o que sobrou."
+          ],
+          "fact": "O sinal revela a abundância do cuidado de Jesus e inspira a partilha.",
+          "metadata": {
+            "miracleType": "Providência",
+            "gospel": "João",
+            "teaching": "Partilha",
+            "references": [
+              "João 6,1–15"
+            ]
+          }
+        },
+        {
+          "id": "walking-on-water",
+          "image": "assets/miracles/05-walking-on-water.png",
+          "showEmojiBadge": false,
+          "name": "Jesus Caminha sobre as Águas",
+          "shortDescription": "Jesus se aproxima dos discípulos sobre o lago.",
+          "emoji": "🌊",
+          "visual": {
+            "glyph": "🌊✨",
+            "backgroundColor": "#C6DFEA"
+          },
+          "story": [
+            "Durante a noite, os discípulos estavam no barco enfrentando vento forte.",
+            "Jesus foi até eles caminhando sobre a água e disse que não tivessem medo.",
+            "Pedro tentou ir ao encontro dele e aprendeu a confiar em sua ajuda."
+          ],
+          "fact": "Ao entrar no barco, Jesus foi reconhecido pelos discípulos como Filho de Deus.",
+          "metadata": {
+            "miracleType": "Natureza",
+            "gospel": "Mateus",
+            "teaching": "Fé",
+            "references": [
+              "Mateus 14,22–33"
+            ]
+          }
+        },
+        {
+          "id": "paralytic",
+          "image": "assets/miracles/06-paralytic.png",
+          "showEmojiBadge": false,
+          "name": "O Homem Levado pelos Amigos",
+          "shortDescription": "Amigos abrem o teto para aproximar um homem de Jesus.",
+          "emoji": "🏠",
+          "visual": {
+            "glyph": "🏠",
+            "backgroundColor": "#DCCFBF"
+          },
+          "story": [
+            "Quatro amigos queriam levar até Jesus um homem que não conseguia caminhar.",
+            "Como a casa estava cheia, abriram uma passagem no teto e desceram a maca.",
+            "Jesus acolheu a confiança daquele grupo, perdoou o homem e o curou."
+          ],
+          "fact": "O cuidado dos amigos faz parte marcante deste encontro com Jesus.",
+          "metadata": {
+            "miracleType": "Cura",
+            "gospel": "Marcos",
+            "teaching": "Fé",
+            "references": [
+              "Marcos 2,1–12"
+            ]
+          }
+        },
+        {
+          "id": "man-born-blind",
+          "image": "assets/miracles/07-man-born-blind.png",
+          "showEmojiBadge": false,
+          "name": "O Homem que Passou a Enxergar",
+          "shortDescription": "Jesus encontra um homem que não enxergava desde o nascimento.",
+          "emoji": "👁️",
+          "visual": {
+            "glyph": "👁",
+            "backgroundColor": "#F2E2B6"
+          },
+          "story": [
+            "Os discípulos encontraram um homem que não enxergava desde o nascimento.",
+            "Jesus rejeitou a ideia de que aquela condição fosse castigo por algum pecado.",
+            "Depois do encontro e da cura, o homem passou a reconhecer cada vez melhor quem era Jesus."
+          ],
+          "fact": "O relato também fala de uma visão interior que cresce no diálogo e na fé.",
+          "metadata": {
+            "miracleType": "Cura",
+            "gospel": "João",
+            "teaching": "Vida nova",
+            "references": [
+              "João 9,1–41"
+            ]
+          }
+        },
+        {
+          "id": "leper-cleansed",
+          "image": "assets/miracles/08-leper-cleansed.png",
+          "showEmojiBadge": false,
+          "name": "Jesus Acolhe um Homem com Lepra",
+          "shortDescription": "Jesus se aproxima, acolhe e cura com compaixão.",
+          "emoji": "🤲",
+          "visual": {
+            "glyph": "🤲",
+            "backgroundColor": "#D9E5D2"
+          },
+          "story": [
+            "Um homem com lepra aproximou-se de Jesus e pediu para ser purificado.",
+            "Jesus estendeu a mão, tocou nele e o curou.",
+            "O gesto revela compaixão e proximidade com quem vivia afastado da comunidade."
+          ],
+          "fact": "Além da cura, o encontro abria um caminho para a reintegração daquela pessoa.",
+          "metadata": {
+            "miracleType": "Cura",
+            "gospel": "Mateus",
+            "teaching": "Compaixão",
+            "references": [
+              "Mateus 8,1–4"
+            ]
+          }
+        },
+        {
+          "id": "centurion-servant",
+          "image": "assets/miracles/09-centurion-servant.png",
+          "showEmojiBadge": false,
+          "name": "O Servo do Centurião",
+          "shortDescription": "Um centurião confia na palavra de Jesus.",
+          "emoji": "🛡️",
+          "visual": {
+            "glyph": "🛡",
+            "backgroundColor": "#D6DCE6"
+          },
+          "story": [
+            "Um centurião procurou Jesus porque seu servo estava sofrendo muito.",
+            "Ele confiava que uma palavra de Jesus seria suficiente, mesmo à distância.",
+            "Jesus reconheceu aquela fé, e o servo foi curado."
+          ],
+          "fact": "As palavras do centurião inspiram uma oração rezada antes da Comunhão na Missa.",
+          "metadata": {
+            "miracleType": "Cura",
+            "gospel": "Mateus",
+            "teaching": "Fé",
+            "references": [
+              "Mateus 8,5–13"
+            ]
+          }
+        },
+        {
+          "id": "woman-healed",
+          "image": "assets/miracles/10-woman-healed.png",
+          "showEmojiBadge": false,
+          "name": "A Mulher que Tocou o Manto",
+          "shortDescription": "Uma mulher se aproxima de Jesus com confiança.",
+          "emoji": "🧵",
+          "visual": {
+            "glyph": "🧵",
+            "backgroundColor": "#E2D2E8"
+          },
+          "story": [
+            "Uma mulher que sofria havia muitos anos aproximou-se de Jesus no meio da multidão.",
+            "Ela tocou seu manto com confiança e percebeu que estava curada.",
+            "Jesus parou para vê-la, ouvi-la e chamá-la de filha."
+          ],
+          "fact": "Jesus não deixou que a mulher permanecesse anônima: falou com ela com dignidade e paz.",
+          "metadata": {
+            "miracleType": "Cura",
+            "gospel": "Marcos",
+            "teaching": "Fé",
+            "references": [
+              "Marcos 5,25–34"
+            ]
+          }
+        },
+        {
+          "id": "jairus-daughter",
+          "image": "assets/miracles/11-jairus-daughter.png",
+          "showEmojiBadge": false,
+          "name": "A Filha de Jairo Volta à Vida",
+          "shortDescription": "Jesus devolve uma menina ao convívio de sua família.",
+          "emoji": "🤝",
+          "visual": {
+            "glyph": "🤝",
+            "backgroundColor": "#F0D1D6"
+          },
+          "story": [
+            "Jairo pediu ajuda a Jesus porque sua filha estava muito doente.",
+            "Quando chegaram à casa, Jesus tomou a menina pela mão e a chamou para levantar.",
+            "Ela voltou à vida, e Jesus pediu que lhe dessem algo para comer."
+          ],
+          "fact": "O gesto de dar alimento mostra o cuidado simples e concreto de Jesus com a menina.",
+          "metadata": {
+            "miracleType": "Vida restaurada",
+            "gospel": "Marcos",
+            "teaching": "Vida nova",
+            "references": [
+              "Marcos 5,21–24",
+              "Marcos 5,35–43"
+            ]
+          }
+        },
+        {
+          "id": "lazarus",
+          "image": "assets/miracles/12-lazarus.png",
+          "showEmojiBadge": false,
+          "name": "Lázaro Volta à Vida",
+          "shortDescription": "Jesus chama seu amigo Lázaro para fora do túmulo.",
+          "emoji": "🌅",
+          "visual": {
+            "glyph": "🌅",
+            "backgroundColor": "#E7DEC3"
+          },
+          "story": [
+            "Marta e Maria estavam de luto pela morte de seu irmão Lázaro, amigo de Jesus.",
+            "Jesus chorou com elas e foi até o túmulo.",
+            "Então chamou Lázaro para fora, e a família recebeu de volta aquele que amava."
+          ],
+          "fact": "Antes do sinal, Jesus se apresenta a Marta como a ressurreição e a vida.",
+          "metadata": {
+            "miracleType": "Vida restaurada",
+            "gospel": "João",
+            "teaching": "Vida nova",
+            "references": [
+              "João 11,1–44"
+            ]
+          }
+        },
+        {
+          "id": "deaf-man",
+          "image": "assets/miracles/13-deaf-man.png",
+          "showEmojiBadge": false,
+          "name": "O Homem que Passou a Ouvir",
+          "shortDescription": "Jesus dedica atenção pessoal a um homem que não ouvia bem.",
+          "emoji": "👂",
+          "visual": {
+            "glyph": "👂",
+            "backgroundColor": "#D7E4DA"
+          },
+          "story": [
+            "Algumas pessoas levaram até Jesus um homem que não ouvia bem e tinha dificuldade para falar.",
+            "Jesus o conduziu para um lugar reservado e cuidou dele com atenção.",
+            "O homem passou a ouvir e a falar com clareza."
+          ],
+          "fact": "A palavra “Efatá”, usada por Jesus neste relato, significa “Abre-te”.",
+          "metadata": {
+            "miracleType": "Cura",
+            "gospel": "Marcos",
+            "teaching": "Compaixão",
+            "references": [
+              "Marcos 7,31–37"
+            ]
+          }
+        },
+        {
+          "id": "ten-lepers",
+          "image": "assets/miracles/14-ten-lepers.png",
+          "showEmojiBadge": false,
+          "name": "Os Dez Homens Curados",
+          "shortDescription": "Dez homens são curados, e um retorna agradecido.",
+          "emoji": "🙌",
+          "visual": {
+            "glyph": "🙌",
+            "backgroundColor": "#DCE6C9"
+          },
+          "story": [
+            "Dez homens com lepra pediram que Jesus tivesse compaixão deles.",
+            "Enquanto seguiam a orientação recebida, perceberam que estavam curados.",
+            "Um deles voltou, agradeceu e reconheceu o bem que havia recebido."
+          ],
+          "fact": "O homem que retornou para agradecer era samaritano, alguém visto como estrangeiro pelo grupo.",
+          "metadata": {
+            "miracleType": "Cura",
+            "gospel": "Lucas",
+            "teaching": "Gratidão",
+            "references": [
+              "Lucas 17,11–19"
+            ]
+          }
+        },
+        {
+          "id": "widow-nain-son",
+          "image": "assets/miracles/15-widow-nain-son.png",
+          "showEmojiBadge": false,
+          "name": "O Filho da Viúva de Naim",
+          "shortDescription": "Jesus se compadece de uma mãe e restaura sua alegria.",
+          "emoji": "🫂",
+          "visual": {
+            "glyph": "🫂",
+            "backgroundColor": "#EBD0C1"
+          },
+          "story": [
+            "Ao chegar à cidade de Naim, Jesus encontrou uma mãe viúva que havia perdido seu único filho.",
+            "Cheio de compaixão, aproximou-se e chamou o jovem para se levantar.",
+            "O filho voltou à vida e foi entregue à sua mãe."
+          ],
+          "fact": "O relato destaca a compaixão de Jesus antes mesmo de alguém lhe fazer um pedido.",
+          "metadata": {
+            "miracleType": "Vida restaurada",
+            "gospel": "Lucas",
+            "teaching": "Compaixão",
+            "references": [
+              "Lucas 7,11–17"
+            ]
+          }
+        },
+        {
+          "id": "peters-mother-in-law",
+          "image": "assets/miracles/16-peters-mother-in-law.png",
+          "showEmojiBadge": false,
+          "name": "A Sogra de Pedro é Curada",
+          "shortDescription": "Jesus toma sua mão, e ela se levanta restaurada.",
+          "emoji": "🤲",
+          "visual": {
+            "glyph": "🤲",
+            "backgroundColor": "#E7D5C8"
+          },
+          "story": [
+            "Na casa de Pedro, Jesus encontrou a sogra dele de cama e com febre.",
+            "Ele tocou sua mão, e a febre desapareceu.",
+            "Restabelecida, ela se levantou e voltou a acolher as pessoas da casa."
+          ],
+          "fact": "Este breve relato acontece logo depois de outras ações de Jesus em Cafarnaum.",
+          "metadata": {
+            "miracleType": "Cura",
+            "gospel": "Mateus",
+            "teaching": "Compaixão",
+            "references": [
+              "Mateus 8,14–15"
+            ]
+          }
+        },
+        {
+          "id": "withered-hand",
+          "image": "assets/miracles/17-withered-hand.png",
+          "showEmojiBadge": false,
+          "name": "O Homem da Mão Paralisada",
+          "shortDescription": "Jesus coloca o bem da pessoa no centro do sábado.",
+          "emoji": "✋",
+          "visual": {
+            "glyph": "✋",
+            "backgroundColor": "#D8E0D5"
+          },
+          "story": [
+            "Em uma sinagoga, estava um homem com uma das mãos paralisada.",
+            "Jesus perguntou se no sábado era permitido fazer o bem e salvar uma vida.",
+            "Então pediu que o homem estendesse a mão, e ela foi restaurada."
+          ],
+          "fact": "O encontro ensina que a lei de Deus nunca deve ser usada para impedir o bem.",
+          "metadata": {
+            "miracleType": "Cura",
+            "gospel": "Marcos",
+            "teaching": "Compaixão",
+            "references": [
+              "Marcos 3,1–6"
+            ]
+          }
+        },
+        {
+          "id": "coin-in-fish",
+          "image": "assets/miracles/18-coin-in-fish.png",
+          "showEmojiBadge": false,
+          "name": "A Moeda Encontrada no Peixe",
+          "shortDescription": "Uma moeda inesperada aparece durante uma pescaria.",
+          "emoji": "🐟",
+          "visual": {
+            "glyph": "🐟🪙",
+            "backgroundColor": "#C8E3DF"
+          },
+          "story": [
+            "Algumas pessoas perguntaram a Pedro sobre o imposto destinado ao Templo.",
+            "Jesus o enviou para pescar e disse que encontraria uma moeda no primeiro peixe.",
+            "A moeda seria suficiente para cumprir a obrigação de ambos."
+          ],
+          "fact": "O episódio une uma cena cotidiana de pesca a um ensinamento sobre liberdade e responsabilidade.",
+          "metadata": {
+            "miracleType": "Providência",
+            "gospel": "Mateus",
+            "teaching": "Responsabilidade",
+            "references": [
+              "Mateus 17,24–27"
+            ]
+          }
+        }
+      ]
+    }
+  ]
+}

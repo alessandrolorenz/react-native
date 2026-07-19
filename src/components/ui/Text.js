@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { forwardRef } from 'react';
 import { Text as RNText } from 'react-native';
 import { colors, textVariants } from '../../theme';
 
@@ -8,13 +8,14 @@ import { colors, textVariants } from '../../theme';
 const COLOR_MAP = {
   primary: colors.text.primary,
   soft: colors.text.soft,
+  accent: colors.text.accent,
   onPrimary: colors.text.onPrimary,
   onAccent: colors.text.onAccent,
-  accent: colors.action.primaryPressed,
+  onDark: colors.text.onDark,
   error: colors.status.error,
 };
 
-export default function Text({
+const Text = forwardRef(function Text({
   variant = 'body',
   color = 'primary',
   align,
@@ -22,12 +23,13 @@ export default function Text({
   children,
   style,
   ...rest
-}) {
+}, ref) {
   const variantStyle = textVariants[variant] || textVariants.body;
   const resolvedColor = COLOR_MAP[color] || color; // allow raw hex passthrough
 
   return (
     <RNText
+      ref={ref}
       style={[
         variantStyle,
         { color: resolvedColor },
@@ -40,4 +42,6 @@ export default function Text({
       {children}
     </RNText>
   );
-}
+});
+
+export default Text;

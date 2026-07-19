@@ -3,7 +3,7 @@ import { Dimensions, StyleSheet, View } from 'react-native';
 import Card from './Card';
 import { spacing } from '../theme/colors';
 
-const MIN_CARD_SIZE = 44;
+const MIN_CARD_SIZE = 48;
 const HORIZONTAL_PADDING = spacing.md;
 const CARD_MARGIN = 4;
 
@@ -13,6 +13,7 @@ export default function GameBoard({
   flipped,
   matched,
   busy,
+  reduceMotion,
   cardBackGlyph,
   onCardPress,
 }) {
@@ -40,6 +41,11 @@ export default function GameBoard({
             isOpen={isFlipped || isMatched}
             isMatched={isMatched}
             disabled={busy || isMatched}
+            position={index + 1}
+            totalCards={deck.length}
+            row={Math.floor(index / columns) + 1}
+            column={(index % columns) + 1}
+            reduceMotion={reduceMotion}
             cardBackGlyph={cardBackGlyph}
             onPress={() => onCardPress(index)}
           />

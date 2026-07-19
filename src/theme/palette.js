@@ -12,6 +12,7 @@ export const palette = {
   // Rose / pink family (primary action)
   rose200: '#F4B6C2',
   rose400: '#E08FA1',
+  rose700: '#B04F68',
 
   // Sky blue (secondary action)
   sky200: '#B5D8E8',

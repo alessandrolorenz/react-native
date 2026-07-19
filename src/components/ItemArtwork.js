@@ -7,9 +7,18 @@ export default function ItemArtwork({ item, imageStyle, glyphStyle, showBadge = 
   const backgroundColor = item.visual?.backgroundColor || colors.surface;
 
   return (
-    <View style={[styles.artwork, { backgroundColor }]}>
+    <View
+      style={[styles.artwork, { backgroundColor }]}
+      accessible={false}
+      importantForAccessibility="no-hide-descendants"
+    >
       {item.image ? (
-        <Image source={item.image} style={[styles.image, imageStyle]} resizeMode="cover" />
+        <Image
+          source={item.image}
+          style={[styles.image, imageStyle]}
+          resizeMode="cover"
+          accessible={false}
+        />
       ) : (
         <Text
           style={[styles.glyph, glyph.length > 2 && styles.compactGlyph, glyphStyle]}

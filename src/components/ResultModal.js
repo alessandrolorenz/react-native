@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useRef } from 'react';
 import {
   Modal,
   Pressable,
@@ -9,6 +9,7 @@ import {
 } from 'react-native';
 import ItemArtwork from './ItemArtwork';
 import { colors, radii, shadow, spacing } from '../theme/colors';
+import useAccessibilityFocus from '../hooks/useAccessibilityFocus';
 
 export default function ResultModal({
   visible,
@@ -18,20 +19,42 @@ export default function ResultModal({
   onNextPhase,
   onPlayAgain,
   onBackHome,
+  reduceMotion = false,
 }) {
+  const titleRef = useRef(null);
+  useAccessibilityFocus(titleRef, visible ? item?.id : 'result-hidden', {
+    enabled: visible,
+    delayMs: reduceMotion ? 120 : 360,
+  });
+
   if (!item) return null;
 
   const hasStory = Array.isArray(item.story) && item.story.length > 0;
 
   return (
-    <Modal visible={visible} transparent animationType="fade">
-      <View style={styles.backdrop}>
+    <Modal
+      visible={visible}
+      transparent
+      animationType={reduceMotion ? 'none' : 'fade'}
+      onRequestClose={onBackHome}
+    >
+      <View
+        style={styles.backdrop}
+        accessibilityViewIsModal
+        importantForAccessibility="yes"
+      >
         <View style={styles.card}>
           <ScrollView contentContainerStyle={styles.scroll}>
             <Text style={styles.kicker}>✨ Fase concluída! ✨</Text>
-            <Text style={styles.congrats}>Você encontrou todos os pares!</Text>
+            <Text ref={titleRef} style={styles.congrats} accessibilityRole="header">
+              Você encontrou todos os pares!
+            </Text>
 
-            <View style={styles.imageWrap}>
+            <View
+              style={styles.imageWrap}
+              accessible={false}
+              importantForAccessibility="no-hide-descendants"
+            >
               <ItemArtwork item={item} glyphStyle={styles.artworkGlyph} />
             </View>
 
@@ -39,7 +62,9 @@ export default function ResultModal({
             {item.shortDescription ? <Text style={styles.short}>{item.shortDescription}</Text> : null}
 
             {hasStory ? <View style={styles.storyBlock}>
-              <Text style={styles.sectionTitle}>{theme.copy.resultSectionTitle}</Text>
+              <Text style={styles.sectionTitle} accessibilityRole="header">
+                {theme.copy.resultSectionTitle}
+              </Text>
               {item.story.map((line, i) => (
                 <Text key={i} style={styles.storyLine}>
                   {line}
@@ -48,21 +73,38 @@ export default function ResultModal({
             </View> : null}
 
             {item.fact ? <View style={styles.factPill}>
-              <Text style={styles.factLabel}>{theme.copy.factTitle}</Text>
+              <Text style={styles.factLabel} accessibilityRole="header">
+                {theme.copy.factTitle}
+              </Text>
               <Text style={styles.fact}>{item.fact}</Text>
             </View> : null}
 
             <View style={styles.actions}>
               {hasNextPhase && (
-                <Pressable style={styles.cta} onPress={onNextPhase}>
+                <Pressable
+                  style={styles.cta}
+                  onPress={onNextPhase}
+                  accessibilityRole="button"
+                  accessibilityLabel="Ir para a próxima fase"
+                >
                   <Text style={styles.ctaText}>Próxima fase</Text>
                 </Pressable>
               )}
-              <Pressable style={[styles.cta, styles.ctaAlt]} onPress={onPlayAgain}>
+              <Pressable
+                style={[styles.cta, styles.ctaAlt]}
+                onPress={onPlayAgain}
+                accessibilityRole="button"
+                accessibilityLabel="Repetir esta fase"
+              >
                 <Text style={styles.ctaText}>Repetir fase</Text>
               </Pressable>
-              <Pressable style={[styles.cta, styles.ctaHome]} onPress={onBackHome}>
-                <Text style={styles.ctaText}>Voltar ao início</Text>
+              <Pressable
+                style={[styles.cta, styles.ctaHome]}
+                onPress={onBackHome}
+                accessibilityRole="button"
+                accessibilityLabel="Voltar ao início"
+              >
+                <Text style={[styles.ctaText, styles.ctaHomeText]}>Voltar ao início</Text>
               </Pressable>
             </View>
           </ScrollView>
@@ -175,6 +217,7 @@ const styles = StyleSheet.create({
     lineHeight: 20,
   },
   cta: {
+    minHeight: 48,
     alignSelf: 'stretch',
     backgroundColor: colors.primary,
     paddingVertical: spacing.md,
@@ -197,5 +240,8 @@ const styles = StyleSheet.create({
     fontWeight: '700',
     color: colors.textOnPrimary,
     letterSpacing: 0.5,
+  },
+  ctaHomeText: {
+    color: colors.textOnDark,
   },
 });

@@ -8,21 +8,43 @@ import {
 } from 'react-native';
 import ItemArtwork from './ItemArtwork';
 import { colors, radii, shadow } from '../theme/colors';
+import { duration } from '../theme';
 
 // Single memory card with a 3D flip animation.
 // `isOpen` (matched OR currently flipped) drives a rotateY animation between
 // 0deg (back face up) and 180deg (front face up). backfaceVisibility: 'hidden'
 // keeps the hidden face from leaking through during the rotation.
-function Card({ card, isOpen, isMatched, disabled, onPress, size, cardBackGlyph = '✦' }) {
+function Card({
+  card,
+  isOpen,
+  isMatched,
+  disabled,
+  onPress,
+  size,
+  position,
+  totalCards,
+  row,
+  column,
+  reduceMotion,
+  cardBackGlyph = '✦',
+}) {
   const rotation = useRef(new Animated.Value(isOpen ? 1 : 0)).current;
 
   useEffect(() => {
-    Animated.timing(rotation, {
+    if (reduceMotion) {
+      rotation.stopAnimation();
+      rotation.setValue(isOpen ? 1 : 0);
+      return undefined;
+    }
+
+    const animation = Animated.timing(rotation, {
       toValue: isOpen ? 1 : 0,
-      duration: 280,
+      duration: duration.base,
       useNativeDriver: true,
-    }).start();
-  }, [isOpen, rotation]);
+    });
+    animation.start();
+    return () => animation.stop();
+  }, [isOpen, reduceMotion, rotation]);
 
   const frontInterpolate = rotation.interpolate({
     inputRange: [0, 1],
@@ -34,14 +56,24 @@ function Card({ card, isOpen, isMatched, disabled, onPress, size, cardBackGlyph 
   });
 
   const dimension = { width: size, height: size };
+  const positionLabel = `Carta ${position} de ${totalCards}, linha ${row}, coluna ${column}`;
+  const accessibilityLabel = isMatched
+    ? `${positionLabel}, ${card.item.name}, par encontrado`
+    : isOpen
+      ? `${positionLabel}, ${card.item.name}, revelada`
+      : `${positionLabel}, virada para baixo`;
+  const interactionDisabled = disabled || isOpen;
 
   return (
     <Pressable
       onPress={onPress}
-      disabled={disabled || isOpen}
+      disabled={interactionDisabled}
       style={[styles.cardWrapper, dimension]}
       accessibilityRole="button"
-      accessibilityLabel={isOpen ? card.item.name : 'Carta virada para baixo'}
+      accessibilityLabel={accessibilityLabel}
+      accessibilityHint={interactionDisabled ? undefined : 'Toque duas vezes para revelar'}
+      accessibilityState={{ disabled: interactionDisabled, selected: isOpen }}
+      focusable
     >
       {/* Back face (face-down state) */}
       <Animated.View
@@ -68,6 +100,11 @@ function Card({ card, isOpen, isMatched, disabled, onPress, size, cardBackGlyph 
         ]}
       >
         <ItemArtwork item={card.item} glyphStyle={styles.itemGlyph} />
+        {isMatched ? (
+          <View style={styles.matchedBadge} importantForAccessibility="no-hide-descendants">
+            <Text style={styles.matchedBadgeText}>✓</Text>
+          </View>
+        ) : null}
       </Animated.View>
     </Pressable>
   );
@@ -105,8 +142,7 @@ const styles = StyleSheet.create({
   },
   backGlyph: {
     fontSize: 28,
-    color: colors.white,
-    opacity: 0.85,
+    color: colors.text,
   },
   front: {
     backgroundColor: colors.white,
@@ -114,8 +150,27 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
   frontMatched: {
+    borderWidth: 3,
+    borderColor: colors.primaryDark,
+  },
+  matchedBadge: {
+    position: 'absolute',
+    top: 4,
+    right: 4,
+    width: 24,
+    height: 24,
+    borderRadius: 12,
+    backgroundColor: colors.white,
     borderWidth: 2,
-    borderColor: colors.matched,
+    borderColor: colors.primaryDark,
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  matchedBadgeText: {
+    color: colors.primaryDark,
+    fontSize: 16,
+    fontWeight: '800',
+    lineHeight: 18,
   },
   itemGlyph: {
     fontSize: 34,
@@ -128,6 +183,11 @@ export default memo(Card, (prev, next) =>
   prev.isMatched === next.isMatched &&
   prev.disabled === next.disabled &&
   prev.size === next.size &&
+  prev.position === next.position &&
+  prev.totalCards === next.totalCards &&
+  prev.row === next.row &&
+  prev.column === next.column &&
+  prev.reduceMotion === next.reduceMotion &&
   prev.cardBackGlyph === next.cardBackGlyph &&
   prev.card.cardId === next.card.cardId,
 );

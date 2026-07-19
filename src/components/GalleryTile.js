@@ -10,6 +10,7 @@ function GalleryTile({ item, size, onPress }) {
       style={[styles.wrapper, { width: size }]}
       accessibilityRole="button"
       accessibilityLabel={item.name}
+      accessibilityHint="Abre o perfil deste item"
     >
       <View style={[styles.imageFrame, { width: size, height: size }]}>
         <ItemArtwork item={item} glyphStyle={styles.glyph} />

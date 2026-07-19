@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useRef } from 'react';
 import {
   Modal,
   Pressable,
@@ -9,13 +9,21 @@ import {
 } from 'react-native';
 import ItemArtwork from './ItemArtwork';
 import { colors, radii, shadow, spacing } from '../theme/colors';
+import useAccessibilityFocus from '../hooks/useAccessibilityFocus';
 
 export default function CampaignCompleteModal({
   visible,
   theme,
   item,
   onBackHome,
+  reduceMotion = false,
 }) {
+  const titleRef = useRef(null);
+  useAccessibilityFocus(titleRef, visible ? item?.id : 'campaign-hidden', {
+    enabled: visible,
+    delayMs: reduceMotion ? 120 : 360,
+  });
+
   if (!item) return null;
 
   const completion = theme.completion;
@@ -25,13 +33,22 @@ export default function CampaignCompleteModal({
   const hasStory = Array.isArray(item.story) && item.story.length > 0;
 
   return (
-    <Modal visible={visible} transparent animationType="fade">
-      <View style={styles.backdrop}>
+    <Modal
+      visible={visible}
+      transparent
+      animationType={reduceMotion ? 'none' : 'fade'}
+      onRequestClose={onBackHome}
+    >
+      <View
+        style={styles.backdrop}
+        accessibilityViewIsModal
+        importantForAccessibility="yes"
+      >
         <View style={styles.card}>
           <ScrollView contentContainerStyle={styles.scroll}>
             <Text style={styles.kicker}>{completion.kicker}</Text>
 
-            <Text style={styles.congratsTitle}>
+            <Text ref={titleRef} style={styles.congratsTitle} accessibilityRole="header">
               {completion.title}
             </Text>
 
@@ -39,7 +56,11 @@ export default function CampaignCompleteModal({
               {completion.message}
             </Text>
 
-            <View style={styles.imageWrap}>
+            <View
+              style={styles.imageWrap}
+              accessible={false}
+              importantForAccessibility="no-hide-descendants"
+            >
               <ItemArtwork item={item} glyphStyle={styles.artworkGlyph} />
             </View>
 
@@ -47,7 +68,9 @@ export default function CampaignCompleteModal({
             {item.shortDescription ? <Text style={styles.short}>{item.shortDescription}</Text> : null}
 
             {hasStory ? <View style={styles.storyCard}>
-              <Text style={styles.storyTitle}>{theme.copy.resultSectionTitle}</Text>
+              <Text style={styles.storyTitle} accessibilityRole="header">
+                {theme.copy.resultSectionTitle}
+              </Text>
               {item.story.map((line, i) => (
                 <Text key={i} style={styles.storyLine}>
                   {line}
@@ -56,18 +79,29 @@ export default function CampaignCompleteModal({
             </View> : null}
 
             {item.fact ? <View style={styles.factPill}>
-              <Text style={styles.factLabel}>{theme.copy.factTitle}</Text>
+              <Text style={styles.factLabel} accessibilityRole="header">
+                {theme.copy.factTitle}
+              </Text>
               <Text style={styles.fact}>{item.fact}</Text>
             </View> : null}
 
             {sectionText ? <View style={styles.completionCard}>
-              {sectionTitle ? <Text style={styles.completionTitle}>{sectionTitle}</Text> : null}
+              {sectionTitle ? (
+                <Text style={styles.completionTitle} accessibilityRole="header">
+                  {sectionTitle}
+                </Text>
+              ) : null}
               <Text style={styles.completionText}>{sectionText}</Text>
             </View> : null}
 
             {finalMessage ? <Text style={styles.finalMessage}>{finalMessage}</Text> : null}
 
-            <Pressable style={styles.cta} onPress={onBackHome}>
+            <Pressable
+              style={styles.cta}
+              onPress={onBackHome}
+              accessibilityRole="button"
+              accessibilityLabel="Voltar ao início"
+            >
               <Text style={styles.ctaText}>Voltar ao Início</Text>
             </Pressable>
           </ScrollView>
@@ -217,6 +251,7 @@ const styles = StyleSheet.create({
     lineHeight: 20,
   },
   cta: {
+    minHeight: 48,
     alignSelf: 'stretch',
     backgroundColor: colors.primary,
     paddingVertical: spacing.md,

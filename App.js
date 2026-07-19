@@ -1,6 +1,6 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
+import { BackHandler, StyleSheet, Text, View } from 'react-native';
 import HomeScreen from './src/screens/HomeScreen';
 import GameScreen from './src/screens/GameScreen';
 import GalleryScreen from './src/screens/GalleryScreen';
@@ -45,6 +45,22 @@ function App() {
 
   const activeTheme = getThemeById(activeThemeId);
   const progress = progressByTheme[activeThemeId];
+
+  useEffect(() => {
+    const subscription = BackHandler.addEventListener('hardwareBackPress', () => {
+      if (screen === 'profile') {
+        setScreen('gallery');
+        return true;
+      }
+      if (screen === 'gallery' || screen === 'game') {
+        setScreen('home');
+        return true;
+      }
+      return false;
+    });
+
+    return () => subscription.remove();
+  }, [screen]);
 
   const themeErrors = THEMES.flatMap((theme) => validateTheme(theme, PHASES));
   if (themeErrors.length > 0) {

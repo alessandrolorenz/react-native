@@ -16,8 +16,10 @@ export const colors = {
   text: {
     primary: palette.neutral900,
     soft: palette.neutral600,
-    onPrimary: palette.white,
+    accent: palette.rose700,
+    onPrimary: palette.neutral900,
     onAccent: palette.neutral900,
+    onDark: palette.white,
   },
   action: {
     primary: palette.rose200,
@@ -28,7 +30,7 @@ export const colors = {
   },
   card: {
     back: palette.gold200,
-    backEdge: palette.gold500,
+    backEdge: palette.neutral600,
     matched: palette.sage200,
   },
   chip: {
@@ -36,7 +38,7 @@ export const colors = {
     unlocked: palette.chipUnlocked,
     completed: palette.chipCompleted,
     active: palette.peach200,
-    activeBorder: palette.gold500,
+    activeBorder: palette.rose700,
   },
   status: {
     error: palette.error500,

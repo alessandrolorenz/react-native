@@ -1,8 +1,9 @@
-import React from 'react';
+import React, { useRef } from 'react';
 import { Pressable, SafeAreaView, ScrollView, StyleSheet, View } from 'react-native';
 import { Button, Text } from '../components/ui';
 import { colors, spacing, fontSize } from '../theme';
 import { SAFE_AREA } from '../utils/safeArea';
+import useAccessibilityFocus from '../hooks/useAccessibilityFocus';
 
 export default function HomeScreen({
   onPlay,
@@ -12,6 +13,9 @@ export default function HomeScreen({
   progressByTheme,
   onSelectTheme,
 }) {
+  const titleRef = useRef(null);
+  useAccessibilityFocus(titleRef, 'home');
+
   return (
     <SafeAreaView style={styles.safe}>
       <ScrollView
@@ -19,18 +23,45 @@ export default function HomeScreen({
         showsVerticalScrollIndicator={false}
       >
         <View style={styles.hero}>
-          <Text style={styles.emojiHalo}>✨</Text>
-          <Text variant="display" align="center">Jogo da Memória</Text>
-          <Text variant="display" color="accent" align="center" style={styles.titleAccent}>
-            {activeTheme.displayTitle}
+          <Text
+            style={styles.emojiHalo}
+            accessible={false}
+            importantForAccessibility="no"
+          >
+            ✨
           </Text>
+          <View
+            ref={titleRef}
+            accessible
+            accessibilityRole="header"
+            accessibilityLabel={`Jogo da Memória ${activeTheme.displayTitle}`}
+            style={styles.titleGroup}
+          >
+            <Text variant="display" align="center" accessible={false}>Jogo da Memória</Text>
+            <Text
+              variant="display"
+              color="accent"
+              align="center"
+              style={styles.titleAccent}
+              accessible={false}
+            >
+              {activeTheme.displayTitle}
+            </Text>
+          </View>
           <Text variant="body" color="soft" italic align="center" style={styles.subtitle}>
             {activeTheme.subtitle}
           </Text>
         </View>
 
         <View style={styles.themeSection}>
-          <Text variant="h2" align="center" style={styles.themeHeading}>Escolha um tema</Text>
+          <Text
+            variant="h2"
+            align="center"
+            style={styles.themeHeading}
+            accessibilityRole="header"
+          >
+            Escolha um tema
+          </Text>
           <View style={styles.themeList}>
             {themes.map((theme) => {
               const selected = theme.id === activeTheme.id;
@@ -47,13 +78,14 @@ export default function HomeScreen({
                   ]}
                   accessibilityRole="button"
                   accessibilityState={{ selected }}
-                  accessibilityLabel={`${theme.title}, ${completed} de 4 fases concluídas`}
+                  accessibilityLabel={`${theme.title}, ${completed} de 4 fases concluídas, ${progress.totalScore} pontos${selected ? ', tema selecionado' : ''}`}
+                  accessibilityHint={selected ? 'Tema atual' : 'Seleciona este tema'}
                 >
                   <Text style={styles.themeGlyph}>{theme.coverGlyph}</Text>
                   <View style={styles.themeCopy}>
                     <Text variant="h2" style={styles.themeTitle}>{theme.title}</Text>
                     {selected ? (
-                      <Text variant="caption" color="soft" numberOfLines={2}>
+                      <Text variant="caption" color="soft">
                         {theme.description}
                       </Text>
                     ) : null}
@@ -69,10 +101,22 @@ export default function HomeScreen({
         </View>
 
         <View style={styles.actions}>
-          <Button variant="secondary" size="lg" fullWidth onPress={onOpenGallery}>
+          <Button
+            variant="secondary"
+            size="lg"
+            fullWidth
+            onPress={onOpenGallery}
+            accessibilityLabel={`Abrir ${activeTheme.copy.galleryTitle.replace(/^✦\s*/, '')}`}
+          >
             {activeTheme.copy.galleryButton}
           </Button>
-          <Button variant="primary" size="lg" fullWidth onPress={onPlay}>
+          <Button
+            variant="primary"
+            size="lg"
+            fullWidth
+            onPress={onPlay}
+            accessibilityLabel={`Jogar fases do tema ${activeTheme.title}`}
+          >
             Jogar Fases
           </Button>
         </View>
@@ -96,6 +140,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
   hero: {
+    width: '100%',
     alignItems: 'center',
     justifyContent: 'center',
     marginTop: spacing.sm,
@@ -103,7 +148,12 @@ const styles = StyleSheet.create({
   emojiHalo: {
     fontSize: fontSize['5xl'],
     marginBottom: spacing.md,
-    height: fontSize['6xl'], // Ensure it takes up space even if emoji doesn't render
+    minHeight: fontSize['6xl'],
+    textAlign: 'center',
+  },
+  titleGroup: {
+    width: '100%',
+    alignItems: 'center',
   },
   titleAccent: {
     marginBottom: spacing.md,
@@ -111,6 +161,8 @@ const styles = StyleSheet.create({
   subtitle: {
     fontSize: fontSize.md,
     marginBottom: spacing.md,
+    width: '100%',
+    flexShrink: 1,
   },
   actions: {
     width: '100%',
@@ -137,7 +189,7 @@ const styles = StyleSheet.create({
     backgroundColor: colors.bg.surface,
   },
   themeCardSelected: {
-    borderColor: colors.action.primary,
+    borderColor: colors.text.accent,
     backgroundColor: colors.bg.heroTint,
   },
   themeCardCompact: {
@@ -161,7 +213,7 @@ const styles = StyleSheet.create({
   },
   selectionMark: {
     fontSize: 24,
-    color: colors.action.primaryPressed,
+    color: colors.text.accent,
     fontWeight: '800',
   },
   footer: {

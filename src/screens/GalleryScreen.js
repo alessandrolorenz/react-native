@@ -1,4 +1,4 @@
-import React, { useMemo, useState } from 'react';
+import React, { useMemo, useRef, useState } from 'react';
 import {
   Dimensions,
   Pressable,
@@ -14,6 +14,7 @@ import FilterChips from '../components/FilterChips';
 import { applyFilters, getDistinctValues } from '../utils/itemFilters';
 import { colors, radii, shadow, spacing } from '../theme/colors';
 import { SAFE_AREA } from '../utils/safeArea';
+import useAccessibilityFocus from '../hooks/useAccessibilityFocus';
 
 const COLUMNS = 2;
 const HORIZONTAL_PADDING = spacing.md;
@@ -23,6 +24,8 @@ export default function GalleryScreen({ theme, onBack, onSelectItem }) {
   const [query, setQuery] = useState('');
   const [selectedFilters, setSelectedFilters] = useState({});
   const [filtersOpen, setFiltersOpen] = useState(false);
+  const titleRef = useRef(null);
+  useAccessibilityFocus(titleRef, theme.id);
 
   const { width } = Dimensions.get('window');
   const tileSize =
@@ -64,11 +67,18 @@ export default function GalleryScreen({ theme, onBack, onSelectItem }) {
   return (
     <SafeAreaView style={styles.safe}>
       <View style={styles.header}>
-        <Pressable onPress={onBack} style={styles.iconBtn} accessibilityLabel="Voltar">
+        <Pressable
+          onPress={onBack}
+          style={styles.iconBtn}
+          accessibilityRole="button"
+          accessibilityLabel="Voltar ao início"
+        >
           <Text style={styles.icon}>‹</Text>
         </Pressable>
-        <Text style={styles.title}>{theme.copy.galleryTitle}</Text>
-        <View style={styles.iconBtn} />
+        <Text ref={titleRef} style={styles.title} accessibilityRole="header">
+          {theme.copy.galleryTitle}
+        </Text>
+        <View style={styles.iconBtnPlaceholder} accessible={false} />
       </View>
 
       <View style={styles.searchWrap}>
@@ -81,37 +91,43 @@ export default function GalleryScreen({ theme, onBack, onSelectItem }) {
           autoCorrect={false}
           autoCapitalize="none"
           returnKeyType="search"
+          accessibilityLabel={`Buscar em ${theme.title}`}
+          accessibilityHint="Digite parte do nome de um item"
         />
       </View>
 
-      {theme.filters.length > 0 && <Pressable
-        onPress={() => setFiltersOpen((v) => !v)}
-        style={styles.filterToggle}
-        accessibilityRole="button"
-        accessibilityState={{ expanded: filtersOpen }}
-      >
-        <View style={styles.filterToggleLeft}>
-          <Text style={styles.filterToggleLabel}>Filtros</Text>
-          {activeFilterCount > 0 && (
-            <Text style={styles.filterToggleBadge}>
-              ({activeFilterCount} {activeFilterCount === 1 ? 'ativo' : 'ativos'})
-            </Text>
-          )}
-        </View>
-        <View style={styles.filterToggleLeft}>
+      {theme.filters.length > 0 && (
+        <View style={styles.filterControls}>
+          <Pressable
+            onPress={() => setFiltersOpen((v) => !v)}
+            style={styles.filterToggle}
+            accessibilityRole="button"
+            accessibilityLabel={`Filtros${activeFilterCount > 0 ? `, ${activeFilterCount} ${activeFilterCount === 1 ? 'ativo' : 'ativos'}` : ''}`}
+            accessibilityHint={filtersOpen ? 'Recolhe as opções de filtro' : 'Expande as opções de filtro'}
+            accessibilityState={{ expanded: filtersOpen }}
+          >
+            <View style={styles.filterToggleLeft}>
+              <Text style={styles.filterToggleLabel}>Filtros</Text>
+              {activeFilterCount > 0 && (
+                <Text style={styles.filterToggleBadge}>
+                  ({activeFilterCount} {activeFilterCount === 1 ? 'ativo' : 'ativos'})
+                </Text>
+              )}
+            </View>
+            <Text style={styles.filterToggleChevron}>{filtersOpen ? '▾' : '▸'}</Text>
+          </Pressable>
           {activeFilterCount > 0 && !filtersOpen && (
             <Pressable
               onPress={clearAll}
-              hitSlop={8}
               style={styles.filterToggleClear}
               accessibilityRole="button"
+              accessibilityLabel="Limpar todos os filtros"
             >
               <Text style={styles.filterToggleClearText}>✕ limpar</Text>
             </Pressable>
           )}
-          <Text style={styles.filterToggleChevron}>{filtersOpen ? '▾' : '▸'}</Text>
         </View>
-      </Pressable>}
+      )}
 
       {filtersOpen && (
         <FilterChips
@@ -121,6 +137,10 @@ export default function GalleryScreen({ theme, onBack, onSelectItem }) {
           showClearAll={showClearAll}
         />
       )}
+
+      <Text style={styles.resultsSummary} accessibilityLiveRegion="polite">
+        {filtered.length} {filtered.length === 1 ? 'item encontrado' : 'itens encontrados'}
+      </Text>
 
       <ScrollView contentContainerStyle={styles.grid}>
         {filtered.length === 0 ? (
@@ -152,8 +172,8 @@ const styles = StyleSheet.create({
     zIndex: 10,
   },
   iconBtn: {
-    width: 44,
-    height: 44,
+    width: 48,
+    height: 48,
     borderRadius: radii.pill,
     backgroundColor: colors.white,
     alignItems: 'center',
@@ -165,20 +185,32 @@ const styles = StyleSheet.create({
     lineHeight: 26,
   },
   title: {
+    flex: 1,
+    flexShrink: 1,
+    paddingHorizontal: spacing.sm,
     fontSize: 20,
     fontWeight: '800',
     color: colors.primaryDark,
     letterSpacing: 1,
+    textAlign: 'center',
   },
+  iconBtnPlaceholder: { width: 48, height: 48 },
   searchWrap: {
     paddingHorizontal: spacing.md,
     paddingTop: spacing.xs,
   },
+  filterControls: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    paddingHorizontal: spacing.sm,
+  },
   filterToggle: {
+    flex: 1,
+    minHeight: 48,
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'space-between',
-    paddingHorizontal: spacing.md,
+    paddingHorizontal: spacing.sm,
     paddingVertical: spacing.sm,
   },
   filterToggleLeft: {
@@ -203,8 +235,9 @@ const styles = StyleSheet.create({
     marginLeft: spacing.sm,
   },
   filterToggleClear: {
+    minHeight: 48,
+    justifyContent: 'center',
     paddingHorizontal: spacing.sm,
-    paddingVertical: 4,
   },
   filterToggleClearText: {
     fontSize: 12,
@@ -221,6 +254,14 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     borderColor: colors.cardBackEdge,
     ...shadow,
+  },
+  resultsSummary: {
+    color: colors.textSoft,
+    fontSize: 12,
+    lineHeight: 18,
+    paddingHorizontal: spacing.md,
+    paddingBottom: spacing.xs,
+    textAlign: 'right',
   },
   grid: {
     flexDirection: 'row',

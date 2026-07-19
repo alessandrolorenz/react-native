@@ -10,7 +10,7 @@ function formatTime(seconds) {
 
 function StatPill({ label, value }) {
   return (
-    <View style={styles.pill}>
+    <View style={styles.pill} accessible={false} importantForAccessibility="no-hide-descendants">
       <Text style={styles.pillLabel}>{label}</Text>
       <Text style={styles.pillValue}>{value}</Text>
     </View>
@@ -18,6 +18,7 @@ function StatPill({ label, value }) {
 }
 
 export default function Header({
+  titleRef,
   onBack,
   onRestart,
   moves,
@@ -30,21 +31,45 @@ export default function Header({
   return (
     <View style={styles.wrap}>
       <View style={styles.row}>
-        <Pressable onPress={onBack} style={styles.iconBtn} accessibilityLabel="Voltar">
+        <Pressable
+          onPress={onBack}
+          style={styles.iconBtn}
+          accessibilityRole="button"
+          accessibilityLabel="Voltar ao início"
+        >
           <Text style={styles.icon}>‹</Text>
         </Pressable>
 
-        <View style={styles.center}>
-          <Text style={styles.phaseLabel}>{activePhase.label}</Text>
-          <Text style={styles.phaseMeta}>Grade {activePhase.rows}x{activePhase.cols}</Text>
+        <View
+          ref={titleRef}
+          style={styles.center}
+          accessible
+          accessibilityRole="header"
+          accessibilityLabel={`${activePhase.label}, grade ${activePhase.rows} por ${activePhase.cols}`}
+        >
+          <Text style={styles.phaseLabel} accessible={false}>{activePhase.label}</Text>
+          <Text style={styles.phaseMeta} accessible={false}>
+            Grade {activePhase.rows}x{activePhase.cols}
+          </Text>
         </View>
 
-        <Pressable onPress={onRestart} style={styles.iconBtn} accessibilityLabel="Reiniciar fase">
+        <Pressable
+          onPress={onRestart}
+          style={styles.iconBtn}
+          accessibilityRole="button"
+          accessibilityLabel="Reiniciar fase"
+          accessibilityHint="Embaralha as cartas e zera o progresso desta partida"
+        >
           <Text style={styles.icon}>↻</Text>
         </Pressable>
       </View>
 
-      <View style={styles.statsRow}>
+      <View
+        style={styles.statsRow}
+        accessible
+        accessibilityRole="summary"
+        accessibilityLabel={`Resumo da partida. Total ${totalScore} pontos. Fase ${phasePoints} pontos. Tempo ${formatTime(elapsedSeconds)}. Combo ${combo}. ${moves} jogadas.`}
+      >
         <StatPill label="Total" value={totalScore} />
         <StatPill label="Fase" value={phasePoints} />
         <StatPill label="Tempo" value={formatTime(elapsedSeconds)} />
@@ -67,8 +92,8 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
   },
   iconBtn: {
-    width: 44,
-    height: 44,
+    width: 48,
+    height: 48,
     borderRadius: radii.pill,
     backgroundColor: colors.white,
     alignItems: 'center',
@@ -106,7 +131,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   pillLabel: {
-    fontSize: 10,
+    fontSize: 11,
     color: colors.textSoft,
     letterSpacing: 1,
     textTransform: 'uppercase',

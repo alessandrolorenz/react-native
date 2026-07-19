@@ -3,12 +3,12 @@ import { Pressable, StyleSheet, Text } from 'react-native';
 import { colors, elevation, radii, spacing, textVariants } from '../../theme';
 
 // Variants:
-//   primary   — rose action, white text (main CTAs)
-//   secondary — sky action, white text (alternate CTAs like "Galeria")
+//   primary   — rose action, dark text (main CTAs)
+//   secondary — sky action, dark text (alternate CTAs like "Galeria")
 //   tertiary  — peach accent, dark text (subtle calls to action)
-//   icon      — 44×44 circular pill, white surface (back/settings buttons)
+//   icon      — 48×48 circular pill, white surface (back/settings buttons)
 //
-// Sizes apply to non-icon variants. Icon variant ignores `size` and uses 44×44.
+// Sizes apply to non-icon variants. Icon variant ignores `size` and uses 48×48.
 
 const VARIANT_STYLES = {
   primary: { backgroundColor: colors.action.primary, textColor: colors.text.onPrimary },
@@ -45,6 +45,7 @@ export default function Button({
         ]}
         accessibilityRole="button"
         accessibilityLabel={accessibilityLabel}
+        accessibilityState={{ disabled }}
       >
         <Text style={styles.iconGlyph}>{children}</Text>
       </Pressable>
@@ -72,6 +73,7 @@ export default function Button({
       ]}
       accessibilityRole="button"
       accessibilityLabel={accessibilityLabel}
+      accessibilityState={{ disabled }}
     >
       <Text
         style={[
@@ -87,6 +89,7 @@ export default function Button({
 
 const styles = StyleSheet.create({
   base: {
+    minHeight: 48,
     borderRadius: radii.lg,
     alignItems: 'center',
     justifyContent: 'center',
@@ -96,8 +99,8 @@ const styles = StyleSheet.create({
   pressed: { opacity: 0.85 },
   disabled: { opacity: 0.5 },
   iconBase: {
-    width: 44,
-    height: 44,
+    width: 48,
+    height: 48,
     borderRadius: radii.pill,
     backgroundColor: colors.bg.surface,
     alignItems: 'center',

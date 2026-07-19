@@ -4,19 +4,21 @@ import Text from './Text';
 import { colors, radii, spacing } from '../../theme';
 
 // Unified chip primitive. Replaces 4+ ad-hoc chip patterns across the app:
-//   filter — pill, white surface, gold border; active = rose with white text
+//   filter — pill, white surface; active keeps pastel fill with dark text and a strong border
 //   phase  — md radius, state-coded background (locked/unlocked/active/completed)
 //   stat   — md radius, white bg, uppercase label + bold value (Header pills)
 //   meta   — pill, surface bg, gold border (ItemProfile metadata)
 
 const VARIANT_BASE = {
   filter: {
+    minHeight: 48,
     paddingVertical: spacing.sm - 2,
     paddingHorizontal: spacing.md,
     borderRadius: radii.pill,
     borderWidth: 1,
   },
   phase: {
+    minHeight: 48,
     paddingVertical: spacing.sm,
     paddingHorizontal: spacing.md,
     borderRadius: radii.md,
@@ -28,6 +30,7 @@ const VARIANT_BASE = {
     alignItems: 'center',
   },
   meta: {
+    minHeight: 48,
     paddingVertical: spacing.sm - 2,
     paddingHorizontal: spacing.md,
     borderRadius: radii.pill,
@@ -51,7 +54,7 @@ function resolveColors(variant, state) {
   }
   if (variant === 'filter') {
     if (state === 'active') {
-      return { bg: colors.action.primary, border: colors.action.primaryPressed, text: 'onPrimary' };
+      return { bg: colors.action.primary, border: colors.chip.activeBorder, text: 'onPrimary' };
     }
     return { bg: colors.bg.surface, border: colors.card.backEdge, text: 'primary' };
   }

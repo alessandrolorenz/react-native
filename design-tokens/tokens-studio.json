@@ -14,7 +14,8 @@
     },
     "rose": {
       "200": { "$type": "color", "$value": "#F4B6C2" },
-      "400": { "$type": "color", "$value": "#E08FA1" }
+      "400": { "$type": "color", "$value": "#E08FA1" },
+      "700": { "$type": "color", "$value": "#B04F68" }
     },
     "sky": {
       "200": { "$type": "color", "$value": "#B5D8E8" }
@@ -51,8 +52,10 @@
       "text": {
         "primary":   { "$type": "color", "$value": "{palette.neutral.900}" },
         "soft":      { "$type": "color", "$value": "{palette.neutral.600}" },
-        "onPrimary": { "$type": "color", "$value": "{palette.white}" },
-        "onAccent":  { "$type": "color", "$value": "{palette.neutral.900}" }
+        "accent":    { "$type": "color", "$value": "{palette.rose.700}" },
+        "onPrimary": { "$type": "color", "$value": "{palette.neutral.900}" },
+        "onAccent":  { "$type": "color", "$value": "{palette.neutral.900}" },
+        "onDark":    { "$type": "color", "$value": "{palette.white}" }
       },
       "action": {
         "primary":        { "$type": "color", "$value": "{palette.rose.200}" },
@@ -63,7 +66,7 @@
       },
       "card": {
         "back":    { "$type": "color", "$value": "{palette.gold.200}" },
-        "backEdge":{ "$type": "color", "$value": "{palette.gold.500}" },
+        "backEdge":{ "$type": "color", "$value": "{palette.neutral.600}" },
         "matched": { "$type": "color", "$value": "{palette.sage.200}" }
       },
       "chip": {
@@ -71,7 +74,7 @@
         "unlocked":     { "$type": "color", "$value": "{palette.chip.unlocked}" },
         "completed":    { "$type": "color", "$value": "{palette.chip.completed}" },
         "active":       { "$type": "color", "$value": "{palette.peach.200}" },
-        "activeBorder": { "$type": "color", "$value": "{palette.gold.500}" }
+        "activeBorder": { "$type": "color", "$value": "{palette.rose.700}" }
       },
       "status": {
         "error": { "$type": "color", "$value": "{palette.error}" }

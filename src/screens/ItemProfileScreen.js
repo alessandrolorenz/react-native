@@ -11,24 +11,38 @@ import {
 import ItemArtwork from '../components/ItemArtwork';
 import { colors, radii, shadow, spacing } from '../theme/colors';
 import { SAFE_AREA } from '../utils/safeArea';
+import { duration } from '../theme';
+import useAccessibilityFocus from '../hooks/useAccessibilityFocus';
+import useReducedMotion from '../hooks/useReducedMotion';
 
 const HERO_SIZE = 220;
 
 export default function ItemProfileScreen({ theme, itemId, onBack }) {
   const item = theme.items.find((candidate) => candidate.id === itemId);
   const rotation = useRef(new Animated.Value(0)).current;
+  const titleRef = useRef(null);
+  const reduceMotion = useReducedMotion();
+  useAccessibilityFocus(titleRef, itemId);
 
   useEffect(() => {
     if (!item) {
       onBack();
       return;
     }
-    Animated.timing(rotation, {
+    if (reduceMotion) {
+      rotation.stopAnimation();
+      rotation.setValue(1);
+      return undefined;
+    }
+
+    const animation = Animated.timing(rotation, {
       toValue: 1,
-      duration: 280,
+      duration: duration.base,
       useNativeDriver: true,
-    }).start();
-  }, [item, rotation, onBack]);
+    });
+    animation.start();
+    return () => animation.stop();
+  }, [item, reduceMotion, rotation, onBack]);
 
   if (!item) return null;
 
@@ -51,14 +65,23 @@ export default function ItemProfileScreen({ theme, itemId, onBack }) {
   return (
     <SafeAreaView style={styles.safe}>
       <View style={styles.header}>
-        <Pressable onPress={onBack} style={styles.iconBtn} accessibilityLabel="Voltar">
+        <Pressable
+          onPress={onBack}
+          style={styles.iconBtn}
+          accessibilityRole="button"
+          accessibilityLabel="Voltar à galeria"
+        >
           <Text style={styles.icon}>‹</Text>
         </Pressable>
-        <View style={styles.iconBtnPlaceholder} />
+        <View style={styles.iconBtnPlaceholder} accessible={false} />
       </View>
 
       <ScrollView contentContainerStyle={styles.scroll}>
-        <View style={styles.heroOuter}>
+        <View
+          style={styles.heroOuter}
+          accessible={false}
+          importantForAccessibility="no-hide-descendants"
+        >
           <Animated.View
             style={[styles.heroFace, styles.heroBack, { transform: [{ rotateY: backInterpolate }] }]}
           >
@@ -73,15 +96,20 @@ export default function ItemProfileScreen({ theme, itemId, onBack }) {
           </Animated.View>
         </View>
 
-        <Text style={styles.name}>{item.name}</Text>
+        <Text ref={titleRef} style={styles.name} accessibilityRole="header">{item.name}</Text>
         {item.shortDescription ? <Text style={styles.short}>{item.shortDescription}</Text> : null}
 
         {metaPills.length > 0 ? (
           <View style={styles.metaRow}>
             {metaPills.map((pill) => (
-              <View key={pill.key} style={styles.metaPill}>
-                <Text style={styles.metaLabel}>{pill.label}</Text>
-                <Text style={styles.metaValue}>{pill.value}</Text>
+              <View
+                key={pill.key}
+                style={styles.metaPill}
+                accessible
+                accessibilityLabel={`${pill.label}: ${pill.value}`}
+              >
+                <Text style={styles.metaLabel} accessible={false}>{pill.label}</Text>
+                <Text style={styles.metaValue} accessible={false}>{pill.value}</Text>
               </View>
             ))}
           </View>
@@ -89,7 +117,7 @@ export default function ItemProfileScreen({ theme, itemId, onBack }) {
 
         {tags.length > 0 ? (
           <View style={styles.section}>
-            <Text style={styles.sectionHeading}>{tagField.label}</Text>
+            <Text style={styles.sectionHeading} accessibilityRole="header">{tagField.label}</Text>
             <View style={styles.tagRow}>
               {tags.map((tag) => (
                 <View key={tag} style={styles.tagChip}>
@@ -102,7 +130,9 @@ export default function ItemProfileScreen({ theme, itemId, onBack }) {
 
         {hasStory ? (
           <View style={styles.section}>
-            <Text style={styles.sectionHeading}>{theme.copy.profileStoryTitle}</Text>
+            <Text style={styles.sectionHeading} accessibilityRole="header">
+              {theme.copy.profileStoryTitle}
+            </Text>
             {item.story.map((line, index) => (
               <Text key={index} style={styles.storyLine}>{line}</Text>
             ))}
@@ -111,7 +141,9 @@ export default function ItemProfileScreen({ theme, itemId, onBack }) {
 
         {item.fact ? (
           <View style={styles.factPill}>
-            <Text style={styles.factLabel}>✦ {theme.copy.factTitle}</Text>
+            <Text style={styles.factLabel} accessibilityRole="header">
+              ✦ {theme.copy.factTitle}
+            </Text>
             <Text style={styles.fact}>{item.fact}</Text>
           </View>
         ) : null}
@@ -130,14 +162,14 @@ const styles = StyleSheet.create({
     paddingBottom: spacing.sm,
   },
   iconBtn: {
-    width: 44,
-    height: 44,
+    width: 48,
+    height: 48,
     borderRadius: radii.pill,
     backgroundColor: colors.white,
     alignItems: 'center',
     justifyContent: 'center',
   },
-  iconBtnPlaceholder: { width: 44, height: 44 },
+  iconBtnPlaceholder: { width: 48, height: 48 },
   icon: { fontSize: 24, color: colors.text, lineHeight: 26 },
   scroll: {
     paddingHorizontal: spacing.lg,
@@ -176,7 +208,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
   },
-  heroBackGlyph: { fontSize: 36, color: colors.white, opacity: 0.85 },
+  heroBackGlyph: { fontSize: 36, color: colors.text },
   heroFront: { backgroundColor: colors.white },
   heroGlyph: { fontSize: 86 },
   name: {

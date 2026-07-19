@@ -1,5 +1,12 @@
 import React, { useCallback, useEffect, useMemo, useReducer, useRef, useState } from 'react';
-import { Pressable, SafeAreaView, StyleSheet, Text, View } from 'react-native';
+import {
+  AccessibilityInfo,
+  Pressable,
+  SafeAreaView,
+  StyleSheet,
+  Text,
+  View,
+} from 'react-native';
 import GameBoard from '../components/GameBoard';
 import Header from '../components/Header';
 import ResultModal from '../components/ResultModal';
@@ -8,6 +15,9 @@ import { buildDeck } from '../utils/deck';
 import { colors } from '../theme/colors';
 import { applyMissPenalty, buildPhaseSummary, getMatchScore } from '../utils/scoring';
 import { SAFE_AREA } from '../utils/safeArea';
+import { colors as semanticColors } from '../theme';
+import useAccessibilityFocus from '../hooks/useAccessibilityFocus';
+import useReducedMotion from '../hooks/useReducedMotion';
 
 const FLIP_BACK_MS = 700;
 
@@ -24,6 +34,8 @@ const createPhaseState = (phase, items) => ({
   completedAtMs: null,
   lastMatchedItem: null,
   isWon: false,
+  eventSequence: 0,
+  lastEvent: null,
 });
 
 function getInitialPhaseId(phases, progress) {
@@ -48,7 +60,18 @@ function reducer(state, action) {
 
       const nextFlipped = [...state.flipped, index];
       if (nextFlipped.length < 2) {
-        return { ...state, flipped: nextFlipped };
+        const eventSequence = state.eventSequence + 1;
+        return {
+          ...state,
+          flipped: nextFlipped,
+          eventSequence,
+          lastEvent: {
+            id: eventSequence,
+            type: 'reveal',
+            itemName: card.item.name,
+            position: index + 1,
+          },
+        };
       }
 
       const [aIdx, bIdx] = nextFlipped;
@@ -63,6 +86,7 @@ function reducer(state, action) {
         const bestCombo = Math.max(state.bestCombo, comboStreak);
         const phasePoints = state.phasePoints + getMatchScore(comboStreak);
         const isWon = matched.size === action.phasePairs;
+        const eventSequence = state.eventSequence + 1;
 
         return {
           ...state,
@@ -75,9 +99,18 @@ function reducer(state, action) {
           completedAtMs: isWon ? action.nowMs : null,
           lastMatchedItem: a.item,
           isWon,
+          eventSequence,
+          lastEvent: {
+            id: eventSequence,
+            type: 'match',
+            itemName: a.item.name,
+            comboStreak,
+            isWon,
+          },
         };
       }
 
+      const eventSequence = state.eventSequence + 1;
       return {
         ...state,
         flipped: nextFlipped,
@@ -85,6 +118,13 @@ function reducer(state, action) {
         attempts,
         comboStreak: 0,
         phasePoints: applyMissPenalty(state.phasePoints),
+        eventSequence,
+        lastEvent: {
+          id: eventSequence,
+          type: 'miss',
+          firstItemName: a.item.name,
+          secondItemName: b.item.name,
+        },
       };
     }
     case 'RESOLVE_MISS':
@@ -101,6 +141,20 @@ function getPhaseStatus(phaseId, activePhaseId, progress) {
   return 'unlocked';
 }
 
+const PHASE_STATUS_LABEL = {
+  locked: 'bloqueada',
+  unlocked: 'disponível',
+  active: 'fase atual',
+  completed: 'concluída',
+};
+
+const PHASE_STATUS_MARK = {
+  locked: '🔒',
+  unlocked: '›',
+  active: 'Atual',
+  completed: '✓',
+};
+
 export default function GameScreen({ theme, onBack, phases, progress, onPhaseComplete }) {
   const [activePhaseId, setActivePhaseId] = useState(() => getInitialPhaseId(phases, progress));
   const activePhase = useMemo(
@@ -116,6 +170,9 @@ export default function GameScreen({ theme, onBack, phases, progress, onPhaseCom
   const [elapsedSeconds, setElapsedSeconds] = useState(0);
   const timeoutRef = useRef(null);
   const reportedSummaryRef = useRef(null);
+  const titleRef = useRef(null);
+  const reduceMotion = useReducedMotion();
+  useAccessibilityFocus(titleRef, activePhaseId);
 
   useEffect(() => {
     dispatch({ type: 'START_PHASE', phase: activePhase, items: theme.items });
@@ -136,6 +193,31 @@ export default function GameScreen({ theme, onBack, phases, progress, onPhaseCom
       }
     };
   }, [state.busy]);
+
+  useEffect(() => {
+    const event = state.lastEvent;
+    if (!event) return;
+
+    if (event.type === 'reveal') {
+      AccessibilityInfo.announceForAccessibility(
+        `Carta ${event.position}, ${event.itemName}, revelada.`,
+      );
+      return;
+    }
+
+    if (event.type === 'match') {
+      AccessibilityInfo.announceForAccessibility(
+        event.isWon
+          ? `Par encontrado: ${event.itemName}. Fase concluída!`
+          : `Par encontrado: ${event.itemName}. Combo ${event.comboStreak}.`,
+      );
+      return;
+    }
+
+    AccessibilityInfo.announceForAccessibility(
+      `${event.firstItemName} e ${event.secondItemName} não formam um par. As cartas serão fechadas.`,
+    );
+  }, [state.lastEvent]);
 
   useEffect(() => {
     if (state.isWon) {
@@ -163,6 +245,9 @@ export default function GameScreen({ theme, onBack, phases, progress, onPhaseCom
     dispatch({ type: 'START_PHASE', phase: activePhase, items: theme.items });
     setElapsedSeconds(0);
     reportedSummaryRef.current = null;
+    AccessibilityInfo.announceForAccessibility(
+      `${activePhase.label} reiniciada. ${activePhase.pairs * 2} cartas no tabuleiro.`,
+    );
   }, [activePhase, theme.items]);
 
   const handleSelectPhase = useCallback((phaseId) => {
@@ -207,6 +292,7 @@ export default function GameScreen({ theme, onBack, phases, progress, onPhaseCom
     <SafeAreaView style={styles.safe}>
       <View style={styles.headerWrapper}>
         <Header
+          titleRef={titleRef}
           onBack={onBack}
           onRestart={handlePlayAgain}
           moves={state.attempts}
@@ -227,21 +313,33 @@ export default function GameScreen({ theme, onBack, phases, progress, onPhaseCom
               onPress={() => handleSelectPhase(phase.id)}
               disabled={status === 'locked'}
               style={[styles.phaseChip, styles[`chip_${status}`]]}
+              accessibilityRole="button"
+              accessibilityLabel={`Fase ${phase.id}, grade ${phase.rows} por ${phase.cols}, ${PHASE_STATUS_LABEL[status]}`}
+              accessibilityHint={status === 'locked' || status === 'active' ? undefined : 'Muda para esta fase'}
+              accessibilityState={{
+                disabled: status === 'locked',
+                selected: status === 'active',
+              }}
             >
               <Text style={styles.phaseChipTitle}>F{phase.id}</Text>
               <Text style={styles.phaseChipMeta}>{phase.rows}x{phase.cols}</Text>
+              <Text style={styles.phaseChipStatus}>{PHASE_STATUS_MARK[status]}</Text>
             </Pressable>
           );
         })}
       </View>
 
       <View style={styles.boardWrap}>
+        <Text style={styles.boardInstruction}>
+          Encontre os pares. Escolha duas cartas.
+        </Text>
         <GameBoard
           phase={activePhase}
           deck={state.deck}
           flipped={state.flipped}
           matched={state.matched}
           busy={state.busy}
+          reduceMotion={reduceMotion}
           cardBackGlyph={theme.appearance?.cardBackGlyph}
           onCardPress={handleCardPress}
         />
@@ -254,6 +352,7 @@ export default function GameScreen({ theme, onBack, phases, progress, onPhaseCom
         onNextPhase={handleNextPhase}
         onPlayAgain={handlePlayAgain}
         onBackHome={onBack}
+        reduceMotion={reduceMotion}
       />
 
       <CampaignCompleteModal
@@ -261,6 +360,7 @@ export default function GameScreen({ theme, onBack, phases, progress, onPhaseCom
         theme={theme}
         item={state.lastMatchedItem}
         onBackHome={onBack}
+        reduceMotion={reduceMotion}
       />
     </SafeAreaView>
   );
@@ -282,9 +382,13 @@ const styles = StyleSheet.create({
   },
   phaseChip: {
     flex: 1,
+    minHeight: 58,
     alignItems: 'center',
+    justifyContent: 'center',
     borderRadius: 12,
-    paddingVertical: 8,
+    paddingVertical: 4,
+    borderWidth: 2,
+    borderColor: 'transparent',
   },
   phaseChipTitle: {
     fontSize: 12,
@@ -292,25 +396,43 @@ const styles = StyleSheet.create({
     color: colors.text,
   },
   phaseChipMeta: {
-    fontSize: 10,
+    fontSize: 11,
     color: colors.textSoft,
   },
+  phaseChipStatus: {
+    minHeight: 14,
+    fontSize: 10,
+    fontWeight: '800',
+    color: colors.text,
+  },
   chip_locked: {
-    backgroundColor: '#EBDDC8',
-    opacity: 0.55,
+    backgroundColor: semanticColors.chip.locked,
+    borderColor: colors.cardBackEdge,
   },
   chip_unlocked: {
-    backgroundColor: '#E8F2F7',
+    backgroundColor: semanticColors.chip.unlocked,
+    borderColor: colors.cardBackEdge,
   },
   chip_active: {
     backgroundColor: colors.accent,
+    borderColor: colors.primaryDark,
   },
   chip_completed: {
-    backgroundColor: '#DFF0DE',
+    backgroundColor: semanticColors.chip.completed,
+    borderColor: colors.cardBackEdge,
   },
   boardWrap: {
     flex: 1,
     justifyContent: 'center',
+    paddingTop: 8,
     paddingBottom: SAFE_AREA.paddingBottom,
+  },
+  boardInstruction: {
+    color: colors.textSoft,
+    fontSize: 12,
+    lineHeight: 18,
+    textAlign: 'center',
+    paddingHorizontal: 16,
+    marginBottom: 2,
   },
 });

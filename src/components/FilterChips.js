@@ -17,7 +17,7 @@ export default function FilterChips({ rows, onSelect, onClearAll, showClearAll }
       {rows.map((row) =>
         row.options.length === 0 ? null : (
           <View key={row.key} style={styles.row}>
-            <Text style={styles.rowLabel}>{row.label}</Text>
+            <Text style={styles.rowLabel} accessibilityRole="header">{row.label}</Text>
             <ScrollView
               horizontal
               showsHorizontalScrollIndicator={false}
@@ -32,6 +32,8 @@ export default function FilterChips({ rows, onSelect, onClearAll, showClearAll }
                     style={[styles.chip, active && styles.chipActive]}
                     accessibilityRole="button"
                     accessibilityState={{ selected: active }}
+                    accessibilityLabel={`${row.label}: ${option}${active ? ', selecionado' : ''}`}
+                    accessibilityHint={active ? 'Remove este filtro' : 'Aplica este filtro'}
                   >
                     <Text style={[styles.chipText, active && styles.chipTextActive]}>
                       {option}
@@ -45,7 +47,12 @@ export default function FilterChips({ rows, onSelect, onClearAll, showClearAll }
       )}
 
       {showClearAll && (
-        <Pressable onPress={onClearAll} style={styles.clearBtn} accessibilityRole="button">
+        <Pressable
+          onPress={onClearAll}
+          style={styles.clearBtn}
+          accessibilityRole="button"
+          accessibilityLabel="Limpar todos os filtros"
+        >
           <Text style={styles.clearText}>✕ limpar filtros</Text>
         </Pressable>
       )}
@@ -73,6 +80,8 @@ const styles = StyleSheet.create({
     paddingRight: spacing.md,
   },
   chip: {
+    minHeight: 48,
+    justifyContent: 'center',
     paddingHorizontal: spacing.md,
     paddingVertical: 6,
     borderRadius: radii.pill,
@@ -94,8 +103,9 @@ const styles = StyleSheet.create({
     color: colors.textOnPrimary,
   },
   clearBtn: {
+    minHeight: 48,
+    justifyContent: 'center',
     alignSelf: 'flex-start',
-    paddingVertical: 4,
     paddingHorizontal: spacing.sm,
   },
   clearText: {
